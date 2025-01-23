@@ -1,6 +1,5 @@
 package talentLMS.helper;
 
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
