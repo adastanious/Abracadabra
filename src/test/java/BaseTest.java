@@ -1,7 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
-import talentMLS.driver.Driver;
-import talentMLS.helper.WebElementActions;
+import talentLMS.driver.Driver;
+import talentLMS.helper.WebElementActions;
 
 public abstract class BaseTest {
     public WebDriver driver;

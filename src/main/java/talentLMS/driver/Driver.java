@@ -1,7 +1,7 @@
-package talentMLS.driver;
+package talentLMS.driver;
 
 import org.openqa.selenium.WebDriver;
-import talentMLS.fileUtils.ConfigReader;
+import talentLMS.fileUtils.ConfigReader;
 
 public class Driver {
     private Driver() {
