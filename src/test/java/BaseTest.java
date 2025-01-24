@@ -19,7 +19,7 @@ public abstract class BaseTest {
     }
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://arka.talentlms.com/");
+        driver.get("");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 

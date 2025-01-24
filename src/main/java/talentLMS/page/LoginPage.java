@@ -11,10 +11,10 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//button[@type ='submit']")
     WebElement submit;
 
-    public DashboardPage login(String login, String password){
-        this.username.sendKeys(login);
-        this.password.sendKeys(password);
-        submit.click();
-        return new DashboardPage();
+    public NewDashboardPage login(String login, String password){
+        webElementActions.sendKeys(this.username,login);
+        webElementActions.sendKeys(this.password, password);
+        webElementActions.click(submit);
+        return new NewDashboardPage();
     }
 }
