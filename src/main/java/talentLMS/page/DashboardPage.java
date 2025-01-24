@@ -28,11 +28,14 @@ public class DashboardPage extends BasePage{
     @FindBy(xpath = "//div[@class ='tl-bold-link']/a[contains(text(), 'Account & Settings')]")
     WebElement accountAndSettings;
     //Sub items
-    @FindBy(xpath = "//span[@class='arrow-down']")
-    WebElement subMenu;
-    @FindBy(xpath = "//a[@data-testid='legacy-menu-item']")
-    WebElement legacyMenuItem;
-
+    @FindBy(xpath = "//li[@id = 'tl-dropdown-roles']")
+    WebElement profileSubMenu;
+    @FindBy(xpath = "//li[@id = 'tl-dropdown-goto']")
+    WebElement goToSubMenu;
+    @FindBy(xpath = "//li[@id ='tl-dropdown-messages']")
+    WebElement messagesSubMenu;
+    @FindBy(xpath = "//li[@id ='tl-dropdown-help']")
+    WebElement helpSubMenu;
 
     //"Go to" method
     private WebElement getButton(String buttonName) {
@@ -71,6 +74,7 @@ public class DashboardPage extends BasePage{
         }
     }
 
+
     //"Go to" method realization
     public UsersPage usersPage(){
         return goToPage("users", UsersPage.class);
@@ -103,20 +107,8 @@ public class DashboardPage extends BasePage{
         return goToPage("account settings", AccountSettingsPage.class);
     }
 
-    public DashboardPage switchToLegacyInterface () {
-        try {
-            if (driver.findElement(By.xpath("//strong[contains(text(), 'New interface')]")).isDisplayed()) {
-                System.out.println("You are already using legacy interface");
-                return this;
-            }
 
-        } catch (NoSuchElementException e) {
-            subMenu.click();
-            legacyMenuItem.click();
-            return this;
-        }
-        return this;
-    }
+
 }
 
 
