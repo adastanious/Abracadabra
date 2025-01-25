@@ -42,4 +42,15 @@ public class CoursesTest extends  BaseTest {
         }
         return result.toString();
     }
+
+    @Test(priority = 4)
+    public void updateCourseTest(){
+        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().coursesPage();
+        coursesPage.findCourseByName("Samples (002)");
+        String updateName = courses.getCourseName1();
+        coursesPage.updateCourseName(updateName);
+        coursesPage.savesChanges();
+        String actualName = courses.getCourseName();
+        Assert.assertNotEquals(actualName, updateName, "The course name has been updated");
+    }
 }
