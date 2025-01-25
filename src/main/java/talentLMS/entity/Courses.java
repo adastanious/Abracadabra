@@ -22,5 +22,8 @@ public class Courses {
             "После выполнения этих тестов вы сможете оценить, насколько корректно реализован данный";
 
 
+    private String courseName1 = "winter";
+    private String category1 = "simple";
+    private String description1 = "123";
 
 }

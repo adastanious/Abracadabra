@@ -19,7 +19,7 @@ public abstract class BaseTest {
     public void beforeMethod() {
         driver = Driver.getDriver(); // Инициализация драйвера
         driver.manage().deleteAllCookies();
-        driver.get("https://miracle23.talentlms.com/index"); // Переход на стартовую страницу
+        driver.get("https://adinai.talentlms.com/index"); // Переход на стартовую страницу
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Ожидание
     }
 }
