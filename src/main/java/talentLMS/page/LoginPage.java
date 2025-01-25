@@ -8,7 +8,7 @@ public class LoginPage extends BasePage{
     WebElement username;
     @FindBy(xpath = "//input[@name= 'password']")
     WebElement password;
-    @FindBy(xpath = "//button[@type ='submit']")
+    @FindBy(xpath = "//input[@type ='submit']")
     WebElement submit;
 
     public NewDashboardPage login(String login, String password){
