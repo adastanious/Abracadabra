@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class DashboardPage extends BasePage{
+public class DashboardPage extends BasePage {
     //Main items
     @FindBy(xpath = "//div[@class ='tl-bold-link']/a[contains(text(), 'Users')]")
     WebElement usersBtn;
@@ -76,37 +76,44 @@ public class DashboardPage extends BasePage{
 
 
     //"Go to" method realization
-    public UsersPage usersPage(){
+    public UsersPage usersPage() {
         return goToPage("users", UsersPage.class);
     }
-    public CategoriesPage categoriesPage(){
+    public CategoriesPage categoriesPage() {
         return goToPage("categories", CategoriesPage.class);
-        }
-    public BranchesPage branchesPage(){
-        return goToPage("branches", BranchesPage.class);
-            }
-    public UserTypesPage userTypesPage(){
-        return goToPage("user types", UserTypesPage.class);
-                }
-    public ReportsPage reportsPage(){
-        return goToPage("reports", ReportsPage.class);
-                    }
-    public CoursesPage coursesPage(){
-        return goToPage("courses", CoursesPage.class);
-                        }
-    public GroupsPage groupsPage(){
-        return goToPage("groups", GroupsPage.class);
-                            }
-    public EventsEnginePage eventsEnginePage(){
-        return goToPage("events engine", EventsEnginePage.class);
-    }
-    public ImportExportPage importExportPage (){
-        return goToPage("import export", ImportExportPage.class);
-    }
-    public AccountSettingsPage accountSettingsPage(){
-        return goToPage("account settings", AccountSettingsPage.class);
     }
 
+    public BranchesPage branchesPage() {
+        return goToPage("branches", BranchesPage.class);
+    }
+
+    public UserTypesPage userTypesPage() {
+        return goToPage("user types", UserTypesPage.class);
+    }
+
+    public ReportsPage reportsPage() {
+        return goToPage("reports", ReportsPage.class);
+    }
+
+    public CoursesPage coursesPage() {
+        return goToPage("courses", CoursesPage.class);
+    }
+
+    public GroupsPage groupsPage() {
+        return goToPage("groups", GroupsPage.class);
+    }
+
+    public EventsEnginePage eventsEnginePage() {
+        return goToPage("events engine", EventsEnginePage.class);
+    }
+
+    public ImportExportPage importExportPage() {
+        return goToPage("import export", ImportExportPage.class);
+    }
+
+    public AccountSettingsPage accountSettingsPage() {
+        return goToPage("account settings", AccountSettingsPage.class);
+    }
 
 
 }
