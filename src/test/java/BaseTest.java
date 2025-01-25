@@ -1,9 +1,9 @@
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import talentLMS.driver.Driver;
+import talentLMS.entity.Courses;
 import talentLMS.helper.WebElementActions;
+import talentLMS.page.CoursesPage;
 import talentLMS.page.LoginPage;
 
 import java.time.Duration;
@@ -11,16 +11,15 @@ import java.time.Duration;
 public abstract class BaseTest {
     public WebDriver driver;
     WebElementActions webElementActions = new WebElementActions();
+    public LoginPage loginPage = new LoginPage();
+    public Courses courses = new Courses();
+    public CoursesPage coursesPage = new CoursesPage();
 
-    @BeforeSuite
-    public void beforeSuite() {
-        driver = Driver.getDriver();
-
-    }
     @BeforeMethod
-    public void beforeMethod(){
-        driver.get("");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void beforeMethod() {
+        driver = Driver.getDriver(); // Инициализация драйвера
+        driver.manage().deleteAllCookies();
+        driver.get("https://miracle23.talentlms.com/index"); // Переход на стартовую страницу
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Ожидание
     }
-
 }
