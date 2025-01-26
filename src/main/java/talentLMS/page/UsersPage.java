@@ -102,6 +102,19 @@ public class UsersPage extends BasePage {
                 .click(deleteClick);
         return this;
     }
+
+    // метод проверки уникальности email
+    public UsersPage uniqueEmail(String firstName, String lastName, String email, String login, String password, String bioDescription) {
+        webElementActions.waitElementToBeDisplayed(this.firstName);
+        webElementActions.sendKeys(this.firstName, firstName)
+                .sendKeys(this.lastName, lastName)
+                .sendKeys(this.email, email)
+                .sendKeys(this.login, login)
+                .sendKeys(this.password, password)
+                .sendKeys(this.bioDescription, bioDescription)
+                .click(addUserButton);
+        return this;
+    }
 }
 
 
