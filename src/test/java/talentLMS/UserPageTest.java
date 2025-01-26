@@ -1,54 +1,40 @@
 package talentLMS;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import lombok.Getter;
 import org.testng.annotations.Test;
-import talentLMS.enams.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 
-
+@Getter
 public class UserPageTest extends BaseTest {
-
     String email = randomUser.getEmail();
 
     @Test (priority = 1)
     public void addNewUserTest() {
         driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(AdminSection.USERS);
-        userPage.addNewUser(randomUser);
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(sections.getUsers());
+        userPage.addNewUser(randomUser, this.email,false);
     }
 
     @Test (priority = 2)
-    public void fillIncorrectEmailTest() {
-        driver.get("https://abracadabra.talentlms.com/user/create");
-        userPage.userWithIncorrectEmail(randomUserGenerator.randomUserWithIncorrectEmail());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//div/div/span/span[@class='help-inline'])[1]"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "This is not a valid 'Email address'");
-    }
-
-    @Test (priority = 3)
-    public void editUserTest() {
+    public void fillSameDataTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
-        userPage.editUser(randomUserGenerator.randomUser());
+        userPage.addNewUser(randomUser, this.email,true);
+    }
+    @Test (priority = 3)
+    public void fillIncorrectEmailTest() {
+        driver.get("https://abracadabra.talentlms.com/user/index");
+        userPage.addNewUser(randomUser, "alisa.com",true);
     }
 
     @Test (priority = 4)
-    public void deleteUserTest() {
+    public void editUsersTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
-        userPage.deleteUser(email);
+        userPage.editUserName(randomUserGenerator.randomUser(), email);
     }
 
-    @Test(priority = 5)
-    public void uniqueEmailTest() {
-        driver.get("https://abracadabra.talentlms.com/user/create");
-        userPage.uniqueEmail(randomUserGenerator.emailUniquenessCheck());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//span/span[@class='help-inline'])"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "Someone is already using this email address");
+    @Test (priority = 5)
+    public void deleteUsersTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
+        userPage.deleteUsers(email);
     }
 }
