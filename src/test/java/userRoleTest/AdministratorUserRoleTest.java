@@ -1,6 +1,7 @@
+package userRoleTest;
 import org.testng.annotations.Test;
 
-public class AdministratorUserRoleTest extends BaseTest{
+public class AdministratorUserRoleTest extends BaseTest {
 
 
 @Test
