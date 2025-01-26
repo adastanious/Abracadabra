@@ -22,8 +22,7 @@ public abstract class BaseTest {
     }
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://nasya15.talentlms.com/index");
+        driver.get("https://aiperi0606.talentlms.com/index");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
-
 }
