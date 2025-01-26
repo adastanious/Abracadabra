@@ -4,7 +4,7 @@
     <test verbose="2" preserve-order="true" name="/Users/dastanaidarov/IdeaProjects/Abracadabra">
 
         <classes>
-            <class name="UserManage._03_DeleteUserTest">
+            <class name="talentLMS.UserManage.DeleteUserTest">
             </class>
         </classes>
     </test>

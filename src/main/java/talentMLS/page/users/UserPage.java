@@ -68,8 +68,8 @@ public class UserPage extends BasePage {
 
     // метод редактирования пользователя
     public UserPage editUserName(User user, String email) {
-        WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*[1]//span[contains(text(),'" + email + "')]"));
-        WebElement editBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*[1]//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]//i[@title='Edit']"));
+        WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
+        WebElement editBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]//i[@title='Edit']"));
         webElementActions.moveToElement(createdUser)
                 .click(editBtn)
                 .clearAndSendKeys(clickEditName, user.getFirstname())
@@ -78,8 +78,8 @@ public class UserPage extends BasePage {
     }
     // метод удаления пользователя
     public UserPage deleteUsers(String email) {
-        WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*[1]//span[contains(text(),'" + email + "')]"));
-        WebElement xBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*[1]//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]"));
+        WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
+        WebElement xBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]"));
         webElementActions.moveToElement(createdUser)
                 .click(xBtn)
                 .click(deleteClick);

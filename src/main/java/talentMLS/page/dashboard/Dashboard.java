@@ -12,7 +12,6 @@ public class Dashboard extends BasePage {
 
     @FindBy(xpath = "//span[@class='arrow-down']")
     WebElement subMenu;
-
     @FindBy(xpath = "//a[@data-testid='legacy-menu-item']")
     WebElement legacyMenuItem;
 

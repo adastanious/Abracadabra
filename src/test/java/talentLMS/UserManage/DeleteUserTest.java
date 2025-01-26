@@ -1,9 +1,9 @@
-package UserManage;
+package talentLMS.UserManage;
 
 import org.testng.annotations.Test;
 
-public class _03_DeleteUserTest extends _02_EditUserTest {
-    @Test
+public class DeleteUserTest extends EditUserTest {
+    @Test (priority = 4)
     public void deleteUsersTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
         userPage.deleteUsers(email);
