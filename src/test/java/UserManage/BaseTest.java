@@ -1,3 +1,5 @@
+package UserManage;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
 import talentMLS.driver.Driver;

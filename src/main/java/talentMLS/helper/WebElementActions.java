@@ -36,6 +36,13 @@ public class WebElementActions {
         return this;
     }
 
+    public WebElementActions clearAndSendKeys(WebElement element, String text) {
+        waitElementToBeDisplayed(element);
+        element.clear();
+        element.sendKeys(text);
+        return this;
+    }
+
     public WebElementActions doubleClick(WebElement element) {
         waitElementToBeDisplayed(element);
         waitButtonToBeClickable(element);
