@@ -5,8 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 import talentLMS.driver.Driver;
 import talentLMS.helper.WebElementActions;
 
-public abstract class BasePage {
-    WebElementActions webElementActions = new WebElementActions();
+public abstract class  BasePage {
+    public WebElementActions webElementActions = new WebElementActions();
     WebDriver driver = Driver.getDriver();
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);

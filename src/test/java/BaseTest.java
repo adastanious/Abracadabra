@@ -3,9 +3,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 import talentLMS.entity.RandomUserGenerator;
+import talentLMS.fileUtils.ConfigReader;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.LoginPage;
 import talentLMS.page.UsersPage;
+import talentLMS.page.userRole.AdministratorUserRole;
+import talentLMS.page.userRole.InstructorUserRole;
+import talentLMS.page.userRole.LearnerUserRole;
 
 import java.time.Duration;
 
@@ -15,6 +19,9 @@ public abstract class BaseTest {
     public LoginPage loginPage = new LoginPage();
     RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     UsersPage usersPage = new UsersPage();
+    AdministratorUserRole administratorUserRole = new AdministratorUserRole();
+    InstructorUserRole instructorUserRole =new InstructorUserRole();
+    LearnerUserRole learnerUserRole = new LearnerUserRole();
 
     @BeforeSuite
     public void beforeSuite() {
@@ -22,8 +29,10 @@ public abstract class BaseTest {
     }
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://nasya15.talentlms.com/index");
+        driver.get("https://turanabd.talentlms.com/dashboard");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        LoginPage loginPage = new LoginPage();
+        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password"));
     }
 
 }

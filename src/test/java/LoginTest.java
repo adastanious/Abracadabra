@@ -6,6 +6,6 @@ public class LoginTest extends BaseTest{
     @Test
     public void test() {
         LoginPage loginPage = new LoginPage();
-        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().usersPage();
+        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password"));
     }
 }
