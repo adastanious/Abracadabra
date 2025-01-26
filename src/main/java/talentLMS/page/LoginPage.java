@@ -3,6 +3,8 @@ package talentLMS.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class LoginPage extends BasePage{
     @FindBy(xpath = "//input[@name ='username' or @name ='login']")
     WebElement username;
