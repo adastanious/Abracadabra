@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class LearnerUserRole extends UserRole{
+    /**
+     @author Turan, Agema, Nazik
+     */
     @FindBy(id = "tl-learner-option")
     public WebElement learnerUserRole;
 

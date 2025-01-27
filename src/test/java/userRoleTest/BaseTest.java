@@ -5,11 +5,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
-import talentLMS.entity.RandomUserGenerator;
 import talentLMS.fileUtils.ConfigReader;
-import talentLMS.helper.WebElementActions;
 import talentLMS.page.LoginPage;
-import talentLMS.page.UsersPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
@@ -17,6 +14,9 @@ import talentLMS.page.userRole.LearnerUserRole;
 import java.time.Duration;
 
 public class BaseTest {
+    /**
+     @author Turan, Agema, Nazik
+     */
     public WebDriver driver;
 
     public LoginPage loginPage = new LoginPage();
