@@ -1,5 +1,6 @@
 package talentLMS.helper;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -62,5 +63,22 @@ public class WebElementActions {
         waitButtonToBeClickable(element);
         actions.moveToElement(element).perform();
         return this;
+    }
+
+    public boolean isVisible(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public String getText(WebElement element) {
+        try {
+            return element.getText();
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found: " + element);
+            return "";
+        }
     }
 }
