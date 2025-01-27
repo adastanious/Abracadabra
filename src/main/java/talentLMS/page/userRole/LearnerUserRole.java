@@ -1,11 +1,14 @@
 package talentLMS.page.userRole;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Класс LearnerUserRole представляет страницу для роли "Learner" (Обучающийся) в системе TalentLMS.
+ * Learner может просматривать свои курсы и статистику, но не имеет доступа к административным функциям.
+ */
 public class LearnerUserRole extends UserRole{
 
-    // Поля для некликабельных элементов
+    // Элементы интерфейса, которые доступны Learner, но НЕ являются кликабельными
     @FindBy(xpath = "//div[@title='Show courses in progress']")
     public WebElement coursesInProgress;
 
@@ -27,7 +30,4 @@ public class LearnerUserRole extends UserRole{
 
     @FindBy(xpath = "//span[@title='What is TalentLibrary? (002)']")
     public WebElement talentLibraryCourse;
-
-
-
 }

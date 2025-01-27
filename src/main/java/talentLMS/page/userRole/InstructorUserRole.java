@@ -1,12 +1,15 @@
 package talentLMS.page.userRole;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Класс InstructorUserRole представляет страницу для роли "Instructor" в системе TalentLMS.
+ * Instructor имеет доступ к управлению курсами, группами, конференциями и событиями,
+ * а также видит определенные курсы.
+ */
 public class InstructorUserRole extends UserRole {
 
-
-    // Instructor имеет доступ, а Learner не должен видеть или использовать эти элементы
+    // Элементы, доступные ТОЛЬКО для роли "Instructor" (Кнопки: Add course, Add group и.т.д)
     @FindBy(xpath = "//a[text()='Add course']")
     public WebElement addCourse;
 
@@ -22,13 +25,10 @@ public class InstructorUserRole extends UserRole {
     @FindBy(xpath = "//a[text()='Add event']")
     public WebElement addEvent;
 
-    // курсы доступны Instructor
+    // Курсы доступны Instructor
     @FindBy(xpath = "//span[@title='[Edit me] Guide for Learners (001)']")
     public WebElement guideForLearnersCourse;
 
     @FindBy(xpath = "//span[@title='What is TalentLibrary? (002)']")
     public WebElement talentLibraryCourse;
-
-
-
 }

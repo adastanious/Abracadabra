@@ -4,8 +4,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.page.userRole.InstructorUserRole;
+import talentLMS.page.userRole.WebElementUtils;
 import java.time.Duration;
 
+/**
+ * Тест-класс проверяет функциональность роли "Instructor" в системе TalentLMS.
+ */
 public class InstructorUserRoleTest extends BaseTest {
 
     @Test
@@ -15,34 +19,27 @@ public class InstructorUserRoleTest extends BaseTest {
         instructorUserRole.moveUserRole();
         switchRolePage.clickUserRole("Instructor");
 
-
+        // Ожидаем загрузки страницы (ждём до 30 секунд, пока курсы станут видимыми)
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        // Ждём, пока курсы станут видимыми:
-        // Проверяем, что курсы отображаются
+        // Ожидаем, пока курсы появятся на экране
         WebElement guideCourse = wait.until(ExpectedConditions.visibilityOf(instructorUserRole.guideForLearnersCourse));
         WebElement talentLibraryCourse = wait.until(ExpectedConditions.visibilityOf(instructorUserRole.talentLibraryCourse));
 
-        //  Проверяем, отображаются ли курсы: Если хотя бы один курс не найден (false) → тест падает с ошибкой.
+        // Позитивные проверки: проверяем, что курсы действительно отображаются
         Assert.assertTrue(guideCourse.isDisplayed(), "Курс '[Edit me] Guide for Learners' отсутствует!");
         Assert.assertTrue(talentLibraryCourse.isDisplayed(), "Курс 'What is TalentLibrary?' отсутствует!");
 
-        //  Проверяет может ли Instructor нажимать кнопки (Add course, Add group и т.д.).
-        Assert.assertTrue(isElementClickable(instructorUserRole.addCourse), "Instructor должен иметь возможность добавить курс!");
-        Assert.assertTrue(isElementClickable(instructorUserRole.addGroup), "Instructor должен иметь возможность добавить группу!");
-        Assert.assertTrue(isElementClickable(instructorUserRole.addConference), "Instructor должен иметь возможность добавить конференцию!");
-        Assert.assertTrue(isElementClickable(instructorUserRole.addDiscussion), "Instructor должен иметь возможность добавить обсуждение!");
-        Assert.assertTrue(isElementClickable(instructorUserRole.addEvent), "Instructor должен иметь возможность добавить событие!");
-    }
-
-    // метод проверяет, можно ли нажать на элемент:
-    private boolean isElementClickable(WebElement element) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Ждёт 10 секунд, пока элемент станет кликабельным.
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            return element.isDisplayed() && element.isEnabled();  // Возвращает true, если элемент видим и активен.
-        } catch (Exception e) {
-            return false; // Если кнопка не кликабельна, возвращает false (тест падает).
-        }
+        // Проверяем, может ли "Instructor" нажимать кнопки (Add course, Add group и т.д.)
+        Assert.assertTrue(WebElementUtils.isElementClickable(instructorUserRole.addCourse, wait),
+                "Instructor должен иметь возможность добавить курс!");
+        Assert.assertTrue(WebElementUtils.isElementClickable(instructorUserRole.addGroup, wait),
+                "Instructor должен иметь возможность добавить группу!");
+        Assert.assertTrue(WebElementUtils.isElementClickable(instructorUserRole.addConference, wait),
+                "Instructor должен иметь возможность добавить конференцию!");
+        Assert.assertTrue(WebElementUtils.isElementClickable(instructorUserRole.addDiscussion, wait),
+                "Instructor должен иметь возможность добавить обсуждение!");
+        Assert.assertTrue(WebElementUtils.isElementClickable(instructorUserRole.addEvent, wait),
+                "Instructor должен иметь возможность добавить событие!");
     }
 }
