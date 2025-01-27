@@ -5,7 +5,8 @@ import talentLMS.driver.Driver;
 import talentLMS.helper.WebElementActions;
 
 public abstract class BasePage {
-    WebElementActions webElementActions = new WebElementActions();
+    public WebElementActions webElementActions = new WebElementActions();
+
 
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
