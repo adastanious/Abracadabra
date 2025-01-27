@@ -2,7 +2,7 @@ package talentMLS.page.login;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentMLS.helper.BasePage;
+import talentMLS.page.BasePage;
 import talentMLS.page.dashboard.Dashboard;
 
 public class LoginPage extends BasePage {

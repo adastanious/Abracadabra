@@ -1,10 +1,9 @@
 package talentMLS.page.course;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentMLS.entity.Course;
-import talentMLS.helper.BasePage;
+import talentMLS.page.BasePage;
 import talentMLS.page.dashboard.Dashboard;
 
 import java.util.Random;

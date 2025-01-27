@@ -3,7 +3,7 @@ package talentMLS.page.dashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentMLS.helper.BasePage;
+import talentMLS.page.BasePage;
 import talentMLS.page.login.LoginPage;
 
 import java.util.*;
