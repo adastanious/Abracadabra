@@ -1,4 +1,5 @@
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
@@ -10,6 +11,7 @@ import talentLMS.page.UsersPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
+import talentLMS.page.userRole.SwitchRolePage;
 
 import java.time.Duration;
 
@@ -22,6 +24,7 @@ public abstract class BaseTest {
     AdministratorUserRole administratorUserRole = new AdministratorUserRole();
     InstructorUserRole instructorUserRole =new InstructorUserRole();
     LearnerUserRole learnerUserRole = new LearnerUserRole();
+    SwitchRolePage switchRolePage = new SwitchRolePage();
 
     @BeforeSuite
     public void beforeSuite() {
@@ -29,10 +32,17 @@ public abstract class BaseTest {
     }
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://turanabd.talentlms.com/dashboard");
+        driver.get("https://agema.talentlms.com/dashboard");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         LoginPage loginPage = new LoginPage();
         loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password"));
+    }
+
+
+    @AfterTest
+    public void closeDriver (){
+        driver.close();
+        driver.quit();
     }
 
 }

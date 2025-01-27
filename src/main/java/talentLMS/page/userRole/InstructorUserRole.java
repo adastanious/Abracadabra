@@ -5,8 +5,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class InstructorUserRole extends UserRole {
 
-    @FindBy(xpath = "(//i[@class='tl-select-icon' ])[1]")
-    public WebElement instructorUserRole;
 
     // Instructor имеет доступ, а Learner не должен видеть или использовать эти элементы
     @FindBy(xpath = "//a[text()='Add course']")
@@ -32,8 +30,5 @@ public class InstructorUserRole extends UserRole {
     public WebElement talentLibraryCourse;
 
 
-    public void clickInstructorUserRole(){
-        webElementActions.click(instructorUserRole);
-    }
 
 }

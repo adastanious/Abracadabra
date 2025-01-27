@@ -1,5 +1,3 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.page.userRole.LearnerUserRole;
@@ -10,7 +8,7 @@ public class LearnerUserRoleTest extends BaseTest{
     public void learnerUserRoleTest() {
         LearnerUserRole learnerUserRole = new LearnerUserRole();
         learnerUserRole.moveUserRole();
-        learnerUserRole.clickLearnerUserRole();
+        switchRolePage.clickUserRole("Learner");
 
         // Проверка некликабельных элементов (они должны отображаться, но не быть активными)
         Assert.assertTrue(learnerUserRole.coursesInProgress.isDisplayed(), "Courses in progress не отображается!");

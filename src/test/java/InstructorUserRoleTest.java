@@ -13,7 +13,7 @@ public class InstructorUserRoleTest extends BaseTest {
 
         InstructorUserRole instructorUserRole = new InstructorUserRole();
         instructorUserRole.moveUserRole();
-        instructorUserRole.clickInstructorUserRole();
+        switchRolePage.clickUserRole("Instructor");
 
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
