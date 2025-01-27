@@ -45,7 +45,7 @@ public class UserPage extends BasePage {
 
 
     public UserPage addNewUser(User user, String email){
-        webElementActions.click(dashboard.selectSection(sections.getUsers()))
+        webElementActions
                 .click(this.addUser)
                 .sendKeys(this.firstName, user.getFirstname())
                 .sendKeys(this.lastName, user.getLastname())

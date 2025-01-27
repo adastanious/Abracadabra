@@ -9,21 +9,24 @@ import talentMLS.page.login.LoginPage;
 import java.util.*;
 
 public class Dashboard extends BasePage {
-
     @FindBy(xpath = "//span[@class='arrow-down']")
     WebElement subMenu;
     @FindBy(xpath = "//a[@data-testid='legacy-menu-item']")
     WebElement legacyMenuItem;
 
+    @FindBy(xpath = "//div[@class='tl-bold-link']")
+    WebElement sectionsList;
 
-    public WebElement selectSection(String section) {
-        List<WebElement> sections = driver.findElements(By.xpath("//div[@class='tl-bold-link']/a"));
-        List<String> sectionNames = new ArrayList<>();
-        for (WebElement sectionName : sections) {
-            sectionNames.add(sectionName.getText());
-        }
-        WebElement selectedSection = driver.findElement(By.xpath("//div[@class='tl-bold-link']/a[contains(text(),'" + section + "')]"));
-        return selectedSection;
+
+    public Dashboard selectSection(String section) {
+//        List<WebElement> sections = driver.findElements(By.xpath("//div[@class='tl-bold-link']/a"));
+//        List<String> sectionNames = new ArrayList<>();
+//        for (WebElement sectionName : sections) {
+//            sectionNames.add(sectionName.getText());
+//        }
+        switchToLegacyInterface();
+        webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
+        return new Dashboard();
     }
 
     public LoginPage switchToLegacyInterface () {

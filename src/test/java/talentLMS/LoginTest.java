@@ -1,8 +1,8 @@
-package talentLMS.loginTest;
+package talentLMS;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import talentLMS.userManage.BaseTest;
+import talentLMS.BaseTest;
 import talentMLS.fileUtils.ConfigReader;
 
 public class LoginTest extends BaseTest {

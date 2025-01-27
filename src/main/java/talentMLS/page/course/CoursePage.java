@@ -37,9 +37,8 @@ public class CoursePage extends BasePage {
     Dashboard dashboard = new Dashboard();
     Course course = new Course();
 
-    public CoursePage addCourses(){
+    public CoursePage addCourses() {
         webElementActions
-                .click(dashboard.selectSection(sections.getCourses()))
                 .click(this.addCourse)
                 .sendKeys(this.courseName, course.getCourseName())
                 .click(this.category)
@@ -90,17 +89,17 @@ public class CoursePage extends BasePage {
         return result.toString();
     }
 
-    public void updateCourse(WebElement createdCourse, WebElement editBtn){
+    public CoursePage updateCourse(WebElement createdCourse, WebElement editBtn) {
 
         webElementActions
                 .moveToElement(createdCourse)
                 .click(editBtn)
-                .clearAndSendKeys(this.courseName,course.getUpdatedCourseName())
-                .clearAndSendKeys(this.category,course.getUpdatedCategory())
-                .clearAndSendKeys(this.description, course.getUpdatedDescription());
+                .clearAndSendKeys(this.courseName, course.getUpdatedCourseName())
+                .clearAndSendKeys(this.category, course.getUpdatedCategory())
+                .clearAndSendKeys(this.description, course.getUpdatedDescription())
+                .click(submit);
+
+        return new CoursePage();
     }
 
-    public void savesChanges(){
-        webElementActions.click(submit);
-    }
 }
