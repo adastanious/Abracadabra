@@ -13,6 +13,7 @@ public class UserRole extends BasePage {
     @FindBy(xpath = "//a[@class = 'dropdown-toggle tl-nabvar-roles-button']")
     public WebElement userRole;
 
+    // Метод для наведения на окно выбора роли пользователя
     public void moveUserRole(){
         webElementActions.moveToElement(userRole);
         try {
@@ -21,6 +22,7 @@ public class UserRole extends BasePage {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Метод проверяет, можно ли нажать на элемент.
      *

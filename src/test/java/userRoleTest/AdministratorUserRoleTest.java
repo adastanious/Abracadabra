@@ -11,8 +11,7 @@ public class AdministratorUserRoleTest extends BaseTest {
     @Test
     public void administratorUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль администратора
-        administratorUserRole.moveUserRole();
-        administratorUserRole.clickAdministratorUserRole();
+        component.selectRole("administrator");
 
         // проверка элемента Add user с ожидаемым и фактическим текстом, и проверка на кликабельность элемента
         String expectedAddUser = "Add user";

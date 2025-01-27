@@ -5,9 +5,11 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.RandomUserGenerator;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.helper.WebElementActions;
+import talentLMS.page.CategoriesPage;
 import talentLMS.page.LoginPage;
 import talentLMS.page.UsersPage;
 import talentLMS.page.userRole.AdministratorUserRole;
+import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 
@@ -19,9 +21,8 @@ public abstract class BaseTest {
     public LoginPage loginPage = new LoginPage();
     RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     UsersPage usersPage = new UsersPage();
-    AdministratorUserRole administratorUserRole = new AdministratorUserRole();
-    InstructorUserRole instructorUserRole =new InstructorUserRole();
-    LearnerUserRole learnerUserRole = new LearnerUserRole();
+    Component component = new Component();
+    CategoriesPage categoriesPage =new CategoriesPage();
 
     @BeforeSuite
     public void beforeSuite() {

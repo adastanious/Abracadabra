@@ -8,6 +8,7 @@ import talentLMS.driver.Driver;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.LoginPage;
 import talentLMS.page.userRole.AdministratorUserRole;
+import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 
@@ -24,6 +25,7 @@ public class BaseTest {
     InstructorUserRole instructorUserRole =new InstructorUserRole();
     LearnerUserRole learnerUserRole = new LearnerUserRole();
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    Component component = new Component();
 
     @BeforeSuite
     public void beforeSuite() {

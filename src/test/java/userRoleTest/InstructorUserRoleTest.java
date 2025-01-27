@@ -13,8 +13,7 @@ public class InstructorUserRoleTest extends BaseTest {
     @Test
     public void instructorUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль инcтруктора
-        instructorUserRole.moveUserRole();
-        instructorUserRole.clickInstructorUserRole();
+        component.selectRole("instructor");
 
         // проверка элемента Add course с ожидаемым и фактическим текстом, и проверка на кликабельность элемента
         String expectedAddCourseBtn = "Add course";

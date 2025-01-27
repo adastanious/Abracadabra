@@ -13,8 +13,7 @@ public class LearnerUserRoleTest extends BaseTest {
     @Test
     public void learnerUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль ученика
-        learnerUserRole.moveUserRole();
-        learnerUserRole.clickLearnerUserRole();
+        component.selectRole("learner");
 
         //Проверка доступных курсов и сравнение с ожидаемым списком курсов
         ArrayList<String> expectedCourses = new ArrayList<>(); // ожидаемые курсы
