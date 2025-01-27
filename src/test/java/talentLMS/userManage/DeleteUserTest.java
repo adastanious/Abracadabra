@@ -1,4 +1,4 @@
-package talentLMS.UserManage;
+package talentLMS.userManage;
 
 import org.testng.annotations.Test;
 

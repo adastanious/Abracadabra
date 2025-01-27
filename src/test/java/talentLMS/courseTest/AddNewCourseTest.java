@@ -1,7 +1,7 @@
-package talentLMS.CourseTest;
+package talentLMS.courseTest;
 
 import org.testng.annotations.Test;
-import talentLMS.UserManage.BaseTest;
+import talentLMS.userManage.BaseTest;
 import talentMLS.fileUtils.ConfigReader;
 
 

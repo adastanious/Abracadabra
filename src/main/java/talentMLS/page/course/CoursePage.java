@@ -37,8 +37,6 @@ public class CoursePage extends BasePage {
 
     Dashboard dashboard = new Dashboard();
     Course course = new Course();
-    public WebElement createdCourse = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + course.getCourseName() + "')]"));
-    public WebElement editBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + course.getCourseName() + "')]/parent::*/following-sibling::*[4]//i[@title='Edit']"));
 
     public CoursePage addCourses(){
         webElementActions
@@ -93,7 +91,8 @@ public class CoursePage extends BasePage {
         return result.toString();
     }
 
-    public void updateCourse(){
+    public void updateCourse(WebElement createdCourse, WebElement editBtn){
+
         webElementActions
                 .moveToElement(createdCourse)
                 .click(editBtn)

@@ -1,19 +1,19 @@
-package talentLMS.CourseTest;
+package talentLMS.courseTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AddCourseOverLimitTest extends AddNewCourseTest {
+public class AddEmptyNameCourseTest extends AddNewCourseTest {
 
     @Test
-    public void addCourseOverLimitTest(){
+    public void addEmptyNameCourseTest(){
         driver.get("https://abracadabra.talentlms.com/index");
-        coursePage.addCourseWithNameOverLimit();
+        coursePage.addCourseWithEmptyName();
 
         WebElement isRequired = driver.findElement(By.xpath("//span[@class='help-inline' and contains(text(), 'Course name')]"));
         String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "'Course name' cannot exceed 100 characters");
+        Assert.assertEquals(actualResult, "'Course name' is required");
     }
 }

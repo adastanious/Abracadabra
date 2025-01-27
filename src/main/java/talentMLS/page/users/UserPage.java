@@ -70,7 +70,8 @@ public class UserPage extends BasePage {
     public UserPage editUserName(User user, String email) {
         WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
         WebElement editBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]//i[@title='Edit']"));
-        webElementActions.moveToElement(createdUser)
+        webElementActions
+                .moveToElement(createdUser)
                 .click(editBtn)
                 .clearAndSendKeys(clickEditName, user.getFirstname())
                 .click(submit);
@@ -80,7 +81,8 @@ public class UserPage extends BasePage {
     public UserPage deleteUsers(String email) {
         WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
         WebElement xBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]"));
-        webElementActions.moveToElement(createdUser)
+        webElementActions
+                .moveToElement(createdUser)
                 .click(xBtn)
                 .click(deleteClick);
         return this;
