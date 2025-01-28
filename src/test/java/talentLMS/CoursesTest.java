@@ -11,13 +11,14 @@ public class CoursesTest extends BaseTest {
 
     @Test(priority = 1)
     public void test(){
+        driver.get("https://abracadabra.talentlms.com/index");
         loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.addCourses(courses, courses.getCourseName());
     }
 
     @Test(priority = 2)
     public void negativeTest(){
-        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+        driver.get("https://abracadabra.talentlms.com/course/index");
         coursesPage.addCourses(courses, "");
         WebElement isRequired = driver.findElement(By.xpath("//span[@class='help-inline' and contains(text(), 'Course name')]"));
         String actualResult = isRequired.getText();
@@ -26,7 +27,7 @@ public class CoursesTest extends BaseTest {
 
     @Test(priority = 3)
     public void negativeTest2(){
-        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+        driver.get("https://abracadabra.talentlms.com/course/index");
         coursesPage.addCourses(courses, generateRandomString(101));
         WebElement isRequired = driver.findElement(By.xpath("//span[@class='help-inline' and contains(text(), 'Course name')]"));
         String actualResult = isRequired.getText();
@@ -47,8 +48,8 @@ public class CoursesTest extends BaseTest {
 
     @Test(priority = 4)
     public void updateCourseTest(){
-        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
-        coursesPage.findCourseByName("Samples (002)");
+        driver.get("https://abracadabra.talentlms.com/course/index");
+        coursesPage.findCourseByName(courses.getCourseName());
         String updateName = courses.getCourseName1();
         coursesPage.updateCourseName(updateName);
         coursesPage.savesChanges();
