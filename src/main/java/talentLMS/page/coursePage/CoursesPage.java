@@ -1,10 +1,11 @@
-package talentLMS.page;
+package talentLMS.page.coursePage;
 
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.Courses;
+import talentLMS.page.BasePage;
 
 public class CoursesPage extends BasePage {
 
