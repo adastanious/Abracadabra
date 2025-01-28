@@ -1,6 +1,7 @@
 package talentLMS.page;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.Courses;
@@ -31,6 +32,9 @@ public class CoursesPage extends BasePage {
     @FindBy(xpath = "//a[@class='btn btn-primary' and contains(text(), 'Add course')]")
     WebElement addCourse;
 
+    @FindBy(xpath = "//span[@class='tl-formatted-course-name']")
+    WebElement editCourse;
+
     public CoursesPage addCourses(Courses courses, String course){
         webElementActions.click(addCourse);
         webElementActions.sendKeys(this.courseName, course);
@@ -41,5 +45,20 @@ public class CoursesPage extends BasePage {
         webElementActions.click(active);
         webElementActions.click(submit);
         return new CoursesPage();
+    }
+
+    public void findCourseByName(String courseName){
+        WebElement course = driver.findElement(By.xpath("//table[@id='tl-courses-grid']//tbody//span[@title='"+ courseName + "']"));
+        course.click();
+    }
+
+    public void updateCourseName(String name){
+        WebElement editName = driver.findElement(By.xpath("//input[@name='name']"));
+        editName.clear();
+        editName.sendKeys(name);
+    }
+
+    public void savesChanges(){
+        webElementActions.click(submit);
     }
 }
