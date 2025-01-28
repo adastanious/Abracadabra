@@ -1,3 +1,5 @@
+package talentLMS;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -5,17 +7,17 @@ import org.testng.annotations.*;
 import talentLMS.fileUtils.ConfigReader;
 import java.util.Random;
 
-public class CoursesTest extends  BaseTest {
+public class CoursesTest extends BaseTest {
 
     @Test(priority = 1)
     public void test(){
-        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().coursesPage();
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.addCourses(courses, courses.getCourseName());
     }
 
     @Test(priority = 2)
     public void negativeTest(){
-        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().coursesPage();
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.addCourses(courses, "");
         WebElement isRequired = driver.findElement(By.xpath("//span[@class='help-inline' and contains(text(), 'Course name')]"));
         String actualResult = isRequired.getText();
@@ -24,7 +26,7 @@ public class CoursesTest extends  BaseTest {
 
     @Test(priority = 3)
     public void negativeTest2(){
-        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().coursesPage();
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.addCourses(courses, generateRandomString(101));
         WebElement isRequired = driver.findElement(By.xpath("//span[@class='help-inline' and contains(text(), 'Course name')]"));
         String actualResult = isRequired.getText();
@@ -45,7 +47,7 @@ public class CoursesTest extends  BaseTest {
 
     @Test(priority = 4)
     public void updateCourseTest(){
-        loginPage.login(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).switchToLegacyInterface().coursesPage();
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.findCourseByName("Samples (002)");
         String updateName = courses.getCourseName1();
         coursesPage.updateCourseName(updateName);

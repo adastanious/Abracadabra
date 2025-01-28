@@ -3,6 +3,8 @@ package talentLMS;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
+import talentLMS.entity.Courses;
+import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.users.UserPage;
 import talentMLS.entity.User;
 import talentLMS.entity.Sections;
@@ -19,6 +21,8 @@ public abstract class BaseTest {
     UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     User randomUser = randomUserGenerator.randomUser();
+    CoursesPage coursesPage = new CoursesPage();
+    Courses courses = new Courses();
 
     @BeforeSuite
     public void beforeSuite() {
