@@ -1,7 +1,7 @@
 package talentLMS.utils.randomEntityUtils;
 
 import com.github.javafaker.Faker;
-import talentMLS.entity.User;
+import talentLMS.entity.User;
 
 import java.util.Random;
 

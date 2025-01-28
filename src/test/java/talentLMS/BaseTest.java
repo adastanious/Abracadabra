@@ -6,7 +6,7 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.Courses;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.users.UserPage;
-import talentMLS.entity.User;
+import talentLMS.entity.User;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
