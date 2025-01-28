@@ -1,9 +1,6 @@
 package talentLMS;
 
 import lombok.Getter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentMLS.fileUtils.ConfigReader;
 @Getter
@@ -13,32 +10,30 @@ public class UserPageTest extends BaseTest {
     @Test (priority = 1)
     public void addNewUserTest() {
         driver.get("https://abracadabra.talentlms.com/index");
-
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface();
-        userPage.addNewUser(randomUser, this.email);
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(sections.getUsers());
+        userPage.addNewUser(randomUser, this.email,false);
     }
 
     @Test (priority = 2)
-    public void addIncorrectEmailTest() {
-        driver.get("https://abracadabra.talentlms.com/user/create");
-        userPage.addNewUserNoCorrect(randomUser,"alisa123.com");
-
-        WebElement isRequired = driver.findElement(By.xpath("//div[@class='span8']/child::*[3]//span[@class='help-block']"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "This is not a valid 'Email address'");
+    public void fillSameDataTest() {
+        driver.get("https://abracadabra.talentlms.com/user/index");
+        userPage.addNewUser(randomUser, this.email,true);
+    }
+    @Test (priority = 3)
+    public void fillIncorrectEmailTest() {
+        driver.get("https://abracadabra.talentlms.com/user/index");
+        userPage.addNewUser(randomUser, "alisa.com",true);
     }
 
-    @Test (priority = 3)
+    @Test (priority = 4)
     public void editUsersTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
         userPage.editUserName(randomUserGenerator.randomUser(), email);
     }
 
-    @Test (priority = 4)
+    @Test (priority = 5)
     public void deleteUsersTest() {
         driver.get("https://abracadabra.talentlms.com/user/index");
         userPage.deleteUsers(email);
     }
-
-
 }

@@ -8,7 +8,7 @@ import talentMLS.page.BasePage;
 import talentMLS.page.dashboard.Dashboard;
 
 public class UserPage extends BasePage {
-    @FindBy(xpath = "//a[contains(text(),'Add user')]")
+    @FindBy(xpath = "//div[@class='tl-header-tools pull-left']//a[contains(text(),'Add user')]")
     public WebElement addUser;
 
     @FindBy(xpath = "//input[@name='name']")
@@ -19,6 +19,8 @@ public class UserPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='email']")
     public WebElement email;
+    @FindBy(xpath = "//div[@class='span8']/child::*[3]//span[@class='help-block']")
+    public WebElement errorMessage;
 
     @FindBy(xpath = "//input[@name='login']")
     public WebElement login;
@@ -43,27 +45,31 @@ public class UserPage extends BasePage {
     public WebElement deleteClick;
     Dashboard dashboard = new Dashboard();
 
-
-    public UserPage addNewUser(User user, String email){
+    public UserPage addNewUser(User user, String email, boolean isNegativeCase) {
+        // Заполняем форму для добавления нового пользователя
         webElementActions
-                .click(this.addUser)
-                .sendKeys(this.firstName, user.getFirstname())
-                .sendKeys(this.lastName, user.getLastname())
-                .sendKeys(this.email, email)
-                .sendKeys(this.login, user.getUsername())
-                .sendKeys(this.password, user.getPassword())
-                .click(this.addUserButton);
-        return new UserPage();
-    }
+                .click(this.addUser) // Кликаем на кнопку "Добавить пользователя"
+                .sendKeys(this.firstName, user.getFirstname()) // Вводим имя пользователя
+                .sendKeys(this.lastName, user.getLastname()) // Вводим фамилию пользователя
+                .sendKeys(this.email, email) // Вводим email
+                .sendKeys(this.login, user.getUsername()) // Вводим логин
+                .sendKeys(this.password, user.getPassword()) // Вводим пароль
+                .click(this.addUserButton); // Нажимаем на кнопку добавления пользователя
 
-    public UserPage addNewUserNoCorrect(User user, String email) {
-        webElementActions.sendKeys(this.firstName, user.getFirstname())
-                .sendKeys(this.lastName, user.getLastname())
-                .sendKeys(this.email, email)
-                .sendKeys(this.login, user.getUsername())
-                .sendKeys(this.password, user.getPassword())
-                .click(addUserButton);
-        return this;
+        // Проверяем, является ли это негативным кейсом
+        if (isNegativeCase) {
+            // Если это негативный кейс, проверяем наличие сообщения об ошибке
+            if (webElementActions.isVisible(this.errorMessage)) {
+                String errorText = webElementActions.getText(this.errorMessage); // Получаем текст ошибки
+                System.out.println("Error message displayed: " + errorText); // Выводим текст ошибки
+            } else {
+                System.out.println("Expected an error, but no error message was displayed."); // Если ошибки нет
+            }
+            return this; // Возвращаем текущую страницу для дальнейшей проверки
+        }
+
+        // Если это позитивный кейс, возвращаем страницу нового пользователя
+        return new UserPage();
     }
 
     // метод редактирования пользователя
