@@ -1,4 +1,4 @@
-package talentMLS.entity;
+package talentLMS.entity;
 
 import lombok.*;
 @Getter
