@@ -8,13 +8,6 @@ public class AdministratorUserRole extends UserRole{
      @author Turan, Agema, Nazik
      */
 
-    @FindBy(xpath = "//i[@class ='tl-select-icon-selected']")
-    public WebElement administratorUserRole;
-
-    public void clickAdministratorUserRole(){
-        webElementActions.click(administratorUserRole);
-    }
-
     @FindBy(xpath = "//div[@class='hidden-phone']/a[normalize-space(text())='Add user']")
     public WebElement addUser;
 

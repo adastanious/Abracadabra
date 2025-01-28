@@ -4,6 +4,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static talentLMS.enams.Role.ADMINISTRATOR;
+
 public class AdministratorUserRoleTest extends BaseTest {
     /**
      @author Turan, Agema, Nazik
@@ -11,7 +13,7 @@ public class AdministratorUserRoleTest extends BaseTest {
     @Test
     public void administratorUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль администратора
-        component.selectRole("administrator");
+        component.selectRole(ADMINISTRATOR);
 
         // проверка элемента Add user с ожидаемым и фактическим текстом, и проверка на кликабельность элемента
         String expectedAddUser = "Add user";

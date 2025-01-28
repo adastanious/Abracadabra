@@ -11,13 +11,6 @@ public class InstructorUserRole extends UserRole {
      @author Turan, Agema, Nazik
      */
 
-    @FindBy(id = "tl-trainer-option")
-    public WebElement instructorUserRole;
-
-    public void clickInstructorUserRole(){
-        webElementActions.click(instructorUserRole);
-    }
-
     @FindBy(xpath = "//a[text()='Add course']")
     public WebElement addCourseBtn;
 

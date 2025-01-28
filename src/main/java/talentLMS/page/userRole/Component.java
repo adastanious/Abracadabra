@@ -2,7 +2,10 @@ package talentLMS.page.userRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.enams.Role;
 import talentLMS.page.BasePage;
+
+import static talentLMS.enams.Role.*;
 
 
 public class Component extends UserRole {
@@ -20,26 +23,24 @@ public class Component extends UserRole {
     @FindBy(xpath = "//i[@class ='tl-select-icon-selected']")
     public WebElement administratorUserRole;
 
-    public void selectRole(String role) {
-        /**
-         * Метод для клика по определенной роли пользователя.
-         * Принимает строковый параметр ⁠ role ⁠, который определяет, на какую роль нужно кликнуть.
-         *
-         * @param role Название роли, которую нужно выбрать ("learner" или "instructor").
-         * @throws IllegalArgumentException если передана некорректная роль.
-         */
+    /**
+     * Метод для клика по определенной роли пользователя.
+     * Принимает строковый параметр ⁠ role ⁠, который определяет, на какую роль нужно кликнуть.
+     *
+     * @param role Название роли, которую нужно выбрать ("learner" или "instructor").
+     * @throws IllegalArgumentException если передана некорректная роль.
+     */
+    public void selectRole(Role role) {
         userRole.moveUserRole();
-        switch (role.toLowerCase()) { // Приводим роль к нижнему регистру для универсальности
-            case "instructor":
-                webElementActions.click(instructorUserRole);// Кликаем по роли Инструктора
-                break;
-            case "learner":
-                webElementActions.click(learnerUserRole);// Кликаем по роли Учащегося
-                break;
-            case "administrator":
-                webElementActions.click(administratorUserRole);// Кликаем по роли Администратора
-                break;
-            default:
+        if (role.equals(INSTRUCTOR)) {
+            webElementActions.click(instructorUserRole);// Кликаем по роли Инструктора
+        }else if (role.equals(LEARNER)){
+            webElementActions.click(learnerUserRole);// Кликаем по роли Учащегося
+        }
+           else if (role.equals(ADMINISTRATOR)) {
+            webElementActions.click(administratorUserRole);// Кликаем по роли Администратора
+        }
+           else {
                 // Выбрасываем исключение, если передана неизвестная роль
                 throw new IllegalArgumentException("Неверная роль пользователя: " + role);
         }

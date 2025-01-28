@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
+import static talentLMS.enams.Role.INSTRUCTOR;
+
 public class InstructorUserRoleTest extends BaseTest {
     /**
      * @author Turan, Agema, Nazik
@@ -13,7 +15,7 @@ public class InstructorUserRoleTest extends BaseTest {
     @Test
     public void instructorUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль инcтруктора
-        component.selectRole("instructor");
+        component.selectRole(INSTRUCTOR);
 
         // проверка элемента Add course с ожидаемым и фактическим текстом, и проверка на кликабельность элемента
         String expectedAddCourseBtn = "Add course";
@@ -50,7 +52,7 @@ public class InstructorUserRoleTest extends BaseTest {
         expectedCourses.add("[Edit me] Guide for Learners (001)");
         expectedCourses.add("What is TalentLibrary? (002)");
         ArrayList<String> actualCourses = new ArrayList<>(); // фактисеские курсы из веб элементов
-        for (WebElement element : learnerUserRole.courses) {
+        for (WebElement element : instructorUserRole.courses) {
             actualCourses.add(element.getText());
         }
         Assert.assertEquals(expectedCourses, actualCourses, "Курсы не совподают");

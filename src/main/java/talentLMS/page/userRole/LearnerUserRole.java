@@ -9,12 +9,6 @@ public class LearnerUserRole extends UserRole{
     /**
      @author Turan, Agema, Nazik
      */
-    @FindBy(id = "tl-learner-option")
-    public WebElement learnerUserRole;
-
-    public void clickLearnerUserRole(){
-        webElementActions.click(learnerUserRole);
-    }
 
     @FindBy(xpath = "//span[@class ='tl-formatted-course-name']")
     public List<WebElement> courses;

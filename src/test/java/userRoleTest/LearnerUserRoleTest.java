@@ -3,8 +3,11 @@ package userRoleTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import talentLMS.enams.Role;
 
 import java.util.ArrayList;
+
+import static talentLMS.enams.Role.LEARNER;
 
 public class LearnerUserRoleTest extends BaseTest {
     /**
@@ -13,7 +16,7 @@ public class LearnerUserRoleTest extends BaseTest {
     @Test
     public void learnerUserRoleTest() {
         // Навести на элемент роли пользовотеля и нажать роль ученика
-        component.selectRole("learner");
+        component.selectRole(LEARNER);
 
         //Проверка доступных курсов и сравнение с ожидаемым списком курсов
         ArrayList<String> expectedCourses = new ArrayList<>(); // ожидаемые курсы
