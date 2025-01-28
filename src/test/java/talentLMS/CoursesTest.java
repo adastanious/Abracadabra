@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.fileUtils.ConfigReader;
+
+import java.time.Duration;
 import java.util.Random;
 
 public class CoursesTest extends BaseTest {
@@ -55,5 +57,15 @@ public class CoursesTest extends BaseTest {
         coursesPage.savesChanges();
         String actualName = courses.getCourseName();
         Assert.assertNotEquals(actualName, updateName, "The course name has been updated");
+    }
+
+    @Test(priority = 5)
+    public void deleteCourse(){
+        driver.get("https://abracadabra.talentlms.com/index");
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+
+        coursesPage.deleteCourse();
+
+
     }
 }

@@ -4,10 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 import talentLMS.entity.Courses;
-import talentLMS.entity.User;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.users.UserPage;
-
+import talentLMS.entity.User;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
