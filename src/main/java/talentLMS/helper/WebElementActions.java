@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
@@ -63,20 +62,5 @@ public class WebElementActions {
         waitButtonToBeClickable(element);
         actions.moveToElement(element).perform();
         return this;
-    }
-    public boolean isVisible(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    public String getText(WebElement element) {
-        try {
-            return element.getText();
-        } catch (NoSuchElementException e) {
-            System.out.println("Element not found: " + element);
-            return "";
-        }
     }
 }

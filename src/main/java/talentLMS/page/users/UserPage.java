@@ -3,10 +3,15 @@ package talentLMS.page.users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.entity.User;
 import talentLMS.page.BasePage;
-import talentMLS.entity.User;
+
+/**
+ @author Nasyikat
+ */
 
 public class UserPage extends BasePage {
+
     @FindBy(xpath = "//div[@class='tl-header-tools pull-left']//a[contains(text(),'Add user')]")
     public WebElement addUser;
 
@@ -18,8 +23,12 @@ public class UserPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='email']")
     public WebElement email;
-    @FindBy(xpath = "//div[@class='span8']/child::*[3]//span[@class='help-block']")
-    public WebElement errorMessage;
+
+    @FindBy(xpath = "//td[@class=' tl-align-left hidden-phone']/span[@title='Learner-Type']")
+    public WebElement learnerType;
+
+    @FindBy(xpath = "(//div/i[@class='icon-pencil icon-grid' and @alt='Edit'])[1]")
+    public WebElement edit;
 
     @FindBy(xpath = "//input[@name='login']")
     public WebElement login;
@@ -30,67 +39,101 @@ public class UserPage extends BasePage {
     @FindBy(xpath = "//input[@name='submit_personal_details']")
     public WebElement addUserButton;
 
-
-    // xpath кнопки поля first name в разделе edit
     @FindBy(xpath = "//div[@class='input-append tl-countdown']/input[@type='text' and @name='name']")
     public WebElement clickEditName;
 
-    //xpath кнопки submit
     @FindBy(xpath = "//input[@name='submit_personal_details']")
     public WebElement submit;
 
-    // xPath удалить пользователя
     @FindBy(xpath = "//a[@id='tl-confirm-submit']")
     public WebElement deleteClick;
 
-
-    public UserPage addNewUser(User user, String email, boolean isNegativeCase) {
-        // Заполняем форму для добавления нового пользователя
+    /**
+     * Общий метод для ввода данных пользователя.
+     *
+     * @param user объект класса User, содержащий данные пользователя (имя, фамилия, email, логин, пароль).
+     */
+    private void enterUserData(User user) {
         webElementActions
-                .click(this.addUser) // Кликаем на кнопку "Добавить пользователя"
-                .sendKeys(this.firstName, user.getFirstname()) // Вводим имя пользователя
-                .sendKeys(this.lastName, user.getLastname()) // Вводим фамилию пользователя
-                .sendKeys(this.email, email) // Вводим email
-                .sendKeys(this.login, user.getUsername()) // Вводим логин
-                .sendKeys(this.password, user.getPassword()) // Вводим пароль
-                .click(this.addUserButton); // Нажимаем на кнопку добавления пользователя
+                .sendKeys(this.firstName, user.getFirstname())
+                .sendKeys(this.lastName, user.getLastname())
+                .sendKeys(this.email, user.getEmail())
+                .sendKeys(this.login, user.getUsername())
+                .sendKeys(this.password, user.getPassword());
+    }
 
-        // Проверяем, является ли это негативным кейсом
-        if (isNegativeCase) {
-            // Если это негативный кейс, проверяем наличие сообщения об ошибке
-            if (webElementActions.isVisible(this.errorMessage)) {
-                String errorText = webElementActions.getText(this.errorMessage); // Получаем текст ошибки
-                System.out.println("Error message displayed: " + errorText); // Выводим текст ошибки
-            } else {
-                System.out.println("Expected an error, but no error message was displayed."); // Если ошибки нет
-            }
-            return this; // Возвращаем текущую страницу для дальнейшей проверки
-        }
-
-        // Если это позитивный кейс, возвращаем страницу нового пользователя
+    /**
+     * Метод добавления нового пользователя.
+     *
+     * @param user объект класса User с данными нового пользователя.
+     * @return объект страницы пользователя (UserPage).
+     */
+    public UserPage addNewUser(User user) {
+        webElementActions
+                .click(this.addUser);
+        enterUserData(user);  // Ввод данных пользователя
+        webElementActions
+                .click(this.addUserButton);
         return new UserPage();
     }
 
-    // метод редактирования пользователя
-    public UserPage editUserName(User user, String email) {
-        WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
-        WebElement editBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]//i[@title='Edit']"));
+    /**
+     * Метод добавления пользователя с некорректным email.
+     * Используется для проверки обработки ошибок при вводе данных.
+     *
+     * @param user объект класса User с некорректным email.
+     * @return объект страницы пользователя (UserPage).
+     */
+    public UserPage userWithIncorrectEmail(User user) {
+        enterUserData(user);  // Ввод данных пользователя
         webElementActions
-                .moveToElement(createdUser)
-                .click(editBtn)
-                .clearAndSendKeys(clickEditName, user.getFirstname())
-                .click(submit);
-        return this;
+                .click(addUserButton);
+        return new UserPage();
     }
-    // метод удаления пользователя
-    public UserPage deleteUsers(String email) {
+
+    /**
+     * Метод редактирования данных существующего пользователя.
+     *
+     * @param user объект класса User с обновленными данными (например, имя).
+     * @return объект страницы пользователя (UserPage).
+     */
+    public UserPage editUser(User user) {
+        webElementActions
+                .click(learnerType)
+                .click(edit)
+                .click(clickEditName)
+                .sendKeys(clickEditName, user.getFirstname())
+                .click(submit);
+        return new UserPage();
+    }
+
+    /**
+     * Метод удаления пользователя по email.
+     *
+     * @param email строка, содержащая email пользователя, которого необходимо удалить.
+     * @return объект страницы пользователя (UserPage).
+     */
+    public UserPage deleteUser(String email) {
         WebElement createdUser = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]"));
         WebElement xBtn = driver.findElement(By.xpath("//thead/following-sibling::*/child::*//span[contains(text(),'" + email + "')]/parent::*/following-sibling::*[4]"));
         webElementActions
                 .moveToElement(createdUser)
                 .click(xBtn)
                 .click(deleteClick);
-        return this;
+        return new UserPage();
     }
 
+    /**
+     * Метод добавления пользователя с уникальным email.
+     * Используется для проверки уникальности email при добавлении нового пользователя.
+     *
+     * @param user объект класса User с уникальным email.
+     * @return объект страницы пользователя (UserPage).
+     */
+    public UserPage uniqueEmail(User user) {
+        enterUserData(user);  // Ввод данных пользователя
+        webElementActions
+                .click(addUserButton);
+        return new UserPage();
+    }
 }
