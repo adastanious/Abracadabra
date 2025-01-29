@@ -2,6 +2,8 @@ package talentLMS;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.fileUtils.ConfigReader;
@@ -61,11 +63,29 @@ public class CoursesTest extends BaseTest {
 
     @Test(priority = 5)
     public void deleteCourse(){
-        driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+        driver.get("https://abracadabra.talentlms.com/course/index");
+        coursesPage.addCourses(courses, courses.getCourseName());
+        driver.findElement(By.xpath("//a[@title='Courses']")).click();
 
-        coursesPage.deleteCourse();
+        // Проверяем, что курс создан
+        Assert.assertTrue(coursesPage.isCoursePresent(courses.getCourseName()), "Курс не найден после создания!");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+        // Удаляем только этот курс
+        coursesPage.deleteCourse(courses.getCourseName());
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.xpath("//tr[td//span[contains(text(), '" + courses.getCourseName() + "')]]")
+        ));
+
+        // Проверяем, что курс удален
+        Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Курс все еще существует!");
+
+        coursesPage.switchInstructor();
+        Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Инструктор видит удаленный курс!");
+        coursesPage.switchLearner();
+        Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Студент видит удаленный курс!");
 
     }
 }
