@@ -79,4 +79,19 @@ public class WebElementActions {
             return "";
         }
     }
+    /**
+     * Метод проверяет, можно ли нажать на элемент.
+     *
+     * @param element WebElement, который нужно проверить.
+     * @param wait WebDriverWait для ожидания элемента.
+     * @return true, если элемент кликабелен, иначе false.
+     */
+    public boolean isElementClickable(WebElement element, WebDriverWait wait) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element)); // Ждём, пока элемент станет кликабельным.
+            return element.isDisplayed() && element.isEnabled(); // Возвращает true, если элемент видим и активен.
+        } catch (Exception e) {
+            return false; // Если элемент не кликабелен, возвращает false.
+        }
+    }
 }
