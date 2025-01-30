@@ -24,8 +24,7 @@ public abstract class BaseTest {
     public WebDriver driver;
 
     public WebElementActions webElementActions = new WebElementActions();
-    LoginPage loginPage = new LoginPage();
-    Sections sections = new Sections();
+    public LoginPage loginPage = new LoginPage();
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
