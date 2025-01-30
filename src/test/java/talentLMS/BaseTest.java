@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 
 import talentLMS.entity.User;
+import talentLMS.page.userRole.Component;
 import talentLMS.page.users.UserPage;
 
 import talentLMS.entity.Courses;
@@ -26,6 +27,7 @@ public abstract class BaseTest {
     User randomUser = randomUserGenerator.randomUser();
     CoursesPage coursesPage = new CoursesPage();
     Courses courses = new Courses();
+    Component component = new Component();
 
     @BeforeSuite
     public void beforeSuite() {

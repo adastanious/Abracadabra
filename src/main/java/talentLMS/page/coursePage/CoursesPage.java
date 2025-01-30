@@ -106,14 +106,7 @@ public class CoursesPage extends BasePage {
         return !courses.isEmpty();
     }
 
-    public CoursesPage switchInstructor(){
-        webElementActions.moveToElement(switchAdmin).click(instructorButton);
-        return new CoursesPage();
-    }
-    public CoursesPage switchLearner(){
-        webElementActions.moveToElement(switchAdmin).click(learnerButton);
-        return new CoursesPage();
-    }
+
 
 
 

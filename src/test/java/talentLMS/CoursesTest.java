@@ -82,7 +82,7 @@ public class CoursesTest extends BaseTest {
         // Проверяем, что курс удален
         Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Курс все еще существует!");
 
-        coursesPage.switchInstructor();
+        ;
         Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Инструктор видит удаленный курс!");
         coursesPage.switchLearner();
         Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Студент видит удаленный курс!");
