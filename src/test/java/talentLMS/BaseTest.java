@@ -27,9 +27,9 @@ public abstract class BaseTest {
     public WebElementActions webElementActions = new WebElementActions();
     public LoginPage loginPage = new LoginPage();
     Sections sections = new Sections();
-    UserPage userPage = new UserPage();
+    public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
-    User randomUser = randomUserGenerator.randomUser();
+    public User randomUser = randomUserGenerator.randomUser();
     CoursesPage coursesPage = new CoursesPage();
     Courses courses = new Courses();
     public Component component = new Component();
@@ -42,6 +42,7 @@ public abstract class BaseTest {
 
     @BeforeSuite
     public void beforeSuite() {
+
         driver = Driver.getDriver();
     }
 }
