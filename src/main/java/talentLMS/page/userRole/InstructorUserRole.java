@@ -2,10 +2,11 @@ package talentLMS.page.userRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.page.BasePage;
 
 import java.util.List;
 
-public class InstructorUserRole extends UserRole {
+public class InstructorUserRole extends BasePage {
     /**
      @author Turan, Agema, Nazik
      */
