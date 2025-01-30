@@ -70,7 +70,8 @@ public class CategoriesPage extends BasePage {
                 .click(parentCategory1Btn.get(1))
                 .click(priceBtn)
                 .sendKeys(priceInput, category.getPrice())
-                .click(addCategoryBtn);
+                .click(addCategoryBtn)
+                .moveToElement(assertText);
         return this;
     }
 
@@ -130,7 +131,8 @@ public class CategoriesPage extends BasePage {
                 .clearAndSendKeys(changeNameCategoryInput, category.getCategoryName2())
                 .click(priceBtn)
                 .clearAndSendKeys(priceInput, category.getPrice2())
-                .click(addCategoryBtn);
+                .click(addCategoryBtn)
+                .moveToElement(assertText);
         return this;
     }
 }

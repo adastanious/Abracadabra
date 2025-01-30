@@ -4,10 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.entity.Category;
 import talentLMS.fileUtils.ConfigReader;
-
 import java.time.Duration;
 import java.util.ArrayList;
-
 import static talentLMS.enams.Role.ADMINISTRATOR;
 
 public class CategoriesTest extends BaseTest {
@@ -22,12 +20,6 @@ public class CategoriesTest extends BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
         component.selectRole(ADMINISTRATOR);
         categoriesPage.addCategory(category);
-        webElementActions.moveToElement(categoriesPage.assertText);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         String expectedText ="Success! New category created.";
         String actualText  = categoriesPage.assertText.getText();
         Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
@@ -38,12 +30,6 @@ public class CategoriesTest extends BaseTest {
     public void addCategoriesDoubleName(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category);
-        webElementActions.moveToElement(categoriesPage.assertText);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         String expectedText ="Success! New category created.";
         String actualText  = categoriesPage.assertText.getText();
         Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
@@ -55,7 +41,7 @@ public class CategoriesTest extends BaseTest {
         ArrayList<Category> listBeforeDelete = categoriesPage.getCategoryFormTable();
         categoriesPage.deleteCategory();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -67,12 +53,6 @@ public class CategoriesTest extends BaseTest {
     @Test(priority = 4)
     public void changeCategory(){
         categoriesPage.changeCategory(category);
-        webElementActions.moveToElement(categoriesPage.assertText);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         String expectedText ="Category updated successfully";
         String actualText  = categoriesPage.assertText.getText();
         Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
