@@ -64,21 +64,6 @@ public class WebElementActions {
         actions.moveToElement(element).perform();
         return this;
     }
-    public boolean isVisible(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-    public String getText(WebElement element) {
-        try {
-            return element.getText();
-        } catch (NoSuchElementException e) {
-            System.out.println("Element not found: " + element);
-            return "";
-        }
-    }
     /**
      * Метод проверяет, можно ли нажать на элемент.
      *
