@@ -1,4 +1,4 @@
-package talentLMS.entity;
+package talentLMS.enums;
 
 public enum Event {
     SELECTEVENT("Select event"),

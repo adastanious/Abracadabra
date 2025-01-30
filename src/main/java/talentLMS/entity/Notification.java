@@ -1,5 +1,7 @@
 package talentLMS.entity;
 
+import talentLMS.enums.Recipient;
+import talentLMS.enums.Event;
 import lombok.Data;
 
 @Data
