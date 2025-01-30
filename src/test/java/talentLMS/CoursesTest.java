@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.fileUtils.ConfigReader;
-
 import java.time.Duration;
 import java.util.Random;
 
@@ -63,7 +62,8 @@ public class CoursesTest extends BaseTest {
 
     @Test(priority = 5)
     public void deleteCourse(){
-        driver.get("https://abracadabra.talentlms.com/course/index");
+        driver.get("https://abracadabra.talentlms.com/index");
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
         coursesPage.addCourses(courses, courses.getCourseName());
         driver.findElement(By.xpath("//a[@title='Courses']")).click();
 

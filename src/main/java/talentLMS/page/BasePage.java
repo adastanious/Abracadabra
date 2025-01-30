@@ -12,6 +12,7 @@ public abstract class BasePage {
     public Sections sections = new Sections();
 
 
+
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
