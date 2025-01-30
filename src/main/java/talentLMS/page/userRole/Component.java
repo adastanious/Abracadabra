@@ -3,11 +3,13 @@ package talentLMS.page.userRole;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.enams.Role;
+import talentLMS.page.BasePage;
 
 import static talentLMS.enams.Role.*;
 
-public class Component extends UserRole{
-    UserRole userRole = new UserRole();
+public class Component extends BasePage {
+    @FindBy(xpath = "//a[@class = 'dropdown-toggle tl-nabvar-roles-button']")
+    public WebElement userRoleMove;
 
     // Локатор для выбора роли "Learner"
     @FindBy(xpath = "//a[normalize-space()='Learner']")
@@ -29,7 +31,7 @@ public class Component extends UserRole{
      * @throws IllegalArgumentException если передана некорректная роль.
      */
     public void selectRole(Role role) {
-        userRole.moveUserRole();
+        webElementActions.moveToElement(userRoleMove);
         if (role.equals(INSTRUCTOR)) {
             webElementActions.click(instructorUserRole);// Кликаем по роли Инструктора
         }else if (role.equals(LEARNER)){

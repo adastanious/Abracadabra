@@ -2,8 +2,9 @@ package talentLMS.page.userRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.page.BasePage;
 
-public class AdministratorUserRole extends UserRole{
+public class AdministratorUserRole extends BasePage {
     /**
      @author Turan, Agema, Nazik
      */
