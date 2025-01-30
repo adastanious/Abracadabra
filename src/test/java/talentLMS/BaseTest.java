@@ -24,7 +24,6 @@ public abstract class BaseTest {
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
-    User randomUser = randomUserGenerator.randomUser();
     CoursesPage coursesPage = new CoursesPage();
     Courses courses = new Courses();
     Component component = new Component();

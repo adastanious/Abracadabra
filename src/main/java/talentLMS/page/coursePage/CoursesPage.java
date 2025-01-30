@@ -13,6 +13,10 @@ import java.util.List;
 
 public class CoursesPage extends BasePage {
 
+    /*
+    Mirat
+     */
+
     @FindBy(xpath = "//input[@name='name']")
     WebElement courseName;
 
@@ -49,6 +53,9 @@ public class CoursesPage extends BasePage {
     @FindBy(xpath = "//li[@id='tl-learner-option' and normalize-space(.)='Learner']")
     WebElement learnerButton;
 
+    @FindBy(xpath = "//a[@title='Courses']")
+    WebElement clickCourse;
+
 
     public CoursesPage addCourses(Courses courses, String course) {
         webElementActions.click(addCourse);
@@ -59,6 +66,7 @@ public class CoursesPage extends BasePage {
         webElementActions.sendKeys(this.description, courses.getDescription());
         webElementActions.click(active);
         webElementActions.click(submit);
+        webElementActions.click(clickCourse);
         return new CoursesPage();
     }
 
@@ -88,16 +96,17 @@ public class CoursesPage extends BasePage {
         WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//tr[td//span[contains(text(), '" + courseName + "')]]//i[@alt='Delete']")
         ));
-        deleteButton.click();
-        WebElement confirmButton = wait.until(ExpectedConditions.elementToBeClickable(deleteCourseMain));
-        confirmButton.click();
+        webElementActions.click(deleteButton);
+        webElementActions.click(deleteCourseMain);
 
         // Ждем, пока курс исчезнет из списка
+        webElementActions.moveToElement(courseRow);
+        webElementActions.moveToElement(switchAdmin).click(instructorButton);
+        webElementActions.moveToElement(switchAdmin).click(learnerButton);
+
         wait.until(ExpectedConditions.invisibilityOfElementLocated(
                 By.xpath("//tr[td//span[contains(text(), '" + courseName + "')]]")
         ));
-        webElementActions.moveToElement(switchAdmin).click(instructorButton);
-        webElementActions.moveToElement(switchAdmin).click(learnerButton);
 
         return new CoursesPage();
     }
