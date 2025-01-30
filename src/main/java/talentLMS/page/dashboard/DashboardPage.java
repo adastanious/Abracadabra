@@ -3,6 +3,7 @@ package talentLMS.page.dashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.enams.AdminSection;
 import talentLMS.page.BasePage;
 import talentLMS.page.login.LoginPage;
 
@@ -18,10 +19,10 @@ public class DashboardPage extends BasePage {
     WebElement sectionsList;
 
 
-    public DashboardPage selectSection(String section) {
+    public LoginPage selectSection(AdminSection section) {
         switchToLegacyInterface();
         webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
-        return new DashboardPage();
+        return new LoginPage();
     }
 
     public LoginPage switchToLegacyInterface () {
