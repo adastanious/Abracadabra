@@ -3,10 +3,15 @@ package talentLMS.page.users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentLMS.page.BasePage;
 import talentLMS.entity.User;
+import talentLMS.page.BasePage;
+
+/**
+ @author Nasyikat Aiperi Aizada
+ */
 
 public class UserPage extends BasePage {
+
     @FindBy(xpath = "//div[@class='tl-header-tools pull-left']//a[contains(text(),'Add user')]")
     public WebElement addUser;
 
