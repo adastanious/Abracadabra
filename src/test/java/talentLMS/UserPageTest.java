@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import talentLMS.enams.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 
 
@@ -14,7 +15,7 @@ public class UserPageTest extends BaseTest {
     @Test (priority = 1)
     public void addNewUserTest() {
         driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(sections.getUsers());
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(AdminSection.USERS);
         userPage.addNewUser(randomUser);
     }
 
