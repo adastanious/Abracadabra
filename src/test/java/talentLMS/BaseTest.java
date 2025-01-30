@@ -18,12 +18,10 @@ import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
-
 import java.time.Duration;
 
 public abstract class BaseTest {
     public WebDriver driver;
-
     public WebElementActions webElementActions = new WebElementActions();
     public LoginPage loginPage = new LoginPage();
     Sections sections = new Sections();
@@ -45,4 +43,5 @@ public abstract class BaseTest {
 
         driver = Driver.getDriver();
     }
+
 }
