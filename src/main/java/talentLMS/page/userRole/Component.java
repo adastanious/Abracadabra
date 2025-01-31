@@ -2,10 +2,10 @@ package talentLMS.page.userRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentLMS.enums.Role;
+import talentLMS.enams.Role;
 import talentLMS.page.BasePage;
 
-import static talentLMS.enums.Role.*;
+import static talentLMS.enams.Role.*;
 
 public class Component extends BasePage {
     @FindBy(xpath = "//a[@class = 'dropdown-toggle tl-nabvar-roles-button']")

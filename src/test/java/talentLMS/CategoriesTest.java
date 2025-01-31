@@ -6,7 +6,7 @@ import talentLMS.entity.Category;
 import talentLMS.fileUtils.ConfigReader;
 import java.time.Duration;
 import java.util.ArrayList;
-import static talentLMS.enums.Role.ADMINISTRATOR;
+import static talentLMS.enams.Role.ADMINISTRATOR;
 
 public class CategoriesTest extends BaseTest {
     /**
