@@ -1,4 +1,4 @@
-package talentLMS.enums;
+package talentLMS.enams;
 
 import lombok.Getter;
 

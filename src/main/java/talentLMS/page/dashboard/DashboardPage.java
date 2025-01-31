@@ -3,7 +3,7 @@ package talentLMS.page.dashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentLMS.enums.AdminSection;
+import talentLMS.enams.AdminSection;
 import talentLMS.page.BasePage;
 import talentLMS.page.login.LoginPage;
 

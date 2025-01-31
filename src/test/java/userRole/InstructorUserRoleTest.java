@@ -8,7 +8,7 @@ import talentLMS.fileUtils.ConfigReader;
 
 import java.util.ArrayList;
 
-import static talentLMS.enums.Role.INSTRUCTOR;
+import static talentLMS.enams.Role.INSTRUCTOR;
 
 public class InstructorUserRoleTest extends BaseTest {
     /**
