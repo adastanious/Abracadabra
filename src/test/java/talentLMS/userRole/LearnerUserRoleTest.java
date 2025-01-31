@@ -3,17 +3,21 @@ package talentLMS.userRole;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import talentLMS.BaseTest;
+import talentLMS.fileUtils.ConfigReader;
 
 import java.util.ArrayList;
 
-import static talentLMS.enams.Role.LEARNER;
+import static talentLMS.enums.Role.LEARNER;
 
-public class LearnerUserRoleTest extends BaseTest{
+public class LearnerUserRoleTest extends BaseTest {
     /**
      @author Turan, Agema, Nazik
      */
     @Test
     public void learnerUserRoleTest() {
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
         // Навести на элемент роли пользовотеля и нажать роль ученика
         component.selectRole(LEARNER);
 
