@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.UserType;
 import talentLMS.page.BasePage;
 
+import java.util.List;
+
 /**
   @author Aizada, Agema, Adinai, Nasyikat, Aiperi
  */
@@ -61,12 +63,21 @@ public class UserTypes extends BasePage {
     @FindBy(xpath = "//option[@value='4' and text()='Learner-Type']")
     public WebElement learnerType;
 
+    @FindBy(xpath = "//a[@class='dynatree-title' and text()='Courses']/preceding-sibling::span[@class='dynatree-checkbox']")
+    public WebElement AdminCourses;
+
+    @FindBy(xpath = "//a[@class='dynatree-title' and text()='Profile']/preceding-sibling::span[@class='dynatree-checkbox']")
+    public WebElement GeneralProfile;
+
+    @FindBy(xpath = "//a[@class='btn btn-primary' and contains(text(),'Add')]")
+    public WebElement addType;
+
     /**
      * Добавляет новый тип пользователя.
      *
-     * @param userType  Объект UserType, содержащий данные нового типа пользователя.
-     * @param userRole  WebElement, представляющий роль пользователя (администратор, инструктор, ученик).
-     * @param checkbox  WebElement, чекбокс, связанный с выбранной ролью.
+     * @param userType Объект UserType, содержащий данные нового типа пользователя.
+     * @param userRole WebElement, представляющий роль пользователя (администратор, инструктор, ученик).
+     * @param checkbox WebElement, чекбокс, связанный с выбранной ролью.
      * @return Объект UserTypes после выполнения операции.
      */
     public UserTypes addUserType(UserType userType, WebElement userRole, WebElement checkbox) {
@@ -133,6 +144,38 @@ public class UserTypes extends BasePage {
         webElementActions.click(operationIcon)
                 .click(learnerType)
                 .click(delete);
+        return this;
+    }
+
+    /**
+     * Удаляет тип пользователя в негативном сценарии.
+     *
+     * @param userType Тип пользователя для удаления.
+     * @return Текущий объект UserTypes.
+     */
+    public UserTypes deleteNegative(UserType userType) {
+        webElementActions.click(operationIcon)
+                .click(delete);
+        return this;
+    }
+
+    /**
+     * Добавляет нового пользователя с ролью администратора.
+     *
+     * @param userType Тип пользователя с данными администратора.
+     * @return Текущий объект UserTypes.
+     */
+    public UserTypes addAdminUserType(UserType userType) {
+        webElementActions.click(addType)
+                .sendKeys(name, userType.getName())
+                .click(arrow)
+                .click(clickAdministrator);
+
+        // Устанавливаем флажки для администратора
+        List<WebElement> checkboxes = List.of(AdminCourses, GeneralProfile);
+        checkboxes.forEach(webElementActions::click);
+
+        webElementActions.click(save);
         return this;
     }
 }
