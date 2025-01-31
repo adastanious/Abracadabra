@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import talentLMS.enams.AdminSection;
+import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 
 
