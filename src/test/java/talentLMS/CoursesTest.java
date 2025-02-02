@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 
 import java.util.Random;
@@ -13,7 +14,8 @@ public class CoursesTest extends BaseTest {
     @Test(priority = 1)
     public void test(){
         driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(AdminSection.COURSES);
         coursesPage.addCourses(courses, courses.getCourseName());
     }
 
@@ -61,7 +63,7 @@ public class CoursesTest extends BaseTest {
     @Test(priority = 5)
     public void deleteCourse(){
         driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(sections.getCourses());
+        loginPage.doLogin(ConfigReader.getProperty("login"),ConfigReader.getProperty("password")).selectSection(AdminSection.COURSES);
 
         coursesPage.deleteCourse();
 
