@@ -4,8 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
-import talentLMS.entity.Category;
-import talentLMS.entity.Courses;
+import talentLMS.entity.*;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.userRole.AdministratorUserRole;
@@ -13,8 +12,6 @@ import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
-import talentLMS.entity.User;
-import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
@@ -37,6 +34,7 @@ public abstract class BaseTest {
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public UserEntity userEntity = new UserEntity();
 
     @BeforeSuite
     public void beforeSuite() {
