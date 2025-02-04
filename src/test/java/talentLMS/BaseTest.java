@@ -12,12 +12,15 @@ import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
+import talentLMS.page.userTypes.UserTypes;
 import talentLMS.page.users.UserPage;
 import talentLMS.entity.User;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
+import talentLMS.utils.randomEntityUtils.RandomUserTypeGenerator;
+
 import java.time.Duration;
 
 public abstract class BaseTest {
@@ -37,6 +40,8 @@ public abstract class BaseTest {
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public RandomUserTypeGenerator randomUserTypeGenerator = new RandomUserTypeGenerator();
+    public UserTypes userTypes = new UserTypes();
 
     @BeforeSuite
     public void beforeSuite() {
