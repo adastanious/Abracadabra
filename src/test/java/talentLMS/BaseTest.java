@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
-import talentLMS.entity.Category;
-import talentLMS.entity.Courses;
+import talentLMS.entity.*;
+import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.userRole.AdministratorUserRole;
@@ -13,10 +13,9 @@ import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
-import talentLMS.entity.User;
-import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
+import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 import java.time.Duration;
 
@@ -24,7 +23,6 @@ public abstract class BaseTest {
     public WebDriver driver;
     public WebElementActions webElementActions = new WebElementActions();
     public LoginPage loginPage = new LoginPage();
-    Sections sections = new Sections();
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
@@ -37,10 +35,11 @@ public abstract class BaseTest {
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
+    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
 
     @BeforeSuite
     public void beforeSuite() {
-
         driver = Driver.getDriver();
     }
 
