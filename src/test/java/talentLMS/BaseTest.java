@@ -7,6 +7,8 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.Category;
 import talentLMS.entity.Courses;
 import talentLMS.fileUtils.ConfigReader;
+import talentLMS.entity.*;
+import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
@@ -19,6 +21,7 @@ import talentLMS.entity.User;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
+import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 
 import java.time.Duration;
@@ -40,6 +43,8 @@ public abstract class BaseTest {
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public DashboardPage dashboardPage = new DashboardPage();
+    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
+    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
 
     @BeforeSuite
     public void beforeSuite() {

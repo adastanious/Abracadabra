@@ -1,8 +1,10 @@
 package talentLMS.helper;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
 
@@ -62,6 +64,14 @@ public class WebElementActions {
         waitElementToBeDisplayed(element);
         waitButtonToBeClickable(element);
         actions.moveToElement(element).perform();
+        return this;
+    }
+
+    public WebElementActions sendKeysWithEnter(WebElement element, String text) {
+        waitElementToBeDisplayed(element);
+        element.clear();
+        element.sendKeys(text);
+        element.sendKeys(Keys.ENTER);
         return this;
     }
 

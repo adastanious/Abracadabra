@@ -19,10 +19,10 @@ public class DashboardPage extends BasePage {
     WebElement sectionsList;
 
 
-    public DashboardPage selectSection(AdminSection section) {
-        switchToLegacyInterface();
+    public LoginPage selectSection(AdminSection section) {
+        //switchToLegacyInterface();
         webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
-        return this;
+        return new LoginPage();
     }
 
     public LoginPage switchToLegacyInterface () {
