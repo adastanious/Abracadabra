@@ -1,43 +1,43 @@
-package talentLMS;
+package talentLMS.categoriesTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import talentLMS.BaseTest;
 import talentLMS.entity.Category;
-import talentLMS.fileUtils.ConfigReader;
-import java.time.Duration;
+import talentLMS.enums.AdminSection;
 import java.util.ArrayList;
 import static talentLMS.enums.Role.ADMINISTRATOR;
 
-public class CategoriesTest extends BaseTest {
+public class CategoriesSmokeTest extends BaseTest {
     /**
      @author Turan
      */
+
     //проверка создания категорий
     @Test(priority = 1)
     public void addCategories() {
-        driver.get("https://abracadabra.talentlms.com/dashboard");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
         component.selectRole(ADMINISTRATOR);
-        categoriesPage.addCategory(category);
+        categoriesPage.addCategory( category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText ="Success! New category created.";
         String actualText  = categoriesPage.assertText.getText();
-        Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
+        Assert.assertEquals(expectedText, actualText, "Администратор не может создать категорию с корректным названием.");
     }
 
     // Проверка создания категорий с дублирующими названиями
-    @Test(priority = 2)
+    @Test(priority = 8)
     public void addCategoriesDoubleName(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
-        categoriesPage.addCategory(category);
+        categoriesPage.addCategory(category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText ="Success! New category created.";
         String actualText  = categoriesPage.assertText.getText();
-        Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
+        Assert.assertNotEquals(actualText, expectedText, "Система позволяет создавать категории с одинаковыми названиями.");
     }
 
     //проверка удаления категорий[2]
-    @Test(priority = 3)
+    @Test(priority = 9)
     public void deleteCategory()  {
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        dashboardPage.selectSection(AdminSection.CATEGORIES);
         ArrayList<Category> listBeforeDelete = categoriesPage.getCategoryFormTable();
         categoriesPage.deleteCategory();
         try {
@@ -50,11 +50,14 @@ public class CategoriesTest extends BaseTest {
     }
 
     //изменение категорий[2]
-    @Test(priority = 4)
+    @Test(priority = 10)
     public void changeCategory(){
-        categoriesPage.changeCategory(category);
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        dashboardPage.selectSection(AdminSection.CATEGORIES);
+        categoriesPage.changeCategory(category.getCorrectCategoryName2(), category.getCorrectPrice2());
         String expectedText ="Category updated successfully";
         String actualText  = categoriesPage.assertText.getText();
-        Assert.assertEquals(expectedText, actualText, "Тексты не совпадают");
+        Assert.assertEquals(expectedText, actualText, "Система не позволяет изменять категории администратору.");
     }
+
 }
