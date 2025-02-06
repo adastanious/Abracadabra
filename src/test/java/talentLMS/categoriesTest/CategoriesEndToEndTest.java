@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.BaseTest;
 import talentLMS.entity.Category;
+import talentLMS.enums.AdminSection;
+import talentLMS.enums.ErrorMessage;
 
 import java.util.ArrayList;
 
@@ -14,15 +16,33 @@ public class CategoriesEndToEndTest extends BaseTest {
     /**
      @author Turan
      */
+    @Test(priority = 0)
+    public void CategoriesTestTableZero(){
+        dashboardPage.selectSection(AdminSection.CATEGORIES);
+        while (true) {
+            ArrayList<Category> categoriesTable = categoriesPage.getCategoryFormTable();
+            if (categoriesTable.isEmpty()){
+                break;
+            }else {
+                try {
+                    categoriesPage.deleteCategory();
+                }
+                catch (Exception e){
+                }
+            }
+        }
+        ArrayList<Category> categoriesTable = categoriesPage.getCategoryFormTable();
+        Assert.assertEquals(categoriesTable.size(), 0, "Не прошло удаление всех категорий");
+    }
 
     @Test(priority = 1)
     public void addIncorrectCategories(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getIncorrectPrice());
-        String expectedText = "'Name' cannot exceed 80 characters";
+        String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.toString();
         String actualText = categoriesPage.getIncorrectAssertText().getText();
-        Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной более 80 символов.");
-        String expectedTextPrice = "This is not a valid 'Price'";
+        Assert.assertEquals(actualText,expectedText, "Система позволяет создавать категории с названиями длинной более 80 символов.");
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.toString();
         String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории c не корректным прайсом.");
     }
@@ -30,7 +50,7 @@ public class CategoriesEndToEndTest extends BaseTest {
     public void addIncorrectCategories1(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getCorrectCategoryName());
-        String expectedTextPrice = "This is not a valid 'Price'";
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.toString();
         String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из букв.");
     }
@@ -39,7 +59,7 @@ public class CategoriesEndToEndTest extends BaseTest {
     public void addIncorrectCategories2(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getCorrectPrice());
-        String expectedText = "'Name' cannot exceed 80 characters";
+        String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.toString();
         String actualText = categoriesPage.getIncorrectAssertText().getText();
         Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной более 80 символов.");
     }
@@ -48,7 +68,7 @@ public class CategoriesEndToEndTest extends BaseTest {
     public void addIncorrectCategories3(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getIncorrectPrice());
-        String expectedTextPrice = "This is not a valid 'Price'";
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.toString();
         String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории c не корректным прайсом.");
     }
@@ -57,10 +77,10 @@ public class CategoriesEndToEndTest extends BaseTest {
     public void addIncorrectCategories4(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getCorrectCategoryName());
-        String expectedText = "'Name' cannot exceed 80 characters";
+        String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.toString();
         String actualText = categoriesPage.getIncorrectAssertText().getText();
         Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной более 80 символов.");
-        String expectedTextPrice = "This is not a valid 'Price'";
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.toString();
         String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из букв.");
     }
@@ -69,12 +89,21 @@ public class CategoriesEndToEndTest extends BaseTest {
     public void addIncorrectCategories5(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         categoriesPage.addCategory("", category.getCorrectPrice());
-        String expectedText = "'Name' is required";
+        String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_LESS1.toString();
         String actualText = categoriesPage.getIncorrectAssertText2().getText();
         Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной менее 1 символа.");
     }
 
     @Test(priority = 7)
+    public void addIncorrectCategories6(){
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        categoriesPage.addCategory(category.getCorrectCategoryName(), "-500");
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.toString();
+        String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
+        Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории с отрицательным прайсом.");
+    }
+
+    @Test(priority = 8)
     public void instructorCategoriesTest(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         component.selectRole(INSTRUCTOR);
@@ -86,7 +115,7 @@ public class CategoriesEndToEndTest extends BaseTest {
             // Если исключение возникло, тест проходит успешно
             }
     }
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void instructorCategoriesTest2(){
         try {
             categoriesPage.deleteCategory();
@@ -96,7 +125,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void instructorCategoriesTest3(){
         try {
             // Пытаемся добавить категорию
@@ -109,7 +138,7 @@ public class CategoriesEndToEndTest extends BaseTest {
 
 
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void learnerCategoriesTest(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
         component.selectRole(LEARNER);
@@ -120,7 +149,7 @@ public class CategoriesEndToEndTest extends BaseTest {
             // Если исключение возникло, тест проходит успешно
         }
     }
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void learnerCategoriesTest2(){
         try {
             categoriesPage.deleteCategory();
@@ -130,7 +159,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void learnerCategoriesTest3(){
         try {
             categoriesPage.changeCategory(category.getCorrectCategoryName2(), category.getCorrectPrice2());

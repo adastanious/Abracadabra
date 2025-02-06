@@ -1,24 +1,20 @@
 package talentLMS;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
-import talentLMS.entity.Category;
-import talentLMS.entity.Courses;
-import talentLMS.fileUtils.ConfigReader;
 import talentLMS.entity.*;
+import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
 import talentLMS.page.userRole.AdministratorUserRole;
-import talentLMS.entity.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
-import talentLMS.entity.User;
-import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
@@ -57,5 +53,10 @@ public abstract class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
     }
+//    @AfterClass
+//    public void afterClass(){
+//        driver.close();
+//        driver.quit();
+//    }
 
 }
