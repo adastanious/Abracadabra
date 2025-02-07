@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import talentLMS.enams.AdminSection;
+import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 import java.time.Duration;
 import java.util.List;
-import static talentLMS.enams.Role.*;
+import static talentLMS.enums.Role.*;
 
 public class CoursesTest extends BaseTest {
 
