@@ -6,8 +6,10 @@ import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 import talentLMS.entity.*;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
+import talentLMS.page.accountAndSettings.UsersPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
+import talentLMS.page.dashboard.DashboardPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
@@ -26,17 +28,19 @@ public abstract class BaseTest {
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
-    CoursesPage coursesPage = new CoursesPage();
-    Courses courses = new Courses();
+    public CoursesPage coursesPage = new CoursesPage();
+    public Courses courses = new Courses();
     public Component component = new Component();
-    CategoriesPage categoriesPage = new CategoriesPage();
-    Category category = new Category();
+    public CategoriesPage categoriesPage = new CategoriesPage();
+    public Category category = new Category();
     public AdministratorUserRole administratorUserRole = new AdministratorUserRole();
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
-    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
+    public RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public DashboardPage dashboardPage = new DashboardPage();
+    public UsersPage settingsUsersPage = new UsersPage();
 
     @BeforeSuite
     public void beforeSuite() {
