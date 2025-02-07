@@ -1,5 +1,4 @@
 package talentLMS;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeSuite;
@@ -14,7 +13,6 @@ import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
-import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
