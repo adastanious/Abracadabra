@@ -5,6 +5,10 @@ import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.Branch;
 import talentLMS.page.BasePage;
 
+/**
+ @author Adinai
+ */
+
 public class BranchesPage extends BasePage {
 
     @FindBy(xpath = "//a[contains(text(),'Add branch')]")
