@@ -30,7 +30,7 @@ public abstract class BaseTest {
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
-    CoursesPage coursesPage = new CoursesPage();
+    public CoursesPage coursesPage = new CoursesPage();
     Courses courses = new Courses();
     public Component component = new Component();
     public CategoriesPage categoriesPage = new CategoriesPage();
@@ -53,10 +53,11 @@ public abstract class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
     }
-//    @AfterClass
-//    public void afterClass(){
-//        driver.close();
-//        driver.quit();
-//    }
+
+    @AfterClass
+    public void afterClass(){
+        driver.manage().deleteAllCookies();
+        driver.close();
+    }
 
 }
