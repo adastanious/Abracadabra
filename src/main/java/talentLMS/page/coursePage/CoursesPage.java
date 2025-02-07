@@ -1,5 +1,7 @@
 package talentLMS.page.coursePage;
 
+
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,12 +13,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+@Getter
+
 
 public class CoursesPage extends BasePage {
-
-    /**
-     * Mirat
-     */
 
     @FindBy(xpath = "//input[@name='name']")
     WebElement courseName;
@@ -28,7 +28,7 @@ public class CoursesPage extends BasePage {
     WebElement categoryAdd;
 
     @FindBy(xpath = "//div[@class='select2-result-label']")
-    WebElement categoryClick;
+    List <WebElement> categoryClick;
 
     @FindBy(xpath = "//div[@class='input-append tl-countdown']//textarea[@name='description']")
     WebElement description;
@@ -67,7 +67,7 @@ public class CoursesPage extends BasePage {
                 .sendKeys(this.courseName, course)
                 .click(category)
                 .sendKeys(this.categoryAdd, courses.getCategory())
-                .click(categoryClick)
+                .click(categoryClick.get(1))
                 .sendKeys(this.description, courses.getDescription())
                 .click(active)
                 .click(submit);
