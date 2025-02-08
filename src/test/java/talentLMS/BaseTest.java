@@ -11,6 +11,9 @@ import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
+import talentLMS.page.importExport.ExportPage;
+import talentLMS.page.importExport.ImportPage;
+import talentLMS.page.importExport.SyncWithAnFtpServerPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
@@ -41,6 +44,9 @@ public abstract class BaseTest {
     public DashboardPage dashboardPage = new DashboardPage();
     BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public ImportPage importPage = new ImportPage();
+    public ExportPage exportPage = new ExportPage();
+    public SyncWithAnFtpServerPage syncWithAnFtpServerPage = new SyncWithAnFtpServerPage();
 
     @BeforeSuite
     public void beforeSuite() {

@@ -16,7 +16,7 @@ import java.util.List;
  @author Dastan Aidarov
  */
 
-public class BasicSettingsTest extends BaseTest{
+public class BasicSettingsTest extends BaseTest {
     private String randomName = randomSettingsGenerator.randomSiteName();
     private String randomDescription = randomSettingsGenerator.randomSiteDescription();
     private String randomIncorrectName = randomSettingsGenerator.randomSiteNameOver40Chars();
