@@ -34,7 +34,8 @@ public class RandomGroupGenerator {
         return sb.toString();  // Возвращаем строку, собранную с помощью StringBuilder
     }
 
+
     public Group randomGroup(){
-        return  new Group(randomName(), generateText(150));
+        return new Group(randomName(), generateText(150));
     }
 }

@@ -7,10 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
+
 
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
+
     public WebElementActions waitButtonToBeClickable(WebElement element) {
         new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15))
                 .until(ExpectedConditions.elementToBeClickable(element));
@@ -18,7 +19,7 @@ public class WebElementActions {
     }
 
     public WebElementActions waitElementToBeDisplayed(WebElement element) {
-        new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(15))
+        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOf(element));
         return this;
     }
@@ -64,11 +65,12 @@ public class WebElementActions {
         actions.moveToElement(element).perform();
         return this;
     }
+
     /**
      * Метод проверяет, можно ли нажать на элемент.
      *
      * @param element WebElement, который нужно проверить.
-     * @param wait WebDriverWait для ожидания элемента.
+     * @param wait    WebDriverWait для ожидания элемента.
      * @return true, если элемент кликабелен, иначе false.
      */
     public boolean isElementClickable(WebElement element, WebDriverWait wait) {
@@ -80,3 +82,7 @@ public class WebElementActions {
         }
     }
 }
+//    public boolean isDisplayed(WebElement element){
+//        return element.isDisplayed();
+//    }
+//}
