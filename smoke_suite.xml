@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke Suite" parallel="tests" thread-count="2">
+    <test name="Smoke Test - Basic Functionality">
+        <classes>
+            <class name="talentLMS.LoginTest"/>
+            <class name="talentLMS.EventEngineTest"></class>
+        </classes>
+    </test>
+</suite>
