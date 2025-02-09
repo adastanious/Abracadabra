@@ -1,6 +1,7 @@
 package talentLMS;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
@@ -53,10 +54,10 @@ public abstract class BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
     }
 
-//    @AfterClass
-//    public void afterClass(){
-//        driver.manage().deleteAllCookies();
-//        driver.close();
-//    }
+    @AfterClass
+    public void afterClass(){
+        driver.manage().deleteAllCookies();
+        driver.close();
+    }
 
 }

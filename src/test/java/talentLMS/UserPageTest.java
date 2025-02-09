@@ -186,7 +186,7 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Last name' cannot exceed 50 characters");
     }
 
-    @Test(priority = 20)
+    @Test(priority = 21)
     public void randomEmailExceed150CharactersTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserEmailXceed150Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -195,7 +195,7 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Email address' cannot exceed 150 characters");
     }
 
-    @Test(priority = 21)
+    @Test(priority = 22)
     public void randomPasswordExceed30CharactersTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserPasswordXceed30Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
