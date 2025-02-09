@@ -19,19 +19,18 @@ public class DashboardPage extends BasePage {
     WebElement sectionsList;
 
 
-    public LoginPage selectSection(AdminSection section) {
-        //switchToLegacyInterface();
+    public DashboardPage selectSection(AdminSection section) {
         webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
-        return new LoginPage();
+        return new DashboardPage();
     }
 
-    public LoginPage switchToLegacyInterface () {
+    public DashboardPage switchToLegacyInterface () {
         try {
             webElementActions.click(subMenu)
                     .click(legacyMenuItem);
-            return new LoginPage();
+            return new DashboardPage();
         } catch (NoSuchElementException e) {
-            return new LoginPage();
+            return new DashboardPage();
         }
     }
 }

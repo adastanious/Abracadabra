@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
-import talentLMS.page.userRole.Component;
+import talentLMS.entity.Component;
 
 import java.time.Duration;
 

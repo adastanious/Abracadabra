@@ -26,10 +26,19 @@ public class AddNotificationPage extends BasePage {
     public List <WebElement> unavilableRecipientList;
     @FindBy(xpath = "//div/div/textarea[contains(@name,'notification')]")
     public WebElement notificationMessageBox;
+    @FindBy(xpath = "//label[@class ='checkbox']/input[@name ='status']")
+    public WebElement statusCheckbox;
     @FindBy(xpath = "//div/div/input[@value = 'Create notification']")
     public WebElement addNotification;
     @FindBy(xpath = "//a[@class ='brand']")
     public WebElement home;
+
+    @FindBy(xpath = "//label[(text() = 'Name')]/ancestor::div/div/span/span[@class = 'help-inline']")
+    public WebElement wrongNameDataMessage;
+    @FindBy(xpath = "//label[(text() = 'Event')]/ancestor::div/div/span/span[@class = 'help-inline']")
+    public WebElement wrongEventDataMessage;
+    @FindBy(xpath = "//label[(text() = 'Recipient')]/ancestor::div/div/span/span[@class = 'help-inline']")
+    public WebElement wrongRecipienDataMessage;
 
     public AddNotificationPage inputName(String name){
         webElementActions.sendKeys(inputName,name);
@@ -65,6 +74,19 @@ public class AddNotificationPage extends BasePage {
 
     public AddNotificationPage inputMessageBox(String text){
         webElementActions.sendKeys(notificationMessageBox, text);
+        return this;
+    }
+
+    public AddNotificationPage setStatus(boolean status){
+        if(status){
+           if(!statusCheckbox.isSelected()){
+               webElementActions.click(statusCheckbox);
+           }
+           return this;
+        }
+        if(statusCheckbox.isSelected()){
+            webElementActions.click(statusCheckbox);
+        }
         return this;
     }
 
