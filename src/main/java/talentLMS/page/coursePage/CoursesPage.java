@@ -8,7 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.Courses;
 import talentLMS.page.BasePage;
 import java.util.List;
+
 @Getter
+
 public class CoursesPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='name']")

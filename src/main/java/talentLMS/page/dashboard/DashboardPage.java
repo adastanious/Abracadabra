@@ -5,33 +5,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.enums.AdminSection;
 import talentLMS.page.BasePage;
-import talentLMS.page.login.LoginPage;
 
 import java.util.NoSuchElementException;
 
+/**
+ @author Dastan Aidarov
+ */
 public class DashboardPage extends BasePage {
     @FindBy(xpath = "//span[@class='arrow-down']")
     WebElement subMenu;
-    @FindBy(xpath = "//a[@data-testid='legacy-menu-item']")
+    @FindBy(xpath = "//a[@data-testid='legacy-menu-item']//p")
     WebElement legacyMenuItem;
 
     @FindBy(xpath = "//div[@class='tl-bold-link']")
     WebElement sectionsList;
 
-
-    public LoginPage selectSection(AdminSection section) {
+    /**
+     * Метод выбирает нужный раздел администратора на панели управления.
+     * @param section раздел, который необходимо выбрать
+     * @return новый объект DashboardPage
+     */
+    public DashboardPage selectSection(AdminSection section) {
         //switchToLegacyInterface();
         webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
-        return new LoginPage();
+        return new DashboardPage();
     }
 
-    public LoginPage switchToLegacyInterface () {
+    /**
+     * Метод переключается на устаревший интерфейс, если элементы доступны.
+     * В случае отсутствия элементов, просто возвращает новую страницу.
+     * @return новый объект DashboardPage
+     */
+    public DashboardPage switchToLegacyInterface () {
         try {
             webElementActions.click(subMenu)
                     .click(legacyMenuItem);
-            return new LoginPage();
+            return new DashboardPage();
         } catch (NoSuchElementException e) {
-            return new LoginPage();
+            return new DashboardPage();
         }
     }
     ////div[@class='tl-bold-link']//a[contains(text(),'Reports')]

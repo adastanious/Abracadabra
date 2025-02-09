@@ -20,6 +20,15 @@ public class CategoriesSmokeTest extends BaseTest {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
+    /**
+     * Тест для проверки удаления всех категорий в разделе "Категории".
+     * Этот тест выполняет следующие действия:
+     * 1. Переход в раздел "Категории" на странице панели управления.
+     * 2. Попытка удаления всех категорий на странице, пока таблица категорий не станет пустой.
+     * 3. Проверка, что после выполнения операций удаления таблица категорий пуста.
+     *
+     * @throws Exception Если при удалении категорий произойдет ошибка, она будет поймана, но не вызовет сбой теста.
+     */
     @Test(priority = 0)
     public void CategoriesTestTableZero(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
@@ -56,7 +65,7 @@ public class CategoriesSmokeTest extends BaseTest {
         String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertNotEquals(actualText, expectedText, "Система позволяет создавать категории с одинаковыми названиями.");
     }
-    @Test(priority = 3)
+    @Test(priority = 3, dependsOnMethods = {"addCategories"})
     public void addCategoryParentTest(){
         categoriesPage.addCategoryParent("SpaceX",category.getCorrectPrice());
         String expectedText =SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
@@ -89,6 +98,17 @@ public class CategoriesSmokeTest extends BaseTest {
         Assert.assertEquals(expectedText, actualText, "Система не позволяет изменять категории администратору.");
     }
 
+    /**
+     * Тест для проверки соответствия количества категорий в разделе "Категории" и разделе "Курсы".
+     * Этот тест выполняет следующие действия:
+     * 1. Переход в раздел "Категории" на странице панели управления.
+     * 2. Получение списка всех категорий в разделе "Категории".
+     * 3. Переход в раздел "Курсы" на странице панели управления.
+     * 4. Открытие окна для добавления курса и выбор категории.
+     * 5. Сравнение количества категорий в разделе "Категории" и количестве категорий, доступных для выбора в разделе "Курсы".
+     *
+     * @throws AssertionError Если количество категорий не совпадает, тест не пройдет.
+     */
     @Test(priority = 6)
     public void categoryCursesTest(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);

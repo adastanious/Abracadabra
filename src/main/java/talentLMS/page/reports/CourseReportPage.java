@@ -61,19 +61,13 @@ public class CourseReportPage extends BasePage {
     @FindBy(xpath = "//a[@class=\"btn tl-set-report-period\"]")
     WebElement periodBtn;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Метод для перехода на страницу отчета по курсу.
+     * Этот метод выполняет последовательные клики по элементам на странице: сначала по кнопке отчета о курсе,
+     * затем по конкретному курсу из списка.
+     *
+     * @return CourseReportPage Страница отчета о курсе, на которую происходит переход.
+     */
     public CourseReportPage goCourse(){
         webElementActions.click(courseReport)
                 .click(coursesName.get(1));
@@ -82,7 +76,16 @@ public class CourseReportPage extends BasePage {
     }
 
 
-
+    /**
+     * Метод для получения отчетных данных о курсах из таблицы на веб-странице.
+     * Этот метод выполняет клик по кнопке таблицы, ждет загрузки данных и собирает информацию
+     * о курсах, таких как название курса, категория, количество назначенных учеников и завершивших курс.
+     *
+     * @return ArrayList<ReportCourses> Список объектов ReportCourses, каждый из которых представляет
+     *         строку таблицы с данными о курсе.
+     *
+     * @throws InterruptedException Если поток был прерван при ожидании (используется Thread.sleep).
+     */
     public ArrayList<ReportCourses> getCoursesReportFormTable() {
             if (webElementActions.isElementClickable(forTableBtn)){
                 webElementActions.click(forTableBtn);
@@ -107,14 +110,4 @@ public class CourseReportPage extends BasePage {
         }
         return  reportCoursesTable;
     }
-
-
-
-
-
-
-
-
-//    @FindBy(xpath = "//table[@id='tl-timeline-list']//tbody//td//span[@class='tl-formatted-course-name']")
-//    WebElement courseReport;
 }

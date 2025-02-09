@@ -8,6 +8,8 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.*;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
+import talentLMS.page.accountAndSettings.DomainPage;
+import talentLMS.page.accountAndSettings.UsersPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
@@ -27,21 +29,21 @@ public abstract class BaseTest {
     public WebDriver driver;
     public WebElementActions webElementActions = new WebElementActions();
     public LoginPage loginPage = new LoginPage();
-    Sections sections = new Sections();
     public UserPage userPage = new UserPage();
     public RandomUserGenerator randomUserGenerator = new RandomUserGenerator();
     public User randomUser = randomUserGenerator.randomUser();
     public CoursesPage coursesPage = new CoursesPage();
-    Courses courses = new Courses();
+    public Courses courses = new Courses();
     public Component component = new Component();
     public CategoriesPage categoriesPage = new CategoriesPage();
     public Category category = new Category();
     public AdministratorUserRole administratorUserRole = new AdministratorUserRole();
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
+    public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     public DashboardPage dashboardPage = new DashboardPage();
-    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
-    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public UsersPage settingsUsersPage = new UsersPage();
+    public DomainPage domainPage = new DomainPage();
     public CourseReportPage courseReportPage = new CourseReportPage();
 
     @BeforeSuite
@@ -51,7 +53,7 @@ public abstract class BaseTest {
 
     @BeforeClass
     public void beforeClass(){
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
     }
