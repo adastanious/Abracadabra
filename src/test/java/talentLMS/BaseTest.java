@@ -11,6 +11,7 @@ import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
+import talentLMS.page.reportsPage.ReportsPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
@@ -39,6 +40,7 @@ public abstract class BaseTest {
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public DashboardPage dashboardPage = new DashboardPage();
+    public ReportsPage reportsPage = new ReportsPage();
     BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
 
