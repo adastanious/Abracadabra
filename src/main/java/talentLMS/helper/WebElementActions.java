@@ -88,4 +88,22 @@ public class WebElementActions {
             return false; // Если элемент не кликабелен, возвращает false.
         }
     }
+
+    // Проверка видимости элемента (ImportExport)
+    public boolean isVisibleImport(WebElement element) {
+        return element.isDisplayed();
+    }
+
+    // Метод для загрузки файла (ImportExport)
+    public WebElementActions importFiles(WebElement element, String path){
+        element.sendKeys(path);
+        return this;
+    }
+
+    // Метод для ввода текста в поле
+    public WebElementActions typeText(WebElement element, String text) {
+        element.clear();  // Очищаем поле перед вводом текста
+        element.sendKeys(text); // Вводим текст
+        return this;
+    }
 }

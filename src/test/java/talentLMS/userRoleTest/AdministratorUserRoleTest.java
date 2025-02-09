@@ -3,7 +3,6 @@ package talentLMS.userRoleTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.BaseTest;
-import talentLMS.fileUtils.ConfigReader;
 
 import static talentLMS.enums.Role.ADMINISTRATOR;
 

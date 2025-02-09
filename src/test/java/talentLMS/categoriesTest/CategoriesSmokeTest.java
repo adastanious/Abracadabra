@@ -10,8 +10,6 @@ import talentLMS.enums.AdminSection;
 import talentLMS.enums.SuccessMessage;
 import java.util.ArrayList;
 
-import static talentLMS.enums.Role.ADMINISTRATOR;
-
 public class CategoriesSmokeTest extends BaseTest {
     /**
      @author Turan
