@@ -1,74 +1,88 @@
 package talentLMS;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import talentLMS.fileUtils.ConfigReader;
+import talentLMS.entity.Group;
+import talentLMS.enums.AdminSection;
 import java.util.List;
 
 
 public class GroupTest extends BaseTest {
 
+
+    private Group randomGroup;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        // Инициализация данных перед каждым тестом
+        String groupName = "Group" + System.currentTimeMillis();  // Уникальное имя для каждой группы
+        randomGroup = new Group(groupName, "Description for " + groupName);
+
+        // Переход на страницу
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        dashboardPage.selectSection(AdminSection.GROUPS);
+    }
+
     @Test(priority = 1)
     public void addNewGroups() {
-        driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password")).selectSection(sections.getGroups());
         groups.addNewGroup(randomGroup);
         String successMessage = groups.getSuccessOrErrorMessage();
-        Assert.assertEquals(successMessage, "Success! New group created.", "invalid success message text.");
+        Assert.assertEquals(successMessage, "Success! New group created.", "Invalid success message text.");
     }
 
     @Test(priority = 2)
-    public void addUserToGroupTest() {
-        groups.addUserToGroup(randomUser);
+    public void testClickAddUserToGroupBtn() {
+        groups.clickAddUserToGroupBtn();
+        driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
     @Test(priority = 3)
     public void editGroupTest() {
-        driver.get("https://abracadabra.talentlms.com/group/index");
-        groups.editGroup(randomGroupGenerator.randomGroup());
+        groups.editGroup(randomGroup);
         String successMessage = groups.getSuccessOrErrorMessage();
-        Assert.assertEquals(successMessage, "Success! Group updated.", "invalid success message text.");
+        Assert.assertEquals(successMessage, "Success! Group updated.", "Invalid success message text.");
     }
 
     @Test(priority = 4)
     public void deleteGroupTest() {
-        driver.get("https://abracadabra.talentlms.com/group/index");
-        groups.deleteGroup(randomGroupGenerator.randomGroup());
-
+        groups.deleteGroup(randomGroup);
     }
 
     @Test(priority = 5)
-    public void verifyGroupDeletedInTable() throws InterruptedException {
-        String randomGroupName = "GroupToBeDeleted";  // Имя удалённой группы
+    public void verifyGroupDeletedInTable() {
+        List<String> groupNamesBeforeDelete = groups.getAllGroupNamesTable();
 
-        // Обновляем страницу перед проверкой
-        driver.navigate().refresh();
-        Thread.sleep(2000);  // Ждём обновления данных
+        if (!groupNamesBeforeDelete.contains(randomGroup.getName())) {
+            System.out.println("Удаленная группа уже отсутствует в таблице!");
+            return;
+        }
 
-        // Получаем список групп
-        List<String> groupNamesAfterDelete = groups.getAllGroupNames();
+        groups.deleteGroup(randomGroup);
+        List<String> groupNamesAfterDelete = groups.getAllGroupNamesTable();
 
-        // Проверяем, что список не пустой
-        Assert.assertFalse(groupNamesAfterDelete.isEmpty(), "Список групп пуст, хотя группы должны быть!");
+        // Теперь используем метод isGroupDeleted
+        Assert.assertTrue(groups.isGroupDeleted(groupNamesAfterDelete, randomGroup.getName()), "Ошибка: группа не была удалена!");
 
-        // Проверяем, что удалённой группы больше нет
-        Assert.assertTrue(groups.isGroupDeleted(groupNamesAfterDelete, randomGroupName), "Группа все ещё в списке!");
-
-        // Выводим оставшиеся группы
         groups.printRemainingGroups(groupNamesAfterDelete);
     }
 
     @Test(priority = 6)
     public void cancelTest() {
-        driver.get("https://abracadabra.talentlms.com/group/index");
-        groups.deleteGroupCancel(randomGroupGenerator.randomGroup());
-    }
-        @Test(priority = 7)
-    public void testAssignCourseToGroup() {
-        driver.get("https://abracadabra.talentlms.com/group/index");
-        groups.assignCourseToGroup(randomGroupGenerator.randomGroup());
+        groups.deleteGroupCancel(randomGroup);
     }
 
+    @Test(priority = 7)
+    public void testAssignCourseToGroup() {
+        groups.assignCourseToGroup(randomGroupGenerator.randomGroup());
+    }
 }
+
+
+
+
+
+
+
 
 

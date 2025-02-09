@@ -2,6 +2,8 @@ package talentLMS.entity;
 
 import lombok.*;
 
+import java.util.Random;
+
 @Getter
 @Setter
 @EqualsAndHashCode

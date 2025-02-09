@@ -1,17 +1,14 @@
 package talentLMS.page.coursePage;
 
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import talentLMS.driver.Driver;
 import talentLMS.entity.Courses;
 import talentLMS.page.BasePage;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
+@Getter
 public class CoursesPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='name']")
@@ -24,7 +21,7 @@ public class CoursesPage extends BasePage {
     WebElement categoryAdd;
 
     @FindBy(xpath = "//div[@class='select2-result-label']")
-    WebElement categoryClick;
+    List <WebElement> categoryClick;
 
     @FindBy(xpath = "//div[@class='input-append tl-countdown']//textarea[@name='description']")
     WebElement description;
@@ -55,7 +52,7 @@ public class CoursesPage extends BasePage {
         webElementActions.sendKeys(this.courseName, course);
         webElementActions.click(category);
         webElementActions.sendKeys(this.categoryAdd, courses.getCategory());
-        webElementActions.click(categoryClick);
+        webElementActions.click(categoryClick.get(1));
         webElementActions.sendKeys(this.description, courses.getDescription());
         webElementActions.click(active);
         webElementActions.click(submit);

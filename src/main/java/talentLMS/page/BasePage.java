@@ -6,6 +6,8 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 
+import java.util.Random;
+
 public abstract class BasePage {
     public WebElementActions webElementActions = new WebElementActions();
     public WebDriver driver = Driver.getDriver();
