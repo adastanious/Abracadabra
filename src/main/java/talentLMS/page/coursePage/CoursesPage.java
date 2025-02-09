@@ -67,7 +67,7 @@ public class CoursesPage extends BasePage {
                 .sendKeys(this.courseName, course)
                 .click(category)
                 .sendKeys(this.categoryAdd, courses.getCategory())
-                .click(categoryClick.get(1))
+                .click(categoryClick.get(0))
                 .sendKeys(this.description, courses.getDescription())
                 .click(active)
                 .click(submit);

@@ -3,9 +3,11 @@ package talentLMS;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 import talentLMS.entity.*;
+import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
@@ -19,6 +21,7 @@ import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
+
 import java.time.Duration;
 
 public abstract class BaseTest {
@@ -44,6 +47,19 @@ public abstract class BaseTest {
     @BeforeSuite
     public void beforeSuite() {
         driver = Driver.getDriver();
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
+    }
+
+    @AfterClass
+    public void afterClass() {
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 
 }
