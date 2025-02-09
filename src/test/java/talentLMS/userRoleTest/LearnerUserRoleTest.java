@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/test/java/talentLMS/userRoleTest/LearnerUserRoleTest.java
 package talentLMS.userRoleTest;
+========
+package talentLMS.userRole;
+>>>>>>>> main:src/test/java/talentLMS/userRole/LearnerUserRoleTest.java
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
