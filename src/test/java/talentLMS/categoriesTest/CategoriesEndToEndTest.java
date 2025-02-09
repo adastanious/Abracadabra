@@ -103,6 +103,14 @@ public class CategoriesEndToEndTest extends BaseTest {
     }
 
     @Test(priority = 8)
+    public void addIncorrectCategories8(){
+        categoriesPage.addCategory(category.getCorrectCategoryName(), "XII");
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
+        String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
+        Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из римских цифр.");
+    }
+
+    @Test(priority = 9)
     public void instructorCategoriesTest(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -113,7 +121,7 @@ public class CategoriesEndToEndTest extends BaseTest {
             // Если исключение возникло, тест проходит успешно
             }
     }
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void instructorCategoriesTest2(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -124,7 +132,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void instructorCategoriesTest3(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -138,7 +146,7 @@ public class CategoriesEndToEndTest extends BaseTest {
 
 
 
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void learnerCategoriesTest(){
         component.selectRole(LEARNER);
         try {
@@ -149,7 +157,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void learnerCategoriesTest2(){
         component.selectRole(LEARNER);
         try {
@@ -160,7 +168,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void learnerCategoriesTest3(){
         component.selectRole(LEARNER);
         try {

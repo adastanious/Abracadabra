@@ -11,6 +11,7 @@ import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
+import talentLMS.page.reports.CourseReportPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
@@ -41,6 +42,7 @@ public abstract class BaseTest {
     public DashboardPage dashboardPage = new DashboardPage();
     BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public CourseReportPage courseReportPage = new CourseReportPage();
 
     @BeforeSuite
     public void beforeSuite() {
@@ -54,10 +56,10 @@ public abstract class BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
     }
 
-    @AfterClass
-    public void afterClass(){
-        driver.manage().deleteAllCookies();
-        driver.close();
-    }
+//    @AfterClass
+//    public void afterClass(){
+//        driver.manage().deleteAllCookies();
+//        driver.close();
+//    }
 
 }

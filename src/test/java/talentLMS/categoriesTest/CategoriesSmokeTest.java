@@ -10,8 +10,6 @@ import talentLMS.enums.AdminSection;
 import talentLMS.enums.SuccessMessage;
 import java.util.ArrayList;
 
-import static talentLMS.enums.Role.ADMINISTRATOR;
-
 public class CategoriesSmokeTest extends BaseTest {
     /**
      @author Turan
@@ -46,7 +44,7 @@ public class CategoriesSmokeTest extends BaseTest {
     public void addCategories() {
         categoriesPage.addCategory( category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText = SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
-        String actualText  = categoriesPage.assertText.getText();
+        String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertEquals(expectedText, actualText, "Администратор не может создать категорию с корректным названием.");
     }
 
@@ -55,14 +53,14 @@ public class CategoriesSmokeTest extends BaseTest {
     public void addCategoriesDoubleName(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText =SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
-        String actualText  = categoriesPage.assertText.getText();
+        String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertNotEquals(actualText, expectedText, "Система позволяет создавать категории с одинаковыми названиями.");
     }
     @Test(priority = 3)
     public void addCategoryParentTest(){
         categoriesPage.addCategoryParent("SpaceX",category.getCorrectPrice());
         String expectedText =SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
-        String actualText  = categoriesPage.assertText.getText();
+        String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertEquals(expectedText, actualText, "Администратор не может создать категорию с корректным названием.");
     }
 
@@ -87,7 +85,7 @@ public class CategoriesSmokeTest extends BaseTest {
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         categoriesPage.changeCategory(category.getCorrectCategoryName2(), category.getCorrectPrice2());
         String expectedText = SuccessMessage.CATEGORIES_CHANGE_MESSAGE.getMessage();
-        String actualText  = categoriesPage.assertText.getText();
+        String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertEquals(expectedText, actualText, "Система не позволяет изменять категории администратору.");
     }
 

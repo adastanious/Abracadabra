@@ -70,5 +70,6 @@ public class AdministratorUserRoleTest extends BaseTest {
         Assert.assertEquals(actualImportExport, expectedImportExport, actualImportExport + " не совпадают.");
         webElementActions.isElementClickable(administratorUserRole.importExport);
     }
+
 }
 
