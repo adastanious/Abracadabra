@@ -6,6 +6,7 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.Sections;
 import talentLMS.helper.WebElementActions;
 
+
 public abstract class BasePage {
     public WebElementActions webElementActions = new WebElementActions();
     public WebDriver driver = Driver.getDriver();
