@@ -91,9 +91,4 @@ public class WebElementActions {
         }
     }
 
-    public void clickWhenClickable(WebElement webElement) {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(webElement))
-                .click();
-    }
 }
