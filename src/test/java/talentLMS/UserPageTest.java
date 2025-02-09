@@ -3,6 +3,7 @@ package talentLMS;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
@@ -11,17 +12,20 @@ import talentLMS.fileUtils.ConfigReader;
 public class UserPageTest extends BaseTest {
 
     String email = randomUser.getEmail();
+    @BeforeMethod
+    public void beforeMethod(){
+        driver.get("https://abracadabra.talentlms.com/dashboard");
+    }
 
     @Test (priority = 1)
     public void addNewUserTest() {
-        driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(AdminSection.USERS);
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.addNewUser(randomUser);
     }
 
     @Test (priority = 2)
     public void fillIncorrectEmailTest() {
-        driver.get("https://abracadabra.talentlms.com/user/create");
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.userWithIncorrectEmail(randomUserGenerator.randomUserWithIncorrectEmail());
 
         WebElement isRequired = driver.findElement(By.xpath("(//div/div/span/span[@class='help-inline'])[1]"));
@@ -31,7 +35,7 @@ public class UserPageTest extends BaseTest {
 
     @Test (priority = 3)
     public void editUserTest() {
-        driver.get("https://abracadabra.talentlms.com/user/index");
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.editUser(randomUserGenerator.randomUser());
     }
 
