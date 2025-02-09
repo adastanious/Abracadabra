@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.enums.AdminSection;
-import talentLMS.fileUtils.ConfigReader;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -18,9 +16,10 @@ public class CoursesTest extends BaseTest {
      * Mirat
      */
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         dashboardPage.selectSection(AdminSection.COURSES);
     }
+
     /**
      * Тест 1: Создание курса
      * Проверяем, что можно создать курс.
@@ -105,5 +104,56 @@ public class CoursesTest extends BaseTest {
         Assert.assertTrue(adminCourses.containsAll(instructorCourses), "Инструктор видит чужие курсы!");
         Assert.assertTrue(adminCourses.containsAll(learnerCourses), "Студент видит курсы, которые ему недоступны!");
     }
+
+    /**
+     * Тест 7: Проверка валидации кода курса
+     * Проверяем, что при попытке сохранить курс без имени отображается сообщение об обязательности поля,
+     * а для кода курса выводится сообщение, что его длина не может превышать 20 символов.
+     */
+    @Test(priority = 7)
+    public void checkCourseCode() {
+        coursesPage.checkCod();
+        Assert.assertEquals(coursesPage.getAssertName().getText(), "'Course name' is required");
+        Assert.assertEquals(coursesPage.getAssertCode().getText(), "'Course code' cannot exceed 20 characters");
+    }
+
+    /**
+     * Тест 8: Проверка валидации цены курса
+     * Проверяем, что при введении некорректного значения цены отображается соответствующее сообщение об ошибке,
+     * а также поле 'Course name' остаётся обязательным для заполнения.
+     */
+    @Test(priority = 8)
+    public void checkCoursePrice() {
+        coursesPage.validPrice();
+        Assert.assertEquals(coursesPage.getAssertName().getText(), "'Course name' is required");
+        Assert.assertEquals(coursesPage.getAssertPrice().getText(), "This is not a valid 'Price'");
+    }
+
+    /**
+     * Тест 9: Проверка валидации URL видео курса
+     * Убеждаемся, что при указании некорректного URL для видео выводится сообщение об ошибке,
+     * и при этом сохраняется требование обязательного заполнения поля 'Course name'.
+     */
+    @Test(priority = 9)
+    public void checkCourseVideo() {
+        coursesPage.validVideo();
+        Assert.assertEquals(coursesPage.getAssertName().getText(), "'Course name' is required");
+        Assert.assertEquals(coursesPage.getAssertVideo().getText(), "This is not a valid 'URL'");
+    }
+
+    /**
+     * Тест 10: Проверка валидации вместимости курса
+     * Проверяем, что при введении некорректного значения вместимости выводится сообщение об ошибке,
+     * а также подтверждается обязательность заполнения поля 'Course name'.
+     */
+    @Test(priority = 10)
+    public void checkCourseCapacity() {
+        coursesPage.validCapacity();
+        Assert.assertEquals(coursesPage.getAssertName().getText(), "'Course name' is required");
+        Assert.assertEquals(coursesPage.getAssertCapacity().getText(), "This is not a valid 'Capacity'");
+    }
+
+
+
 
 }

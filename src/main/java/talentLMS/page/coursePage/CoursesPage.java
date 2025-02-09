@@ -57,6 +57,46 @@ public class CoursesPage extends BasePage {
     @FindBy(xpath = "//a[@title='Courses']")
     WebElement clickCourse;
 
+    @FindBy(xpath = "//a[@id='show-coursecode']")
+    WebElement clickCod;
+
+    @FindBy(xpath = "//a[@id='show-intro-video-url']")
+    WebElement clickVideo;
+
+    @FindBy(xpath = "//a[@id='show-capacity']")
+    WebElement clickCapacity;
+
+    @FindBy(xpath = "//input[@name='course_code']")
+    WebElement inputCod;
+
+    @FindBy(xpath = "//span[@class='help-inline' and contains(text(), 'Course name')]")
+    WebElement assertName;
+
+    @FindBy(xpath = "//span[@class='help-inline' and contains(text(), 'Course code')]")
+    WebElement assertCode;
+
+    @FindBy(xpath = "//span[@class='help-inline' and contains(text(), 'Price')]")
+    WebElement assertPrice;
+
+    @FindBy(xpath = "//span[@class='help-inline help-course-intro-video-url' and contains(text(), 'URL')]")
+    WebElement assertVideo;
+
+    @FindBy(xpath = "//span[@class='help-inline' and contains(text(), 'Capacity')]")
+    WebElement assertCapacity;
+
+    @FindBy(xpath = "//a[@id='show-price']")
+    WebElement clickPrice;
+
+    @FindBy(xpath = "//input[@name='price']")
+    WebElement inputPrice;
+
+    @FindBy(xpath = "//input[@name='intro_video_url']")
+    WebElement inputVideo;
+
+    @FindBy(xpath = "//input[@name='capacity']")
+    WebElement inputCapacity;
+
+
     /**
      * Метод для создания нового курса
      * Заполняет все необходимые поля и нажимает кнопку "Создать курс".
@@ -182,6 +222,42 @@ public class CoursesPage extends BasePage {
             result.append(characters.charAt(index));
         }
         return result.toString();
+    }
+
+    public CoursesPage checkCod(){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        webElementActions.click(addCourse)
+                .click(clickCod)
+                .sendKeys(inputCod,characters)
+                .click(submit);
+        return this;
+    }
+
+    public CoursesPage validPrice(){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        webElementActions.click(addCourse)
+                .click(clickPrice)
+                .sendKeys(inputPrice, characters)
+                .click(submit);
+        return this;
+    }
+
+    public CoursesPage validVideo(){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        webElementActions.click(addCourse)
+                .click(clickVideo)
+                .sendKeys(inputVideo, characters)
+                .click(submit);
+        return this;
+    }
+
+    public CoursesPage validCapacity(){
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        webElementActions.click(addCourse)
+                .click(clickCapacity)
+                .sendKeys(inputCapacity, characters)
+                .click(submit);
+        return this;
     }
 
 
