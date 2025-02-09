@@ -26,7 +26,7 @@ public class DashboardPage extends BasePage {
      * @return новый объект DashboardPage
      */
     public DashboardPage selectSection(AdminSection section) {
-        //switchToLegacyInterface();
+//        switchToLegacyInterface();
         webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
         return new DashboardPage();
     }

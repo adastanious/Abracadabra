@@ -27,7 +27,6 @@ import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
-import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 
 import java.time.Duration;
@@ -74,5 +73,6 @@ public abstract class BaseTest {
 //        driver.manage().deleteAllCookies();
 //        driver.close();
 //    }
+
 
 }
