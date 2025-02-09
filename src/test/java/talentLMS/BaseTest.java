@@ -19,7 +19,6 @@ import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
-import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 
 import java.time.Duration;
@@ -54,11 +53,11 @@ public abstract class BaseTest {
     public void beforeClass(){
         driver.get(ConfigReader.getProperty("dashboardURL"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
+        loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         driver.manage().deleteAllCookies();
         driver.close();
     }
