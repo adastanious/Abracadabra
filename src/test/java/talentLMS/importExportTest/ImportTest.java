@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.BaseTest;
 
+import java.nio.file.Paths;
+
 ///   @author Agema
 
 public class ImportTest extends BaseTest {
@@ -18,9 +20,11 @@ public class ImportTest extends BaseTest {
     @Test(priority = 1)
     public void importAndDownloadTest() {
 
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
+
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx");
+                .uploadFile(filePath);
 
         Assert.assertTrue(importPage.isFileImported("Upload complete. Click the import button to proceed."), "The file was not imported");
 
@@ -31,9 +35,11 @@ public class ImportTest extends BaseTest {
     @Test(priority = 2)
     public void importAndDownloadNegativeTest() {
 
+        String filePath = Paths.get("src/main/resources/file/Снимок экрана 2024-12-12 в 12.27.03.png").toAbsolutePath().toString();
+
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/Снимок экрана 2024-12-12 в 12.27.03.png");
+                .uploadFile(filePath);
 
         Assert.assertTrue(importPage.isFileImported("File type not allowed"), "The file was incorrectly imported");
     }
@@ -88,11 +94,14 @@ public class ImportTest extends BaseTest {
     @Test(priority = 7)
     public void verifyImportButtonDisabledDuringUpload() {
 
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
+
+
         importPage
                 .openImportExportPage();
 
         importPage
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx");
+                .uploadFile(filePath);
 
         Assert.assertFalse(importPage.isImportButtonEnabled(), "Кнопка 'Import' должна быть заблокирована во время загрузки");
     }
@@ -101,10 +110,13 @@ public class ImportTest extends BaseTest {
     @Test(priority = 8)
     public void verifyClearFileUpload() {
 
+        String filePath1 = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
+        String filePath2 = Paths.get("src/main/resources/file/import_ou_xlsx (1).xlsx").toAbsolutePath().toString();
+
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx")
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/import_ou_xlsx (1).xlsx");
+                .uploadFile(filePath1)
+                .uploadFile(filePath2);
 
         Assert.assertTrue(importPage.isFileImported("Upload complete"), "Очистка поля загрузки не сработала");
     }
@@ -113,9 +125,11 @@ public class ImportTest extends BaseTest {
     @Test(priority = 9)
     public void verifySuccessMessageAfterImport() {
 
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
+
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .uploadFile(filePath)
                 .clickImportButton();
     }
 }

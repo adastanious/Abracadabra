@@ -70,8 +70,7 @@ public class WebElementActions {
     public WebElementActions sendKeysWithEnter(WebElement element, String text) {
         waitElementToBeDisplayed(element);
         element.clear();
-        element.sendKeys(text);
-        element.sendKeys(Keys.ENTER);
+        element.sendKeys(text,Keys.ENTER);
         return this;
     }
 

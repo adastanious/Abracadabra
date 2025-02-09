@@ -12,9 +12,9 @@ import talentLMS.page.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Random;
 @Getter
-
 
 public class CoursesPage extends BasePage {
 
