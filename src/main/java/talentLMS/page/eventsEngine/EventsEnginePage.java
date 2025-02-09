@@ -24,7 +24,7 @@ public class EventsEnginePage extends BasePage {
     List<WebElement> notificationsList;
 
 
-    public AddNotificationPage addEvent(){
+    public AddNotificationPage addNotification(){
         webElementActions.click(addEventBtn);
         return new AddNotificationPage();
     }
@@ -64,19 +64,18 @@ public class EventsEnginePage extends BasePage {
         return this;
     }
 
-    @Step()
     public boolean checkNotificationExists(String name){
         for(String [] notificationInfo : getAllNotifications()){
             if (notificationInfo[0].contains(name)){
-                System.out.println(notificationInfo[0]);
                 return true;
             }
         }
         return false;
     }
 
-    public EditNotificationPage editNotification(){
-
+    public EditNotificationPage editNotification(String name){
+        webElementActions.moveToElement(driver.findElement(By.xpath("//span[text()='"+name+"']/ancestor::tr/td/div/i")))
+                .click(driver.findElement(By.xpath("//span[text()='"+name+"']/ancestor::tr/td/div/div/i[@alt = 'Edit']")));
         return new EditNotificationPage();
     }
 }

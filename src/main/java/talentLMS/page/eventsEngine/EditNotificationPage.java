@@ -25,9 +25,10 @@ public class EditNotificationPage extends BasePage {
     public List <WebElement> unavilableRecipientList;
     @FindBy(xpath = "//div/div/textarea[contains(@name,'notification')]")
     public WebElement notificationMessageBox;
-
+    @FindBy(xpath = "//input[@type = 'submit' and contains(@value, 'Update')]")
+    public WebElement submitBtn;
     public EditNotificationPage editNotificationName(String name){
-        editNameCell.click();
+        editNameCell.clear();
         webElementActions.sendKeys(editNameCell, name);
         return this;
     }
@@ -47,6 +48,7 @@ public class EditNotificationPage extends BasePage {
         for (WebElement b: availableRecipientList){
             if (b.getText().contains(recipient.getRecipient())){
                 webElementActions.click(b);
+                return this;
             }
 
             for (WebElement c: unavilableRecipientList){
@@ -68,6 +70,11 @@ public class EditNotificationPage extends BasePage {
                 .selectEvent(notification.getEvent())
                 .selectRecipient(notification.getRecipient())
                 .editMessage(notification.getBody());
+        return new EventsEnginePage();
+    }
+
+    public EventsEnginePage submit(){
+        webElementActions.click(submitBtn);
         return new EventsEnginePage();
     }
 
