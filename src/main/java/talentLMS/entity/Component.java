@@ -1,4 +1,4 @@
-package talentLMS.page.userRole;
+package talentLMS.entity;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
