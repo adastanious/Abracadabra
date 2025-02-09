@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/test/java/talentLMS/userRoleTest/AdministratorUserRoleTest.java
 package talentLMS.userRoleTest;
+========
+package talentLMS.userRole;
+>>>>>>>> main:src/test/java/talentLMS/userRole/AdministratorUserRoleTest.java
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -69,5 +73,6 @@ public class AdministratorUserRoleTest extends BaseTest {
         Assert.assertEquals(actualImportExport, expectedImportExport, actualImportExport + " не совпадают.");
         webElementActions.isElementClickable(administratorUserRole.importExport);
     }
+
 }
 

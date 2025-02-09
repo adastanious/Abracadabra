@@ -20,7 +20,7 @@ public class Component extends BasePage {
     public WebElement instructorUserRole;
 
     // Локатор для выбора роли "Administrator"
-    @FindBy(xpath = "//i[@class ='tl-select-icon-selected']")
+    @FindBy(xpath = "//a[normalize-space()='Administrator']")
     public WebElement administratorUserRole;
 
     /**

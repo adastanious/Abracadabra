@@ -5,7 +5,6 @@ import org.testng.annotations.*;
 import talentLMS.BaseTest;
 
 import java.nio.file.Paths;
-
 ///   @author Agema
 
 public class ImportTest extends BaseTest {
@@ -19,6 +18,7 @@ public class ImportTest extends BaseTest {
     /// Проверяет успешный импорт файла и загрузку образца.
     @Test(priority = 1)
     public void importAndDownloadTest() {
+
 
         String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
 
@@ -94,6 +94,7 @@ public class ImportTest extends BaseTest {
     @Test(priority = 7)
     public void verifyImportButtonDisabledDuringUpload() {
 
+
         String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx").toAbsolutePath().toString();
 
 
@@ -102,6 +103,7 @@ public class ImportTest extends BaseTest {
 
         importPage
                 .uploadFile(filePath);
+
 
         Assert.assertFalse(importPage.isImportButtonEnabled(), "Кнопка 'Import' должна быть заблокирована во время загрузки");
     }

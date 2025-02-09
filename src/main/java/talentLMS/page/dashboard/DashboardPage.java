@@ -45,4 +45,5 @@ public class DashboardPage extends BasePage {
             return new DashboardPage();
         }
     }
+    ////div[@class='tl-bold-link']//a[contains(text(),'Reports')]
 }

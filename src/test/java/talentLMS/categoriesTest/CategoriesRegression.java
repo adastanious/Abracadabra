@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.testng.AssertJUnit.fail;
 import static talentLMS.enums.Role.*;
 
-public class CategoriesEndToEndTest extends BaseTest {
+public class CategoriesRegression extends BaseTest {
     /**
      @author Turan
      */
@@ -22,6 +22,17 @@ public class CategoriesEndToEndTest extends BaseTest {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
+    /**
+     * Тест для проверки соответствия количества категорий в разделе "Категории" и разделе "Курсы".
+     * Этот тест выполняет следующие действия:
+     * 1. Переход в раздел "Категории" на странице панели управления.
+     * 2. Получение списка всех категорий в разделе "Категории".
+     * 3. Переход в раздел "Курсы" на странице панели управления.
+     * 4. Открытие окна для добавления курса и выбор категории.
+     * 5. Сравнение количества категорий в разделе "Категории" и количестве категорий, доступных для выбора в разделе "Курсы".
+     *
+     * @throws AssertionError Если количество категорий не совпадает, тест не пройдет.
+     */
     @Test(priority = 0)
     public void CategoriesTestTableZero(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
@@ -103,6 +114,27 @@ public class CategoriesEndToEndTest extends BaseTest {
     }
 
     @Test(priority = 8)
+    public void addIncorrectCategories8(){
+        categoriesPage.addCategory(category.getCorrectCategoryName(), "XII");
+        String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
+        String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
+        Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из римских цифр.");
+    }
+
+    /**
+     * Тесты для проверки прав доступа инструктора к функционалу управления категориями.
+     * Эти тесты проверяют, что система не позволяет инструктору:
+     * 1. Создавать новую категорию.
+     * 2. Удалять существующие категории.
+     * 3. Изменять информацию о категории.
+     *
+     * В каждом тесте:
+     * - Устанавливается роль пользователя как "Инструктор".
+     * - Пытаемся выполнить операцию (добавить, удалить или изменить категорию).
+     * - Если операция выполняется без ошибки, то тест завершается с ошибкой с сообщением, что операция запрещена для инструктора.
+     * - Если при попытке выполнить операцию возникает исключение, то тест проходит успешно, так как это ожидаемое поведение.
+     */
+    @Test(priority = 9)
     public void instructorCategoriesTest(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -113,7 +145,7 @@ public class CategoriesEndToEndTest extends BaseTest {
             // Если исключение возникло, тест проходит успешно
             }
     }
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void instructorCategoriesTest2(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -124,7 +156,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void instructorCategoriesTest3(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -138,7 +170,20 @@ public class CategoriesEndToEndTest extends BaseTest {
 
 
 
-    @Test(priority = 11)
+    /**
+     * Тесты для проверки прав доступа ученику к функционалу управления категориями.
+     * Эти тесты проверяют, что система не позволяет ученику:
+     * 1. Создавать новую категорию.
+     * 2. Удалять существующие категории.
+     * 3. Изменять информацию о категории.
+     *
+     * В каждом тесте:
+     * - Устанавливается роль пользователя как "Ученик".
+     * - Пытаемся выполнить операцию (добавить, удалить или изменить категорию).
+     * - Если операция выполняется без ошибки, то тест завершается с ошибкой с сообщением, что операция запрещена для инструктора.
+     * - Если при попытке выполнить операцию возникает исключение, то тест проходит успешно, так как это ожидаемое поведение.
+     */
+    @Test(priority = 12)
     public void learnerCategoriesTest(){
         component.selectRole(LEARNER);
         try {
@@ -149,7 +194,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void learnerCategoriesTest2(){
         component.selectRole(LEARNER);
         try {
@@ -160,7 +205,7 @@ public class CategoriesEndToEndTest extends BaseTest {
         }
     }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void learnerCategoriesTest3(){
         component.selectRole(LEARNER);
         try {
