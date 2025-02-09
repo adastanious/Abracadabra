@@ -24,10 +24,12 @@ import talentLMS.page.importExport.SyncWithAnFtpServerPage;
 import talentLMS.page.userRole.AdministratorUserRole;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
+import talentLMS.page.userTypesPage.UserTypes;
 import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
+import talentLMS.utils.randomEntityUtils.RandomUserTypeGenerator;
 
 import java.time.Duration;
 
@@ -54,6 +56,8 @@ public abstract class BaseTest {
     public ImportPage importPage = new ImportPage();
     public ExportPage exportPage = new ExportPage();
     public SyncWithAnFtpServerPage syncWithAnFtpServerPage = new SyncWithAnFtpServerPage();
+    public RandomUserTypeGenerator randomUserTypeGenerator = new RandomUserTypeGenerator();
+    public UserTypes userTypes = new UserTypes();
 
 
     @BeforeSuite
@@ -68,11 +72,11 @@ public abstract class BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
-//    @AfterClass
-//    public void afterClass(){
-//        driver.manage().deleteAllCookies();
-//        driver.close();
-//    }
+    @AfterClass
+    public void afterClass(){
+        driver.manage().deleteAllCookies();
+        driver.close();
+    }
 
 
 }

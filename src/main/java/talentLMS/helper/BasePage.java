@@ -2,14 +2,14 @@ package talentMLS.helper;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import talentMLS.driver.Driver;
-import talentMLS.entity.Sections;
+import talentLMS.driver.Driver;
+import talentLMS.helper.WebElementActions;
 
 
 public abstract class BasePage {
     public WebElementActions webElementActions = new WebElementActions();
     public WebDriver driver = Driver.getDriver();
-    public Sections sections = new Sections();
+   // public Sections sections = new Sections();
 
 
 
