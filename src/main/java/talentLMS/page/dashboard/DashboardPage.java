@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
  @author Dastan Aidarov
  */
 public class DashboardPage extends BasePage {
-    @FindBy(xpath = "//span[@class='arrow-down']")
+    @FindBy(xpath = "//div[@class='profile-menu-button']")
     WebElement subMenu;
     @FindBy(xpath = "//a[@data-testid='legacy-menu-item']//p")
     WebElement legacyMenuItem;
@@ -38,7 +38,7 @@ public class DashboardPage extends BasePage {
      */
     public DashboardPage switchToLegacyInterface () {
         try {
-            webElementActions.click(subMenu)
+            webElementActions.moveToElement(subMenu)
                     .click(legacyMenuItem);
             return new DashboardPage();
         } catch (NoSuchElementException e) {

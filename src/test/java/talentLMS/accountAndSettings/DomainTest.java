@@ -101,7 +101,7 @@ public class DomainTest extends BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface();
         beforeMethod();
         domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_CURRENT);
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface();
+        beforeClass();
     }
 
     /**
