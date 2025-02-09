@@ -1,4 +1,4 @@
-package talentLMS.enums;
+package talentLMS.enums.accountAndSettings;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,12 +8,18 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 
-public enum BasicSettings {
+/**
+ @author Dastan Aidarov
+ */
 
-    ERROR_TEXT_COLOR ("#b94a4"),
+public enum AccountAndSettings {
+
+    SITE_NAME ("aidas"),
+    SETTINGS_ERROR_TEXT_COLOR ("#b94a48"),
     SITE_NAME_ERROR_TEXT ("'Site name' cannot exceed 40 characters"),
     SITE_DESCRIPTION_ERROR_TEXT ("'Site description' cannot exceed 255 characters"),
-    SETTINGS_SAVED_SUCCESSFULLY ("Basic settings updated successfully"),
+    BASIC_SETTINGS_SAVED_SUCCESSFULLY ("Basic settings updated successfully"),
+    USERS_SETTINGS_SAVED_SUCCESSFULLY ("Users settings updated successfully"),
     NO_MATCHES_FOUND ("No matches found"),
     LANGUAGES (List.of ("English", "Español (Spanish)", "Deutsch (German)",
             "Français (French)", "Ελληνικά (Greek)",
@@ -74,17 +80,36 @@ public enum BasicSettings {
             "New Zealand Dollar", "Singapore Dollar", "Hong Kong Dollar", "Taiwan New Dollar", "Japanese Yen", "Brazilian Real",
             "Mexican Peso", "Euro", "UK Pound", "Danish Krone", "Norwegian Krone", "Swedish Krona", "Swiss Franc", "Hungarian Forint",
             "Turkish Lira", "Russian Ruble", "Polish Zloty", "Czech Koruna", "Indian Rupee", "Philippine Peso", "Thai Baht",
-            "Malaysian Ringgit", "Israeli New Shekel"));
+            "Malaysian Ringgit", "Israeli New Shekel")),
+
+    SECTION_BASIC_SETTINGS ("Basic settings"),
+    SECTION_USERS ("Users"),
+    SECTION_GAMIFICATION ("Gamification"),
+    SECTION_DOMAIN ("Domain"),
+
+    USERS_DEFAULT_USER_TYPE (List.of("SuperAdmin", "Admin-Type", "Trainer-Type", "Learner-Type")),
+    USERS_VISIBLE_USER_FORMATS (List.of("D. AIDAROV", "DAS A.", "DAS AIDAROV", "AIDAROV D.", "AIDAROV DAS", "DASAQA")),
+    DOMAIN_NAME_NEW ("komo"),
+    DOMAIN_NAME_EXISTING ("amazon"),
+    DOMAIN_NAME_INVALID ("digital_nomads"),
+    NEW_URL ("https://komo.talentlms.com/index"),
+    DOMAIN_NAME_CURRENT ("abracadabra"),
+    DOMAIN_NAME_EMPTY (""),
+
+    DOMAIN_EXISTING_ERROR_TEXT ("This value already exists for 'Domain name'"),
+    DOMAIN_IS_REQUIRED_ERROR_TEXT ("'Domain name' is required"),
+    DOMAIN_IS_NOT_VALID_ERROR_TEXT ("This is not a valid 'Domain name'"),
+    DASHBOARD_URL ("https://abracadabra.talentlms.com/dashboard/index");
 
     private List<String> list;
 
-    BasicSettings (List<String> list) {
+    AccountAndSettings(List<String> list) {
         this.list = list;
     }
 
     private String string;
 
-    BasicSettings(String string) {
+    AccountAndSettings(String string) {
         this.string = string;
     }
 

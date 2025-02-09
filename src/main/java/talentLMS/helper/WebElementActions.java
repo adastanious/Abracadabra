@@ -20,7 +20,7 @@ public class WebElementActions {
     }
 
     public WebElementActions waitElementToBeDisplayed(WebElement element) {
-        new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(15))
+        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOf(element));
         return this;
     }
@@ -78,12 +78,11 @@ public class WebElementActions {
      * Метод проверяет, можно ли нажать на элемент.
      *
      * @param element WebElement, который нужно проверить.
-     * @param wait WebDriverWait для ожидания элемента.
      * @return true, если элемент кликабелен, иначе false.
      */
-    public boolean isElementClickable(WebElement element, WebDriverWait wait) {
+    public boolean isElementClickable(WebElement element) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(element)); // Ждём, пока элемент станет кликабельным.
+            waitButtonToBeClickable(element);
             return element.isDisplayed() && element.isEnabled(); // Возвращает true, если элемент видим и активен.
         } catch (Exception e) {
             return false; // Если элемент не кликабелен, возвращает false.

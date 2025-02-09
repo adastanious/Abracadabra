@@ -1,4 +1,4 @@
-package userRole;
+package talentLMS.userRoleTest;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -16,8 +16,6 @@ public class LearnerUserRoleTest extends BaseTest {
      */
     @Test
     public void learnerUserRoleTest() {
-        driver.get("https://abracadabra.talentlms.com/dashboard");
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
         // Навести на элемент роли пользовотеля и нажать роль ученика
         component.selectRole(LEARNER);
 

@@ -1,10 +1,13 @@
 package talentLMS.page.accountAndSettings;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import talentLMS.enums.accountAndSettings.AccountAndSettings;
 import talentLMS.page.BasePage;
+import talentLMS.page.dashboard.DashboardPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ public class BasicSettingsPage extends BasePage {
 
     @FindBy(xpath = "//label[@class='control-label' and contains(text(),'Site name')]")
     WebElement siteName;
+
     @FindBy(xpath = "//input[@name='site_name']")
     WebElement siteNameCell;
 
@@ -107,9 +111,22 @@ public class BasicSettingsPage extends BasePage {
     @FindBy(xpath = "//label[text()='Price']//parent::div/child::div/div/span")
     WebElement priceCurrencyInCourses;
 
+    @FindBy(xpath = "//ul[@class='nav nav-tabs']")
+    WebElement settingsSectionsList;
 
+    @FindBy (xpath = "//a[text()='cancel']")
+    WebElement cancelBtn;
 
+    @FindBy (xpath = "//textarea[@name='announcement']")
+    WebElement internalAnnouncementCell;
 
+    @FindBy (xpath = "//div[@id='tl-internal-announcement']/p")
+    WebElement announcementText;
+
+    private String randomName = randomSettingsGenerator.randomSiteName();
+    private String randomDescription = randomSettingsGenerator.randomSiteDescription();
+    private String randomIncorrectName = randomSettingsGenerator.randomSiteNameOver40Chars();
+    private String randomIncorrectDescription = randomSettingsGenerator.randomSiteDescriptionOver255Chars();
 
     private List<String> languagesList = new ArrayList<>();
     private List<String> timeZonesList = new ArrayList<>();
@@ -117,29 +134,38 @@ public class BasicSettingsPage extends BasePage {
     private List<String> timeFormatsList = new ArrayList<>();
     private List<String> currenciesList = new ArrayList<>();
 
-
     /**
-     * Заполняет поле "Название сайта" указанным значением.
-     * Предварительно очищает поле, затем вводит переданный текст.
-     * @param siteName название сайта, которое нужно ввести
-     * @return новый экземпляр страницы BasicSettingsPage
+     * Выбирает указанный раздел настроек на странице.
+     *
+     * Метод ищет элемент списка настроек по тексту переданного раздела
+     * и выполняет клик по нему.
+     *
+     * @param section Раздел настроек, который необходимо выбрать (объект AccountAndSettings).
+     * @return Объект DashboardPage после выбора раздела.
      */
-    public BasicSettingsPage fillSiteName(String siteName) {
-        webElementActions.sendKeysWithEnter(this.siteNameCell, siteName);
+    public DashboardPage selectSettingsSection(AccountAndSettings section) {
+        webElementActions.click(settingsSectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
+        return new DashboardPage();
+    }
+    /**
+     * Заполняет поле "Название или описание сайта" указанным значением.
+     * Предварительно очищает поле, затем вводит переданный текст.
+     * @param element вебэлемент в который нужно ввести текст.
+     * @param text название или описание сайта, которое нужно ввести.
+     * @return новый экземпляр страницы BasicSettingsPage.
+     */
+    public BasicSettingsPage fillSiteOrDescriptionsName(WebElement element, String text) {
+        webElementActions.sendKeysWithEnter(element, text)
+                .click(saveBtn);
         return new BasicSettingsPage();
     }
 
     /**
-     * Заполняет поле "Описание сайта" указанным значением.
-     * Предварительно очищает поле, затем вводит переданный текст.
-     * @param siteDescription описание сайта, которое нужно ввести
-     * @return новый экземпляр страницы BasicSettingsPage
+     * Выбирает язык из выпадающего списка и сохраняет изменения.
+     *
+     * @param language Название языка, который нужно выбрать.
+     * @return Новый экземпляр BasicSettingsPage.
      */
-    public BasicSettingsPage fillSiteDescription(String siteDescription) {
-        webElementActions.clearAndSendKeys(this.siteDescriptionCell, siteDescription);
-        return new BasicSettingsPage();
-    }
-
     public BasicSettingsPage selectLanguage(String language) {
         try {
             webElementActions.sendKeysWithEnter(this.defaultLanguageSearchCell, language)
@@ -150,6 +176,12 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    /**
+     * Открывает выпадающий список языков и добавляет все доступные языки в список languagesList.
+     * Затем перебирает доступные языковые опции, кликая по каждой из них.
+     *
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectDropDownLanguageOption() {
         webElementActions.click(this.defaultLanguageCell);
 
@@ -168,6 +200,12 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    /**
+     * Открывает выпадающий список часовых поясов и добавляет все доступные часовые пояса в список timeZonesList.
+     * Затем перебирает доступные часовые пояса, кликая по каждому из них.
+     *
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectDropDownTimeZoneOption() {
         webElementActions.click(this.defaultTimeZoneCell);
 
@@ -186,12 +224,23 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    /**
+     * Выбирает часовой пояс из выпадающего списка и сохраняет изменения.
+     *
+     * @param timeZone Название часового пояса, который нужно выбрать.
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectTimeZone(String timeZone) {
         webElementActions.sendKeysWithEnter(this.defaultTimeZoneSearchCell, timeZone)
                 .click(saveBtn);
         return new BasicSettingsPage();
     }
 
+    /**
+     * Открывает выпадающий список форматов даты и добавляет все доступные варианты в список dateFormatsList.
+     *
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectDropDownDateFormatOption() {
         try {
             webElementActions.click(this.dateFormatZoneCell);
@@ -205,6 +254,12 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    /**
+     * Открывает выпадающий список валют и добавляет все доступные валюты в список currenciesList.
+     * Затем перебирает доступные валютные опции, кликая по каждой из них.
+     *
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectDropDownCurrencyOption() {
         webElementActions.click(this.currencyCell);
 
@@ -220,12 +275,34 @@ public class BasicSettingsPage extends BasePage {
         } else {
             throw new RuntimeException("No currency is found in dropdown list!");
         }
+
         return new BasicSettingsPage();
     }
 
+    /**
+     * Выбирает валюту из выпадающего списка и сохраняет изменения.
+     *
+     * @param currency Название валюты, которую нужно выбрать.
+     * @return Новый экземпляр BasicSettingsPage.
+     */
     public BasicSettingsPage selectCurrency(String currency) {
         webElementActions.sendKeysWithEnter(this.currencySearchCell, currency)
                 .click(saveBtn);
+
+        return new BasicSettingsPage();
+    }
+
+    /**
+     * Создает внутреннее объявление, вводя текст в соответствующее поле
+     * и нажимая кнопку "Сохранить".
+     *
+     * @param text Текст объявления
+     * @return Новый экземпляр BasicSettingsPage
+     */
+    public BasicSettingsPage makeAnAnnouncement(String text) {
+        webElementActions.clearAndSendKeys(this.internalAnnouncementCell, text)
+                        .click(this.saveBtn);
+
         return new BasicSettingsPage();
     }
 }

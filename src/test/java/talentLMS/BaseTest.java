@@ -1,17 +1,19 @@
 package talentLMS;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import talentLMS.driver.Driver;
 import talentLMS.entity.*;
+import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
+import talentLMS.page.accountAndSettings.DomainPage;
 import talentLMS.page.accountAndSettings.UsersPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
 import talentLMS.page.userRole.AdministratorUserRole;
-import talentLMS.page.userRole.Component;
 import talentLMS.page.userRole.InstructorUserRole;
 import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
@@ -19,6 +21,7 @@ import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
+
 import java.time.Duration;
 
 public abstract class BaseTest {
@@ -36,15 +39,28 @@ public abstract class BaseTest {
     public AdministratorUserRole administratorUserRole = new AdministratorUserRole();
     public InstructorUserRole instructorUserRole = new InstructorUserRole();
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
-    public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
-    public RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
     public DashboardPage dashboardPage = new DashboardPage();
     public UsersPage settingsUsersPage = new UsersPage();
+    public DomainPage domainPage = new DomainPage();
+
 
     @BeforeSuite
     public void beforeSuite() {
         driver = Driver.getDriver();
+    }
+
+    @BeforeClass
+    public void beforeClass(){
+        driver.get(ConfigReader.getProperty("dashboardURL"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password"));
+    }
+
+    @AfterClass
+    public void afterClass(){
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 
 }

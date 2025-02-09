@@ -5,12 +5,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import talentLMS.BaseTest;
 import talentLMS.enums.AdminSection;
-import talentLMS.enums.BasicSettings;
+import talentLMS.enums.Role;
+import talentLMS.enums.accountAndSettings.AccountAndSettings;
 import talentLMS.fileUtils.ConfigReader;
 
 import java.util.List;
@@ -20,133 +20,195 @@ import java.util.List;
  */
 
 public class BasicSettingsTest extends BaseTest {
-    private String randomName = randomSettingsGenerator.randomSiteName();
-    private String randomDescription = randomSettingsGenerator.randomSiteDescription();
-    private String randomIncorrectName = randomSettingsGenerator.randomSiteNameOver40Chars();
-    private String randomIncorrectDescription = randomSettingsGenerator.randomSiteDescriptionOver255Chars();
 
-    @BeforeClass
-    public void beforeClass() {
+    /**
+     * Этот метод выполняется один раз перед всеми тестами в классе.
+     * Он открывает страницу настроек аккаунта и выбирает раздел базовых настроек.
+     */
+    @BeforeMethod
+    public void beforeMethod() {
         driver.get(ConfigReader.getProperty("dashboardURL"));
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(AdminSection.ACCOUNT_SETTINGS);
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+        basicSettingsPage.selectSettingsSection(AccountAndSettings.SECTION_BASIC_SETTINGS);
     }
 
-    @BeforeTest
-    public void beforeTest() {
-        driver.get(ConfigReader.getProperty("basicSettingsURL"));
-    }
-
-    public void assertSuccessPopUpMessage() {
+    /**
+     * Проверяет, что появилось всплывающее сообщение об успешном сохранении.
+     * @param expectedMessage ожидаемое сообщение.
+     */
+    public BasicSettingsTest assertSuccessPopUpMessage(AccountAndSettings expectedMessage) {
         try {
             String actualSuccessMessage = basicSettingsPage.getSuccessfullySavedPop_UpMessage().getText();
-            String expectedSuccessMessage = BasicSettings.SETTINGS_SAVED_SUCCESSFULLY.getString();
+            String expectedSuccessMessage = expectedMessage.getString();
             Assert.assertEquals(actualSuccessMessage, expectedSuccessMessage, "Success pop-up messages are not the same.");
         } catch (NoSuchElementException e) {
             System.err.println("The pop-up message is not appeared.");
         }
+        return new BasicSettingsTest();
     }
 
-    public void assertErrorTextColor(WebElement element) {
+    /**
+     * Проверяет цвет текста ошибки.
+     * @param element веб-элемент с текстом ошибки.
+     * @param expectedColor ожидаемый цвет текста ошибки в формате HEX.
+     */
+    public BasicSettingsTest assertErrorTextColor(WebElement element, AccountAndSettings expectedColor) {
         String actualNameColor = Color.fromString(element.getCssValue("color")).asHex();
-        String expectedNameColor = BasicSettings.ERROR_TEXT_COLOR.getString();
+        String expectedNameColor = expectedColor.getString();
         Assert.assertEquals(actualNameColor, expectedNameColor,"Colors are not the same");
+        return new BasicSettingsTest();
     }
 
-    public void assertErrorText(String actualText, String expectedText) {
+    /**
+     * Проверяет текст ошибки.
+     * @param actualText фактический текст ошибки.
+     * @param expectedText ожидаемый текст ошибки.
+     */
+    public BasicSettingsTest assertErrorText(String actualText, AccountAndSettings expectedText) {
         try {
             String actualErrorText = actualText;
-            String expectedErrorText = expectedText;
+            String expectedErrorText = expectedText.getString();
             Assert.assertEquals(actualErrorText,expectedErrorText, "The error texts are not the same");
         } catch (NoSuchElementException e) {
             System.err.println("The error text was not appeared.");
         }
+        return new BasicSettingsTest();
     }
 
-    public void assertNoMatchesFound(String actualText, String expectedText) {
+    /**
+     * Проверяет, что сообщение "No matches found" корректно отображается.
+     * @param actualText фактический текст сообщения.
+     * @param expectedText ожидаемый текст сообщения.
+     */
+    public BasicSettingsTest assertNoMatchesFound(String actualText, AccountAndSettings expectedText) {
         String actualNoMatchesText = actualText;
-        String expectedNoMatchesText = expectedText;
+        String expectedNoMatchesText = expectedText.getString();
         Assert.assertEquals(actualNoMatchesText,expectedNoMatchesText, "The matches texts are different");
+        return new BasicSettingsTest();
     }
 
+    public BasicSettingsTest assertAnnouncementText(String expectedText) {
+        String actualAnnouncementText = basicSettingsPage.getAnnouncementText().getText();
+        Assert.assertEquals(actualAnnouncementText, expectedText, "Announcement texts are different.");
+
+        return new BasicSettingsTest();
+    }
+
+    /**
+     * Тест проверяет, что невозможно сохранить название сайта длиннее 40 символов.
+     */
     @Test(description = "verify that it is impossible to save a site name longer than 40 characters", priority = 1)
     public void siteNameOverTheLimitTest() {
-        basicSettingsPage.fillSiteName(this.randomIncorrectName);
-        webElementActions.click(basicSettingsPage.getSaveBtn());
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomIncorrectName());
 
-        assertErrorTextColor(basicSettingsPage.getSiteName());
+        assertErrorTextColor(basicSettingsPage.getSiteName(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR)
 
-        assertErrorText(basicSettingsPage.getSiteNameErrorText().getText(), BasicSettings.SITE_NAME_ERROR_TEXT.getString());
+                .assertErrorText(basicSettingsPage.getSiteNameErrorText().getText(), AccountAndSettings.SITE_NAME_ERROR_TEXT)
 
-        assertErrorTextColor(basicSettingsPage.getSiteNameErrorText());
+                .assertErrorTextColor(basicSettingsPage.getSiteNameErrorText(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR);
 
-        basicSettingsPage.getSiteNameCell().clear();
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), AccountAndSettings.SITE_NAME.getString());
     }
 
+    /**
+     * Тест проверяет, что невозможно сохранить описание сайта длиннее 255 символов.
+     */
     @Test(description = "verify that it is impossible to save a site description longer than 255 characters", priority = 2)
     public void siteDescriptionOverTheLimitTest() {
-        basicSettingsPage.fillSiteDescription(this.randomIncorrectDescription);
-        webElementActions.click(basicSettingsPage.getSaveBtn());
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(),basicSettingsPage.getRandomIncorrectDescription());
 
-        assertErrorTextColor(basicSettingsPage.getSiteDescription());
+        assertErrorTextColor(basicSettingsPage.getSiteDescription(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR)
 
-        assertErrorText(basicSettingsPage.getSiteDescriptionErrorText().getText(), BasicSettings.SITE_DESCRIPTION_ERROR_TEXT.getString());
+                .assertErrorText(basicSettingsPage.getSiteDescriptionErrorText().getText(), AccountAndSettings.SITE_DESCRIPTION_ERROR_TEXT)
 
-        assertErrorTextColor(basicSettingsPage.getSiteDescriptionErrorText());
+                .assertErrorTextColor(basicSettingsPage.getSiteDescriptionErrorText(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR);
+
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(),"");
     }
 
-    @Test(description = "verify that it is possible to save a site name and description", priority = 3)
-    public void siteNameAndDescriptionTest() {
-        basicSettingsPage.fillSiteName(this.randomName).fillSiteDescription(this.randomDescription);
-        webElementActions.click(basicSettingsPage.getSaveBtn());
-
-        assertSuccessPopUpMessage();
+    @Test(description = "verify that it is impossible to save a site description longer than 255 characters", priority = 3)
+    public void emptySiteNameAndDescriptionTest() {
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(),"")
+                        .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(),"");
 
         String titleText = driver.getTitle();
-        Assert.assertEquals(titleText, this.randomName + " | Account & Settings");
+        Assert.assertEquals(titleText, "TalentLMS | Account & Settings", "Site title is incorrect.");
+
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), AccountAndSettings.SITE_NAME.getString());
     }
 
+    /**
+     * Тест проверяет, что можно сохранить название и описание сайта.
+     */
+    @Test(description = "verify that it is possible to save a site name and description", priority = 4)
+    public void siteNameAndDescriptionTest() {
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomName())
+                        .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), basicSettingsPage.getRandomDescription());
 
-    @Test(description = "verify that every language option is clickable", priority = 4)
+        assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
+
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), AccountAndSettings.SITE_NAME.getString());
+        basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(),"");
+        String titleText = driver.getTitle();
+        Assert.assertEquals(titleText, AccountAndSettings.SITE_NAME.getString() + " | Account & Settings", "Site title is incorrect.");
+    }
+
+    /**
+     * Тест проверяет, что каждая опция языка доступна для выбора.
+     */
+    @Test(description = "verify that every language option is clickable", priority = 5)
     public void LanguageOptionsTest() {
         basicSettingsPage.selectDropDownLanguageOption();
-        List<String> expectedLanguagesList = BasicSettings.LANGUAGES.getList();
+        List<String> expectedLanguagesList = AccountAndSettings.LANGUAGES.getList();
 
         Assert.assertEquals(basicSettingsPage.getLanguagesList(), expectedLanguagesList, "LanguagesLists are different!");
     }
 
-    @Test(description = "verify that a user can type then select the language and check its implementation", priority = 5)
+    /**
+     * Тест проверяет возможность смены языка на странице.
+     */
+    @Test(description = "verify that a user can type then select the language and check its implementation", priority = 6)
     public void changeLanguageTest() {
         basicSettingsPage.selectLanguage("Russian");
 
-        assertSuccessPopUpMessage();
+        assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
 
         webElementActions.click(basicSettingsPage.getLogOutBtn());
         String actualText = basicSettingsPage.getPasswordTextInRussian().getText();
         String expectedText = "ПАРОЛЬ";
         Assert.assertEquals(actualText, expectedText, "Texts are different!");
 
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).selectSection(AdminSection.ACCOUNT_SETTINGS);
+        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface().selectSection(AdminSection.ACCOUNT_SETTINGS);
         basicSettingsPage.selectLanguage("English");
     }
 
-    @Test(description = "verify that unavailable language typed is not found and not selected", priority = 6)
+    /**
+     * Тест проверяет невозможность смены языка на Кыргызский язык на странице.
+     */
+    @Test(description = "verify that unavailable language typed is not found and not selected", priority = 7)
     public void unavailableLanguageTest() {
         try {
             basicSettingsPage.selectLanguage("Kyrgyz");
         } catch (ElementClickInterceptedException e) {
-            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), BasicSettings.NO_MATCHES_FOUND.getString());
+            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), AccountAndSettings.NO_MATCHES_FOUND);
         }
     }
 
-    @Test(description = "verify that every time zone option is clickable", priority = 7)
+    /**
+     * Тест проверяет, что каждая опция часового пояса доступна для выбора.
+     */
+    @Test(description = "verify that every time zone option is clickable", priority = 8)
     public void timeZoneOptionsTest() {
         basicSettingsPage.selectDropDownTimeZoneOption();
-        List<String> expectedTimeZonesList = BasicSettings.TIME_ZONES.getList();
+        List<String> expectedTimeZonesList = AccountAndSettings.TIME_ZONES.getList();
 
         Assert.assertEquals(basicSettingsPage.getTimeZonesList(), expectedTimeZonesList, "TimeZonesLists are different!");
     }
 
-    @Test(description = "verify that a user can type then select the time zone and check its implementation", priority = 8)
+    /**
+     * Тест проверяет возможность смены часового пояса на странице.
+     */
+    @Test(description = "verify that a user can type then select the time zone and check its implementation", priority = 9)
     public void changeTimeZoneTest() {
         try {
             basicSettingsPage.selectTimeZone("Rome");
@@ -154,7 +216,7 @@ public class BasicSettingsTest extends BaseTest {
             System.err.println("The time zone is not found");
         }
 
-        assertSuccessPopUpMessage();
+        assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
 
         driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.USERS).webElementActions.click(userPage.addUser);
@@ -162,16 +224,32 @@ public class BasicSettingsTest extends BaseTest {
         Assert.assertEquals(defaultTimeZone,"(GMT +01:00) Rome, Italy", "Time zones are different");
     }
 
-    @Test(description = "verify that unavailable time zone typed is not found and not selected", priority = 9)
+    /**
+     * Тест проверяет невозможность смены часового пояса на Бишкек на странице.
+     */
+    @Test(description = "verify that unavailable time zone typed is not found and not selected", priority = 10)
     public void unavailableTimeZoneTest() {
         try {
             basicSettingsPage.selectTimeZone("Bishkek");
         } catch (ElementClickInterceptedException e) {
-            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), BasicSettings.NO_MATCHES_FOUND.getString());
+            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), AccountAndSettings.NO_MATCHES_FOUND);
         }
     }
 
-    @Test(description = "verify that a user can select every date format and check their implementation", priority = 10)
+    /**
+     * Проверяет, что пользователь может выбрать каждый доступный формат даты и убедиться в его корректности.
+     *
+     * Шаги:
+     * 1. Открывает выпадающий список с форматами даты.
+     * 2. Перебирает все доступные варианты форматов даты.
+     * 3. Выбирает каждый формат, сохраняет изменения и проверяет, что появился успешный pop-up.
+     * 4. Переходит на страницу Dashboard и проверяет, что выбранный формат даты корректно отображается в таймлайне.
+     * 5. Возвращается в настройки аккаунта и переходит к следующему формату.
+     * 6. В конце теста сравнивает список полученных форматов с ожидаемыми.
+     *
+     * Если список форматов даты пуст, тест завершится с исключением RuntimeException.
+     */
+    @Test(description = "verify that a user can select every date format and check their implementation", priority = 11)
     public void dateFormatOptionsTest() {
         basicSettingsPage.selectDropDownDateFormatOption();
 
@@ -180,7 +258,7 @@ public class BasicSettingsTest extends BaseTest {
                     webElementActions.click(basicSettingsPage.getDateFormatOptions().get(i))
                                     .click(basicSettingsPage.getSaveBtn());
 
-                    assertSuccessPopUpMessage();
+                    assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
 
                     driver.get(ConfigReader.getProperty("dashboardURL"));
                     webElementActions.click(basicSettingsPage.getTimeLineBtn())
@@ -198,11 +276,28 @@ public class BasicSettingsTest extends BaseTest {
             }
 
         List<String> actualDateFormatsList = basicSettingsPage.getDateFormatsList();
-        List<String> expectedDateFormatsList = BasicSettings.DATE_FORMATS.getList();
+        List<String> expectedDateFormatsList = AccountAndSettings.DATE_FORMATS.getList();
         Assert.assertEquals(actualDateFormatsList, expectedDateFormatsList, "Date formats are different");
     }
 
-    @Test(description = "verify that a user can select every time format and check their implementation", priority = 11)
+    /**
+     * Проверяет, что пользователь может выбрать каждый доступный формат времени и убедиться в его корректности.
+     *
+     * Шаги:
+     * 1. Открывает выпадающий список с форматами времени.
+     * 2. Собирает все доступные варианты форматов времени и сохраняет их в список.
+     * 3. Перебирает каждый формат:
+     *    - Выбирает формат и сохраняет изменения.
+     *    - Проверяет, что появилось уведомление об успешном сохранении.
+     *    - Переходит в раздел отчетов и проверяет, что формат времени применился корректно.
+     *    - Возвращается в настройки аккаунта для выбора следующего формата.
+     * 4. В конце теста сравнивает список полученных форматов с ожидаемыми.
+     *
+     * Исключения:
+     * - Если список форматов времени пуст, выбрасывается RuntimeException.
+     * - Если элемент не найден, выводится ошибка в консоль.
+     */
+    @Test(description = "verify that a user can select every time format and check their implementation", priority = 12)
     public void timeFormatOptionsTest() {
         try {
             webElementActions.click(basicSettingsPage.getTimeFormatCell());
@@ -216,7 +311,7 @@ public class BasicSettingsTest extends BaseTest {
                     webElementActions.click(basicSettingsPage.getTimeFormatOptions().get(i))
                             .click(basicSettingsPage.getSaveBtn());
 
-                    assertSuccessPopUpMessage();
+                    assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
 
                     driver.get(ConfigReader.getProperty("dashboardURL"));
                     dashboardPage.selectSection(AdminSection.REPORTS);
@@ -244,21 +339,27 @@ public class BasicSettingsTest extends BaseTest {
         }
 
         List<String> actualTimeFormatsList = basicSettingsPage.getTimeFormatsList();
-        List<String> expectedTimeFormatsList = BasicSettings.TIME_FORMATS.getList();
+        List<String> expectedTimeFormatsList = AccountAndSettings.TIME_FORMATS.getList();
         Assert.assertEquals(actualTimeFormatsList, expectedTimeFormatsList, "Time formats are different");
     }
 
-    @Test(description = "verify that every currency option is clickable", priority = 12)
+    /**
+     * Тест проверяет, что каждая опция валюты доступна для выбора.
+     */
+    @Test(description = "verify that every currency option is clickable", priority = 13)
     public void currencyOptionsTest() {
         basicSettingsPage.selectDropDownCurrencyOption();
 
         List<String> actualCurrenciesList = basicSettingsPage.getCurrenciesList();
-        List<String> expectedCurrenciesList = BasicSettings.CURRENCIES.getList();
+        List<String> expectedCurrenciesList = AccountAndSettings.CURRENCIES.getList();
 
         Assert.assertEquals(actualCurrenciesList, expectedCurrenciesList, "CurrenciesLists are different!");
     }
 
-    @Test(description = "verify that a user can select currency Euro and check its implementation", priority = 13)
+    /**
+     * Тест проверяет возможность смены часового пояса на странице.
+     */
+    @Test(description = "verify that a user can select currency Euro and check its implementation", priority = 14)
     public void currencyTest() {
         try {
             basicSettingsPage.selectCurrency("Euro");
@@ -266,7 +367,7 @@ public class BasicSettingsTest extends BaseTest {
             System.err.println("The currency is not found");
         }
 
-        assertSuccessPopUpMessage();
+        assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
 
         driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.COURSES).webElementActions.click(coursesPage.getAddCourse()).click(basicSettingsPage.getPriceBtnInCourses());
@@ -274,24 +375,64 @@ public class BasicSettingsTest extends BaseTest {
         Assert.assertEquals(actualPriceCurrency,"€", "Course currencies are different");
     }
 
-    @Test(description = "verify that unavailable currency typed is not found and not selected", priority = 14)
+    /**
+     * Тест проверяет невозможность смены валюты на сом на странице.
+     */
+    @Test(description = "verify that unavailable currency typed is not found and not selected", priority = 15)
     public void unavailableCurrencyTest() {
         try {
             basicSettingsPage.selectCurrency("Som");
         } catch (ElementClickInterceptedException e) {
-            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), BasicSettings.NO_MATCHES_FOUND.getString());
+            assertNoMatchesFound(basicSettingsPage.getNoMatchesFoundText().getText(), AccountAndSettings.NO_MATCHES_FOUND);
         }
     }
 
-//    @Test(description = "verify that an internal announcement is displayed on the dashboard when a user logs in", priority = 14)
-//    public void internalAnnouncementTest() {
-//        driver.get(ConfigReader.getProperty("dashboardURL"));
-//        dashboardPage.selectSection(AdminSection.USERS);
-//        userPage.addNewUser(randomUser);
-//    }
+    /**
+     * Проверяет, что внутреннее объявление отображается на панели управления
+     * для различных ролей пользователей (администратор, инструктор и ученик).
+     *
+     * Шаги теста:
+     * 1. Создание объявления.
+     * 2. Проверка отображения объявления для администратора.
+     * 3. Переключение на роль "инструктор" и проверка отображения объявления.
+     * 3. Переключение на роль "ученик" и проверка отображения объявления.
+     * 4. Возвращение к роли администратора.
+     *
+     * @throws InterruptedException если поток был прерван во время ожидания обновления UI
+     */
+    @Test(groups = "E2E", description = "verify that an internal announcement is displayed on the dashboard when a learner or an instructor logs in", priority = 16)
+    public void internalAnnouncementTest() throws InterruptedException {
+        String announcementText = "Hello, world!";
+        basicSettingsPage.makeAnAnnouncement(announcementText);
 
+        assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY)
 
+                .assertAnnouncementText(announcementText);
 
+        Thread.sleep(10000);
+        component.selectRole(Role.INSTRUCTOR);
+        assertAnnouncementText(announcementText);
 
+        component.selectRole(Role.LEARNER);
+        assertAnnouncementText(announcementText);;
 
+        component.selectRole(Role.ADMINISTRATOR);
+    }
+
+    /**
+     * Проверяет, что кнопка "Cancel" перенаправляет пользователя обратно на страницу Dashboard.
+     *
+     * Шаги:
+     * 1. Нажимает на кнопку "Cancel" в настройках.
+     * 2. Получает текущий URL страницы после нажатия.
+     * 3. Сравнивает фактический URL с ожидаемым URL Dashboard.
+     */
+    @Test(groups = "Smoke", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 17)
+    public void cancelTest() {
+        webElementActions.click(basicSettingsPage.getCancelBtn());
+
+        String actualURL = driver.getCurrentUrl();
+        String expectedURL = AccountAndSettings.DASHBOARD_URL.getString();
+        Assert.assertEquals(actualURL, expectedURL, "URLs after cancellation are different.");
+    }
 }
