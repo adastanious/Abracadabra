@@ -482,10 +482,10 @@ public class UserTypes extends BasePage {
                 .click(arrowSkillsAI)
                 .click(arrow)
                 .click(clickAdministrator)
-                .click(getCheckboxElement("Create skill"))
-                .click(getCheckboxElement("Generate image"))
+                .click(getCheckboxElement("Create skills"))
+                .click(getCheckboxElement("Generate skill images"))
                 .click(getCheckboxElement("Generate skill questions"))
-                .click(getCheckboxElement("Suggest skill related courses"))
+                .click(getCheckboxElement("Assign related courses to skills"))
                 .click(getCheckboxElement("Suggest skill resources"))
                 .click(getCheckboxElement("Talent pool"))
                 .click(save);
