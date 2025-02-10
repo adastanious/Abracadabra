@@ -25,7 +25,7 @@ public class UserTypesTest extends BaseTest{
 
     @Test(priority = 1)
     public void addNewUserTypeAdminTest() {
-        userTypes.addUserTypeInstructor(randomUserTypeGenerator.randomUserType());
+        userTypes.addUserTypeAdministrator(randomUserTypeGenerator.randomUserType());
     }
 
     @Test(priority = 2)

@@ -38,6 +38,7 @@ import talentLMS.page.userTypesPage.UserTypes;
 import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
+import talentLMS.utils.randomEntityUtils.RandomGroupGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 
 import talentLMS.utils.randomEntityUtils.RandomUserTypeGenerator;
@@ -61,12 +62,10 @@ public abstract class BaseTest {
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     public DashboardPage dashboardPage = new DashboardPage();
-    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
-    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     public Groups groups  = new Groups();
     public RandomGroupGenerator randomGroupGenerator = new RandomGroupGenerator();
-    public Group randomGroup = new RandomGroupGenerator().randomGroup();
     public UsersPage settingsUsersPage = new UsersPage();
     public DomainPage domainPage = new DomainPage();
     public CourseReportPage courseReportPage = new CourseReportPage();

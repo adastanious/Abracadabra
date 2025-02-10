@@ -34,6 +34,7 @@ public class BasicSettingsPage extends BasePage {
 
     @FindBy(xpath = "//label[contains(text(),'Site description')]/parent::div//span[@class='help-inline']")
     WebElement siteDescriptionErrorText;
+
     @FindBy(xpath = "//input[@name='site_description']")
     WebElement siteDescriptionCell;
 
