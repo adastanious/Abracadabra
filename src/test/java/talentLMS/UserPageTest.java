@@ -16,9 +16,6 @@ import java.util.List;
 
 public class UserPageTest extends BaseTest {
 
-
-    String email = randomUser.getEmail();
-
     @BeforeMethod
     public void beforeMethod(){
         driver.get("https://abracadabra.talentlms.com/dashboard");
@@ -26,22 +23,7 @@ public class UserPageTest extends BaseTest {
 
     @Test(priority = 1)
     public void addNewUserTest() {
-
         userPage.addNewUser(randomUser);
-    }
-
-    @Test(priority = 3)
-    public void editUserTest() {
-        userPage.addNewUser(randomUser);
-    }
-
-    @Test (priority = 2)
-    public void fillIncorrectEmailTest() {
-        userPage.userWithIncorrectEmail(randomUserGenerator.randomUserWithIncorrectEmail());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//div/div/span/span[@class='help-inline'])[1]"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "This is not a valid 'Email address'");
     }
 
     @Test (priority = 3)

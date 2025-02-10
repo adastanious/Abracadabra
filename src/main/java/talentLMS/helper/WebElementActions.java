@@ -10,8 +10,6 @@ import talentLMS.driver.Driver;
 import java.time.Duration;
 
 
-import static talentLMS.driver.Driver.getDriver;
-
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
     public WebElementActions waitButtonToBeClickable(WebElement element) {
