@@ -1,9 +1,9 @@
+
 package talentLMS.userRoleTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import talentLMS.BaseTest;
-import talentLMS.fileUtils.ConfigReader;
 
 import static talentLMS.enums.Role.ADMINISTRATOR;
 
@@ -70,5 +70,6 @@ public class AdministratorUserRoleTest extends BaseTest {
         Assert.assertEquals(actualImportExport, expectedImportExport, actualImportExport + " не совпадают.");
         webElementActions.isElementClickable(administratorUserRole.importExport);
     }
+
 }
 
