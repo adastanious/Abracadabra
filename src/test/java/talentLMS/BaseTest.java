@@ -1,6 +1,9 @@
 package talentLMS;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -10,6 +13,13 @@ import talentLMS.entity.*;
 import talentLMS.enums.AdminSection;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
+
+import talentLMS.fileUtils.ConfigReader;
+import talentLMS.page.categoriesPage.CategoriesPage;
+import talentLMS.page.coursePage.CoursesPage;
+import talentLMS.page.dashboard.DashboardPage;
+import talentLMS.page.groupsPage.Groups;
+
 import talentLMS.page.accountAndSettings.DomainPage;
 import talentLMS.page.accountAndSettings.UsersPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
@@ -29,6 +39,7 @@ import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
+
 import talentLMS.utils.randomEntityUtils.RandomUserTypeGenerator;
 
 import java.time.Duration;
@@ -50,6 +61,12 @@ public abstract class BaseTest {
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     public DashboardPage dashboardPage = new DashboardPage();
+    BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
+    RandomSettingsGenerator randomSettingsGenerator = new RandomSettingsGenerator();
+    public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    public Groups groups  = new Groups();
+    public RandomGroupGenerator randomGroupGenerator = new RandomGroupGenerator();
+    public Group randomGroup = new RandomGroupGenerator().randomGroup();
     public UsersPage settingsUsersPage = new UsersPage();
     public DomainPage domainPage = new DomainPage();
     public CourseReportPage courseReportPage = new CourseReportPage();
@@ -58,6 +75,7 @@ public abstract class BaseTest {
     public SyncWithAnFtpServerPage syncWithAnFtpServerPage = new SyncWithAnFtpServerPage();
     public RandomUserTypeGenerator randomUserTypeGenerator = new RandomUserTypeGenerator();
     public UserTypes userTypes = new UserTypes();
+
 
 
     @BeforeSuite
@@ -77,6 +95,5 @@ public abstract class BaseTest {
         driver.manage().deleteAllCookies();
         driver.close();
     }
-
 
 }

@@ -1,15 +1,14 @@
 package talentLMS.helper;
 
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
-
 import java.time.Duration;
-import java.util.NoSuchElementException;
+
 
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
@@ -78,6 +77,7 @@ public class WebElementActions {
      * Метод проверяет, можно ли нажать на элемент.
      *
      * @param element WebElement, который нужно проверить.
+    // * @param wait    WebDriverWait для ожидания элемента.
      * @return true, если элемент кликабелен, иначе false.
      */
     public boolean isElementClickable(WebElement element) {
@@ -88,6 +88,7 @@ public class WebElementActions {
             return false; // Если элемент не кликабелен, возвращает false.
         }
     }
+
 
     // Проверка видимости элемента (ImportExport)
     public boolean isVisibleImport(WebElement element) {
@@ -106,4 +107,5 @@ public class WebElementActions {
         element.sendKeys(text); // Вводим текст
         return this;
     }
+
 }
