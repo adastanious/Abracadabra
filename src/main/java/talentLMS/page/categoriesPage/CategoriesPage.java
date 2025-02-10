@@ -40,7 +40,7 @@ public class CategoriesPage extends BasePage {
     WebElement priceInput;
 
     @FindBy(xpath = "//div[@class='toast-message']")
-    public WebElement assertText;
+    WebElement assertText;
 
     @FindBy(xpath = "//td[@class=\" tl-align-center tl-table-operations-cell\"]")
     WebElement moveElement;
