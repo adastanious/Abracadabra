@@ -3,7 +3,8 @@
 <suite name="SmokeSuit">
     <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
         <classes>
-            <class name="talentLMS.accountAndSettings.DomainTest"></class>
+<!--            <class name="talentLMS.accountAndSettings.DomainTest"></class>-->
+            <class name="talentLMS.importExportTest.ImportTest"></class>
         </classes>
     </test>
 </suite>
