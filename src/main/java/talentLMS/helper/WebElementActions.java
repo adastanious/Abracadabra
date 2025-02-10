@@ -10,8 +10,6 @@ import talentLMS.driver.Driver;
 import java.time.Duration;
 
 
-import static talentLMS.driver.Driver.getDriver;
-
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
     public WebElementActions waitButtonToBeClickable(WebElement element) {
@@ -79,6 +77,7 @@ public class WebElementActions {
      * Метод проверяет, можно ли нажать на элемент.
      *
      * @param element WebElement, который нужно проверить.
+    // * @param wait    WebDriverWait для ожидания элемента.
      * @return true, если элемент кликабелен, иначе false.
      */
     public boolean isElementClickable(WebElement element) {

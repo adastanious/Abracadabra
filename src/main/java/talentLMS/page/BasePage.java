@@ -8,6 +8,8 @@ import talentLMS.helper.WebElementActions;
 import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 
 
+import java.util.Random;
+
 public abstract class BasePage {
     public WebElementActions webElementActions = new WebElementActions();
     public WebDriver driver = Driver.getDriver();
