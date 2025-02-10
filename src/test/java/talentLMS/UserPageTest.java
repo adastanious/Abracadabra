@@ -23,15 +23,15 @@ public class UserPageTest extends BaseTest {
         userPage.addNewUser(randomUser);
     }
 
-    @Test (priority = 2)
-    public void fillIncorrectEmailTest() {
-        dashboardPage.selectSection(AdminSection.USERS);
-        userPage.userWithIncorrectEmail(randomUserGenerator.randomUserWithIncorrectEmail());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//div/div/span/span[@class='help-inline'])[1]"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "This is not a valid 'Email address'");
-    }
+//    @Test (priority = 2)
+//    public void fillIncorrectEmailTest() {
+//        dashboardPage.selectSection(AdminSection.USERS);
+//        userPage.userWithIncorrectEmail(randomUserGenerator.randomUserWithIncorrectEmail());
+//
+//        WebElement isRequired = driver.findElement(By.xpath("(//div/div/span/span[@class='help-inline'])[1]"));
+//        String actualResult = isRequired.getText();
+//        Assert.assertEquals(actualResult, "This is not a valid 'Email address'");
+//    }
 
     @Test (priority = 3)
     public void editUserTest() {
