@@ -12,6 +12,8 @@ import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.accountAndSettings.BasicSettingsPage;
 import talentLMS.page.accountAndSettings.DomainPage;
 import talentLMS.page.accountAndSettings.UsersPage;
+import talentLMS.entity.*;
+import talentLMS.page.branchesPage.BranchesPage;
 import talentLMS.page.categoriesPage.CategoriesPage;
 import talentLMS.page.coursePage.CoursesPage;
 import talentLMS.page.dashboard.DashboardPage;
@@ -27,6 +29,7 @@ import talentLMS.page.userRole.LearnerUserRole;
 import talentLMS.page.users.UserPage;
 import talentLMS.helper.WebElementActions;
 import talentLMS.page.login.LoginPage;
+import talentLMS.utils.randomEntityUtils.RandomBranchGenerator;
 import talentLMS.utils.randomEntityUtils.RandomUserGenerator;
 
 import java.time.Duration;
@@ -55,6 +58,11 @@ public abstract class BaseTest {
     public ExportPage exportPage = new ExportPage();
     public SyncWithAnFtpServerPage syncWithAnFtpServerPage = new SyncWithAnFtpServerPage();
 
+    public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//    public Branch branch = new Branch();
+    public BranchesPage branchesPage = new BranchesPage();
+    public RandomBranchGenerator randomBranchGenerator = new RandomBranchGenerator();
+    public Branch branch = randomBranchGenerator.randomBranch();
 
     @BeforeSuite
     public void beforeSuite() {
