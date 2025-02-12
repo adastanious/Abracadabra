@@ -3,43 +3,53 @@ package talentLMS.importExportTest;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.BaseTest;
+import talentLMS.enums.ErrorMessage;
 
-///   @author Agema
+import java.nio.file.Paths;
+
+/// @author Agema
 
 public class ImportTest extends BaseTest {
 
-    /// Подготавливает тест, открывая страницу "Dashboard".
+    ///  Подготавливает тест, открывая страницу Dashboard
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
-    /// Проверяет успешный импорт файла и загрузку образца.
-    @Test(priority = 1)
+    @Test(groups = {"Smoke"}, description = "Проверяет успешный импорт файла и загрузку образца", priority = 1)
     public void importAndDownloadTest() {
+
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .toAbsolutePath()
+                .toString();
 
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx");
+                .uploadFile(filePath);
 
         Assert.assertTrue(importPage.isFileImported("Upload complete. Click the import button to proceed."), "The file was not imported");
 
-        importPage.clickImportButton().downloadSampleFile();
+        importPage.
+                clickImportButton()
+                .downloadSampleFile();
     }
 
-    /// Проверяет невозможность импорта неподдерживаемого файла.
-    @Test(priority = 2)
+    @Test(groups = "Regression", description = "Проверяет невозможность импорта неподдерживаемого файла", priority = 2)
     public void importAndDownloadNegativeTest() {
+
+        String filePath = Paths.get("src/main/resources/file/Снимок экрана 2024-12-12 в 12.27.03.png")
+                .toAbsolutePath()
+                .toString();
 
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/Снимок экрана 2024-12-12 в 12.27.03.png");
+                .uploadFile(filePath);
 
-        Assert.assertTrue(importPage.isFileImported("File type not allowed"), "The file was incorrectly imported");
+        Assert.assertTrue(importPage.isFileImported(ErrorMessage.FILE_TYPE_NOT_ALLOWED.getMessage()), "The file was incorrectly imported");
     }
 
-    /// Проверяет использование всех доступных примеров импорта.
-    @Test(priority = 3)
+    @Test(groups = "Regression", description = "Проверяет использование всех доступных примеров импорта", priority = 3)
     public void useAllReadyMadeExamplesTest() {
 
         importPage
@@ -52,8 +62,7 @@ public class ImportTest extends BaseTest {
         Assert.assertTrue(importPage.isImportMessagePresent("Line 11: Group New employees updated successfully"), "Ожидаемое сообщение не найдено в результатах импорта!");
     }
 
-    /// Проверяет, что кнопка "Import" отключена без загруженного файла.
-    @Test(priority = 4)
+    @Test(groups = "Smoke", description = "Проверяет, что кнопка Import отключена без загруженного файла", priority = 4)
     public void verifyImportButtonIsDisabled() {
 
         importPage
@@ -62,8 +71,7 @@ public class ImportTest extends BaseTest {
         Assert.assertTrue(importPage.isImportButtonDisabled(), "Кнопка 'Import' должна быть неактивна без загруженного файла");
     }
 
-    /// Проверяет возможность отмены импорта.
-    @Test(priority = 5)
+    @Test(groups = "Regression", description = "Проверяет возможность отмены импорта", priority = 5)
     public void importOrCancel() {
 
         importPage
@@ -71,8 +79,7 @@ public class ImportTest extends BaseTest {
                 .cancelImport();
     }
 
-    /// Проверяет, что кнопка "Sample Excel File" кликабельна.
-    @Test(priority = 6)
+    @Test(groups = "Smoke", description = "Проверяет, что кнопка Sample Excel File кликабельна", priority = 6)
     public void verifySampleExcelFileIsClickable() {
 
         importPage
@@ -84,38 +91,50 @@ public class ImportTest extends BaseTest {
                 .downloadSampleFile();
     }
 
-    /// Проверяет, что кнопка "Import" заблокирована во время загрузки файла.
-    @Test(priority = 7)
+    @Test(groups = "Regression", description = "Проверяет, что кнопка Import заблокирована во время загрузки файла", priority = 7)
     public void verifyImportButtonDisabledDuringUpload() {
+
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .toAbsolutePath()
+                .toString();
 
         importPage
                 .openImportExportPage();
 
         importPage
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx");
+                .uploadFile(filePath);
 
         Assert.assertFalse(importPage.isImportButtonEnabled(), "Кнопка 'Import' должна быть заблокирована во время загрузки");
     }
 
-    /// Проверяет очистку поля загрузки перед новой загрузкой файла.
-    @Test(priority = 8)
+    @Test(groups = "Smoke", description = "Проверяет очистку поля загрузки перед новой загрузкой файла", priority = 8)
     public void verifyClearFileUpload() {
+
+        String filePath1 = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .toAbsolutePath()
+                .toString();
+        String filePath2 = Paths.get("src/main/resources/file/import_ou_xlsx (1).xlsx")
+                .toAbsolutePath()
+                .toString();
 
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx")
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/import_ou_xlsx (1).xlsx");
+                .uploadFile(filePath1)
+                .uploadFile(filePath2);
 
         Assert.assertTrue(importPage.isFileImported("Upload complete"), "Очистка поля загрузки не сработала");
     }
 
-    /// Проверяет успешный импорт файла и появление сообщения "Import completed successfully".
-    @Test(priority = 9)
+    @Test(groups = "Smoke", description = "Проверяет успешный импорт файла и появление сообщения Import completed successfully", priority = 9)
     public void verifySuccessMessageAfterImport() {
+
+        String filePath = Paths.get("src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .toAbsolutePath()
+                .toString();
 
         importPage
                 .openImportExportPage()
-                .uploadFile("/Users/Agema/Documents/Abracadabra/src/main/resources/file/agema-export-28-01-2025.xlsx")
+                .uploadFile(filePath)
                 .clickImportButton();
     }
 }

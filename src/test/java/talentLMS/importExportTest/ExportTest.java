@@ -14,9 +14,9 @@ public class ExportTest extends BaseTest {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
-    /// Тест для экспорта данных в формате CSV
-    @Test(priority = 1)
+    @Test(groups = "Smoke", description = "Тест для экспорта данных в формате CSV", priority = 1)
     public void exportAsCsvTest() {
+
         exportPage
                 .clickImportExport()
                 .clickExportTab()
@@ -25,18 +25,18 @@ public class ExportTest extends BaseTest {
                 .clickExportButton();
     }
 
-    /// Тест для экспорта данных в формате Excel (по умолчанию)
-    @Test(priority = 2)
+    @Test(groups = "Smoke", description = "Тест для экспорта данных в формате Excel (по умолчанию)", priority = 2)
     public void exportAsExcelTest() {
+
         exportPage
                 .clickImportExport()
                 .clickExportTab()
                 .clickExportButton();
     }
 
-    /// Тест для отмены экспорта.
-    @Test(priority = 3)
+    @Test(groups = "Regression", description = "Тест для отмены экспорта", priority = 3)
     public void exportOrCancel(){
+
         exportPage
                 .clickImportExport()
                 .clickExportTab()

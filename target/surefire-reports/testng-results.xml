@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-02-12T16:28:55 KGT" name="SmokeSuit" finished-at="2025-02-12T16:29:43 KGT" duration-ms="47845">
+    <groups>
+      <group name="Regression">
+        <method signature="ImportTest.importAndDownloadNegativeTest()[pri:2, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="importAndDownloadNegativeTest" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.useAllReadyMadeExamplesTest()[pri:3, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="useAllReadyMadeExamplesTest" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.importOrCancel()[pri:5, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="importOrCancel" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.verifyImportButtonDisabledDuringUpload()[pri:7, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="verifyImportButtonDisabledDuringUpload" class="talentLMS.importExportTest.ImportTest"/>
+      </group> <!-- Regression -->
+      <group name="Smoke">
+        <method signature="ImportTest.importAndDownloadTest()[pri:1, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="importAndDownloadTest" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.verifyImportButtonIsDisabled()[pri:4, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="verifyImportButtonIsDisabled" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.verifySampleExcelFileIsClickable()[pri:6, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="verifySampleExcelFileIsClickable" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.verifyClearFileUpload()[pri:8, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="verifyClearFileUpload" class="talentLMS.importExportTest.ImportTest"/>
+        <method signature="ImportTest.verifySuccessMessageAfterImport()[pri:9, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" name="verifySuccessMessageAfterImport" class="talentLMS.importExportTest.ImportTest"/>
+      </group> <!-- Smoke -->
+    </groups>
+    <test started-at="2025-02-12T16:28:55 KGT" name="/IdeaProjects/Abracadabra" finished-at="2025-02-12T16:29:43 KGT" duration-ms="47845">
+      <class name="talentLMS.importExportTest.ImportTest">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:28:55 KGT" name="beforeSuite" finished-at="2025-02-12T16:28:55 KGT" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:28:55 KGT" name="beforeClass" finished-at="2025-02-12T16:29:02 KGT" duration-ms="7014" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:02 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:04 KGT" duration-ms="1790" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="importAndDownloadTest()[pri:1, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:04 KGT" name="importAndDownloadTest" description="Проверяет успешный импорт файла и загрузку образца" finished-at="2025-02-12T16:29:08 KGT" duration-ms="4804" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- importAndDownloadTest -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:09 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:10 KGT" duration-ms="1582" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="importAndDownloadNegativeTest()[pri:2, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:10 KGT" name="importAndDownloadNegativeTest" description="Проверяет невозможность импорта неподдерживаемого файла" finished-at="2025-02-12T16:29:12 KGT" duration-ms="2169" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- importAndDownloadNegativeTest -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:12 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:14 KGT" duration-ms="1707" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="useAllReadyMadeExamplesTest()[pri:3, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:14 KGT" name="useAllReadyMadeExamplesTest" description="Проверяет использование всех доступных примеров импорта" finished-at="2025-02-12T16:29:18 KGT" duration-ms="3798" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- useAllReadyMadeExamplesTest -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:18 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:19 KGT" duration-ms="1358" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyImportButtonIsDisabled()[pri:4, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:19 KGT" name="verifyImportButtonIsDisabled" description="Проверяет, что кнопка Import отключена без загруженного файла" finished-at="2025-02-12T16:29:21 KGT" duration-ms="1670" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyImportButtonIsDisabled -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:21 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:22 KGT" duration-ms="1353" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="importOrCancel()[pri:5, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:22 KGT" name="importOrCancel" description="Проверяет возможность отмены импорта" finished-at="2025-02-12T16:29:26 KGT" duration-ms="4308" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- importOrCancel -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:26 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:28 KGT" duration-ms="1221" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifySampleExcelFileIsClickable()[pri:6, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:28 KGT" name="verifySampleExcelFileIsClickable" description="Проверяет, что кнопка Sample Excel File кликабельна" finished-at="2025-02-12T16:29:29 KGT" duration-ms="1646" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySampleExcelFileIsClickable -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:29 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:31 KGT" duration-ms="1252" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyImportButtonDisabledDuringUpload()[pri:7, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:31 KGT" name="verifyImportButtonDisabledDuringUpload" description="Проверяет, что кнопка Import заблокирована во время загрузки файла" finished-at="2025-02-12T16:29:32 KGT" duration-ms="1252" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyImportButtonDisabledDuringUpload -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:32 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:33 KGT" duration-ms="1624" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyClearFileUpload()[pri:8, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:33 KGT" name="verifyClearFileUpload" description="Проверяет очистку поля загрузки перед новой загрузкой файла" finished-at="2025-02-12T16:29:36 KGT" duration-ms="2312" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyClearFileUpload -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:36 KGT" name="beforeMethod" finished-at="2025-02-12T16:29:37 KGT" duration-ms="1685" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifySuccessMessageAfterImport()[pri:9, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:37 KGT" name="verifySuccessMessageAfterImport" description="Проверяет успешный импорт файла и появление сообщения Import completed successfully" finished-at="2025-02-12T16:29:42 KGT" duration-ms="4968" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySuccessMessageAfterImport -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:talentLMS.importExportTest.ImportTest@12aa2cca]" started-at="2025-02-12T16:29:42 KGT" name="afterClass" finished-at="2025-02-12T16:29:43 KGT" duration-ms="152" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- talentLMS.importExportTest.ImportTest -->
+    </test> <!-- /IdeaProjects/Abracadabra -->
+  </suite> <!-- SmokeSuit -->
+</testng-results>

@@ -1,5 +1,6 @@
 package talentLMS.page.importExport;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.page.BasePage;
@@ -35,49 +36,49 @@ public class SyncWithAnFtpServerPage extends BasePage {
     @FindBy(xpath = "//input[@value='Save']")
     public WebElement saveButton;
 
-    /// Открывает вкладку "Import - Export"
+    @Step("Открывает вкладку Import - Export")
     public SyncWithAnFtpServerPage clickImportExport() {
         webElementActions.click(importExport);
         return this;
     }
 
-    /// Переходит на вкладку "Sync with an FTP server".
+    @Step("Переходит на вкладку Sync with an FTP server")
     public SyncWithAnFtpServerPage clickSyncWithAnFTPServerTab() {
         webElementActions.click(syncWithAnFTPServerTab);
         return this;
     }
 
-    /// Вводит значение в поле "Host".
+    @Step("Вводит значение в поле Host")
     public SyncWithAnFtpServerPage enterHost(String host) {
         webElementActions.typeText(hostInput, host);
         return this;
     }
 
-    /// Вводит значение в поле "Port".
+    @Step("Вводит значение в поле Port")
     public SyncWithAnFtpServerPage enterPort(String port) {
         webElementActions.typeText(portInput, port);
         return this;
     }
 
-    /// Вводит значение в поле "Username".
+    @Step("Вводит значение в поле Username")
     public SyncWithAnFtpServerPage enterUsername(String userName) {
         webElementActions.typeText(userNameInput, userName);
         return this;
     }
 
-    /// Вводит значение в поле "Password".
+    @Step("Вводит значение в поле Password")
     public SyncWithAnFtpServerPage enterPassword(String password) {
         webElementActions.typeText(passwordInput, password);
         return this;
     }
 
-    /// Нажимает кнопку "Test Connection".
+    @Step("Нажимает кнопку Test Connection")
     public SyncWithAnFtpServerPage clickTestConnection() {
         webElementActions.click(testConnectionButton);
         return this;
     }
 
-    /// Включает или отключает экспорт данных.
+    @Step("Включает или отключает экспорт данных")
     public SyncWithAnFtpServerPage enableExport(boolean enable) {
         if (enableExportCheckbox.isSelected() != enable) {
             webElementActions.click(enableExportCheckbox);
@@ -85,7 +86,7 @@ public class SyncWithAnFtpServerPage extends BasePage {
         return this;
     }
 
-    /// Нажимает кнопку "Save".
+    @Step("Нажимает кнопку Save")
     public SyncWithAnFtpServerPage clickSave() {
         webElementActions.click(saveButton);
         return this;

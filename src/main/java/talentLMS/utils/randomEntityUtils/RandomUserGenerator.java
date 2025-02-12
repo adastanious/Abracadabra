@@ -48,4 +48,40 @@ public class RandomUserGenerator {
         return new User(randomFirstName(), randomLastName(), "das.digital.nomads@gmail.com", randomUserName(), randomPassword());
     }
 
+    public User randomUserWithoutFirstName(){
+        return new User("",randomLastName(), randomEmail(), randomUserName(), randomPassword());
+    }
+
+    public User randomUserWithoutLastName(){
+        return new User(randomFirstName(), " ", randomEmail(), randomUserName(), randomPassword());
+    }
+
+    public User randomUserWithoutEmail(){
+        return new User(randomFirstName(), randomLastName(), " ", randomUserName(), randomPassword());
+    }
+
+    public User randomUserWithIncorrectPassword(){
+        return new User(randomFirstName(), randomLastName(), randomEmail(), randomUserName(),"123456");
+    }
+
+    public User randomUserFirstNameXceed50Characters(){
+        return new User("лвсщцушосссссссьчбфддддбйцщлвзцуусщтывстщывьсзщцзцч", randomLastName(), randomEmail(), randomUserName(),randomPassword());
+    }
+
+    public User randomUserLastNameXceed50Characters(){
+        return new User(randomFirstName(), "лвсщцушосссссссьчбфддддбйцщлвзцуусщтывстщывьсзщцзцч", randomEmail(), randomUserName(), randomPassword());
+    }
+
+    public User randomUserEmailXceed150Characters(){
+        return new User(randomFirstName(), randomLastName(), "lorraine.friesensndcdnpinsdpin idnbeirboadpfolm xc; l]s[plverkboad nk;cv, zlvm lfkn v mzlkn m oogf kngf cv ,x';fvkpjbsfgn ;cv ,cm kxjbn km lfk@hotmail.com", randomUserName(), randomPassword());
+    }
+
+    public User randomUserPasswordXceed30Characters(){
+        return new User(randomFirstName(), randomLastName(), randomEmail(), randomUserName(), "123456987856412365498232Dsdknssdrhivkhb!@");
+    }
+
+    public User randomUser1(){
+        return new User(randomFirstName(), randomLastName(), " ", randomUserName(), randomPassword());
+    }
+
 }

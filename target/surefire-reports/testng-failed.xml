@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [SmokeSuit]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="/IdeaProjects/Abracadabra(failed)" verbose="0">
+    <classes>
+      <class name="talentLMS.importExportTest.ImportTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="beforeMethod"/>
+          <include name="useAllReadyMadeExamplesTest"/>
+          <include name="afterClass"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- talentLMS.importExportTest.ImportTest -->
+    </classes>
+  </test> <!-- /IdeaProjects/Abracadabra(failed) -->
+</suite> <!-- Failed suite [SmokeSuit] -->
