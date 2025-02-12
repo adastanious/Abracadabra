@@ -71,6 +71,7 @@ public abstract class BaseTest {
     public RandomUserTypeGenerator randomUserTypeGenerator = new RandomUserTypeGenerator();
     public UserTypes userTypes = new UserTypes();
 
+     public Group randomGroup = new RandomGroupGenerator().randomGroup();
 
     @BeforeSuite
     public void beforeSuite() {

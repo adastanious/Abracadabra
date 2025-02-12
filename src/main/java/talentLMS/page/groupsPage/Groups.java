@@ -1,5 +1,6 @@
 package talentLMS.page.groupsPage;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -76,12 +77,8 @@ public class Groups extends BasePage {
     public WebElement btnAdd;
 
 
-    /**
-     * Добавляет новую группу.
-     *
-     * @param group объект группы с именем и описанием.
-     * @return текущий объект Groups для цепочки вызовов.
-     */
+
+     @Step("Добавляет новую группу")
     public Groups addNewGroup(Group group) {
         webElementActions.click(addGroup)
                 .sendKeys(this.name, group.getName())
@@ -90,11 +87,8 @@ public class Groups extends BasePage {
         return this;
     }
 
-    /**
-     * Получает текст сообщения об успешном выполнении или ошибке.
-     *
-     * @return текст сообщения (например, "Success! New group created.").
-     */
+
+     @Step("Получает текст сообщения об успешном выполнении или ошибке")
     public String getSuccessOrErrorMessage() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5));
         WebElement messageElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='toast-message']")));
@@ -104,15 +98,8 @@ public class Groups extends BasePage {
         return (String) js.executeScript("return arguments[0].innerText;", messageElement);
     }
 
-    /**
-     * Выполняет клики для добавления пользователя в группу.
-     *
-     * Этот метод выполняет серию кликов для инициации процесса добавления пользователя в группу.
-     * Сначала кликается кнопка 'Добавить пользователя в группу', затем выбираются соответствующие опции
-     * для добавления пользователей в группу.
-     *
-     * @return текущий экземпляр объекта Groups, что позволяет использовать цепочку вызовов методов.
-     */
+
+     @Step("Выполняет клики для добавления пользователя в группу")
     public Groups clickAddUserToGroupBtn() {
         webElementActions.click(addUserToGroupBtn)
                 .click(clickUsers)
@@ -121,15 +108,8 @@ public class Groups extends BasePage {
         return this;
     }
 
-    /**
-     * Редактирует существующую группу.
-     * <p>
-     * Этот метод выбирает группу для редактирования, заполняет новые значения
-     * для имени и описания и отправляет форму для обновления группы.
-     *
-     * @param group Объект группы с обновленными данными (имя и описание).
-     * @return Текущий экземпляр класса Groups для продолжения цепочки действий.
-     */
+
+     @Step("Редактирует существующую группу")
     public Groups editGroup(Group group) {
         webElementActions.click(clickDescription)
                 .click(edit)
@@ -139,14 +119,8 @@ public class Groups extends BasePage {
         return this;
     }
 
-    /**
-     * Удаляет группу.
-     * <p>
-     * Этот метод открывает меню опций для группы и подтверждает её удаление.
-     *
-     * @param group Объект группы, которую необходимо удалить.
-     * @return Текущий экземпляр класса Groups для продолжения цепочки действий.
-     */
+
+    @Step("Удаляет группу")
     public Groups deleteGroup(Group group) {
         webElementActions
                 .click(options) // клик по кнопке с опциями группы
@@ -155,14 +129,8 @@ public class Groups extends BasePage {
     }
 
 
-    /**
-     * Получает список всех названий групп из таблицы на странице.
-     * <p>
-     * Метод ожидает загрузки таблицы в течение 5 секунд и затем извлекает названия всех групп.
-     * Если таблица не загрузится за это время, в консоль выводится сообщение об ошибке.
-     *
-     * @return список строк с названиями групп.
-     */
+
+    @Step("Получает список всех названий групп из таблицы на странице")
     public List<String> getAllGroupNamesTable() {
         List<String> groupNames = new ArrayList<>();
 
@@ -187,25 +155,15 @@ public class Groups extends BasePage {
         return groupNames;
     }
 
-    /**
-     * Проверяет, была ли удалена группа (отсутствует ли она в списке).
-     *
-     * @param groupNames   список названий групп, полученный из таблицы.
-     * @param groupToCheck название группы, которую нужно проверить.
-     * @return true, если группы нет в списке (она была удалена), иначе false.
-     */
+
+   @Step("Проверяет, была ли удалена группа (отсутствует ли она в списке)")
     public boolean isGroupDeleted(List<String> groupNames, String groupToCheck) {
         return !groupNames.contains(groupToCheck);
     }
 
-    /**
-     * Выводит список оставшихся групп в консоль.
-     * <p>
-     * Если групп нет, выводится соответствующее сообщение.
-     *
-     * @param groupNames список оставшихся групп.
-     */
-    public void printRemainingGroups(List<String> groupNames) {
+
+     @Step("Выводит список оставшихся групп в консоль")
+     public void printRemainingGroups(List<String> groupNames) {
         if (groupNames.isEmpty()) {
             System.out.println("Нет оставшихся групп!");
         } else {
@@ -215,17 +173,9 @@ public class Groups extends BasePage {
             }
         }
     }
-    /**
-     * Отменяет удаление группы.
-     *
-     * Этот метод выполняет серию кликов для отмены операции удаления группы. Сначала кликается
-     * опция в меню, затем выбирается кнопка отмены.
-     *
-     * @param group объект группы, для которой выполняется операция. Параметр передается для
-     *              контекста, хотя не используется непосредственно в методе.
-     * @return текущий экземпляр объекта Groups, что позволяет использовать цепочку вызовов методов.
-     */
-    public Groups deleteGroupCancel(Group group) {
+
+     @Step("Отменяет удаление группы")
+     public Groups deleteGroupCancel(Group group) {
         webElementActions
                 .click(options)
                 .click(cancel);
@@ -233,16 +183,9 @@ public class Groups extends BasePage {
 
     }
 
-    /**
-     * Назначает курс указанной группе.
-     * Метод выполняет последовательные клики по веб-элементам:
-     * 1. massActions - открывает меню массовых действий.
-     * 2. addGroupsToAllGroups - выбирает опцию добавления групп.
-     * 3. btnAdd - подтверждает выбор.
-     *
-     * @param group Группа, которой назначается курс.
-     */
-    public void assignCourseToGroup(Group group) {
+
+     @Step("Назначает курс указанной группе")
+     public void assignCourseToGroup(Group group) {
         webElementActions.click(massActions)
                 .click(addGroupsToAllGroups)
                 .click(btnAdd);
