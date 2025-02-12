@@ -49,7 +49,7 @@ public abstract class BaseTest {
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     public Groups groups  = new Groups();
     public RandomGroupGenerator randomGroupGenerator = new RandomGroupGenerator();
-    public Group randomGroup = new RandomGroupGenerator().randomGroup();
+     public Group randomGroup = new RandomGroupGenerator().randomGroup();
 
 
     @BeforeSuite
