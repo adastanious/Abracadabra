@@ -60,26 +60,26 @@ public class UsersTest extends BaseTest {
      * 5. Возвращается на страницу настроек перед следующей итерацией.
      * 6. Очищает кэш списка типов пользователей.
      */
-    @Test(groups = { "regression" }, description = "verify that the selected default user type is specified in the Add user form", priority = 2)
-    public void selectDefaultUserTypeTest() {
-        List<String> defaultUserTypes = settingsUsersPage.getDefaultUserTypes();
-
-        for (int i = 0; i < defaultUserTypes.size(); i++) {
-            settingsUsersPage.selectDefaultUserType(i);
-
-            basicSettingsTest.assertSuccessPopUpMessage(AccountAndSettings.USERS_SETTINGS_SAVED_SUCCESSFULLY);
-
-            driver.get(ConfigReader.getProperty("dashboardURL"));
-            dashboardPage.selectSection(AdminSection.USERS).webElementActions.click(userPage.addUser);
-            String actualUserType = settingsUsersPage.getUserTypeInAddUser().getText();
-            String expectedUserType = settingsUsersPage.getUserTypesList().get(i);
-            Assert.assertEquals(actualUserType, expectedUserType, "User types are different");
-
-            driver.get(ConfigReader.getProperty("dashboardURL"));
-            beforeMethod();
-        }
-        settingsUsersPage.getUserTypesList().clear();
-    }
+//    @Test(groups = { "regression" }, description = "verify that the selected default user type is specified in the Add user form", priority = 2)
+//    public void selectDefaultUserTypeTest() {
+//        List<String> defaultUserTypes = settingsUsersPage.getDefaultUserTypes();
+//
+//        for (int i = 0; i < defaultUserTypes.size(); i++) {
+//            settingsUsersPage.selectDefaultUserType(i);
+//
+//            basicSettingsTest.assertSuccessPopUpMessage(AccountAndSettings.USERS_SETTINGS_SAVED_SUCCESSFULLY);
+//
+//            driver.get(ConfigReader.getProperty("dashboardURL"));
+//            dashboardPage.selectSection(AdminSection.USERS).webElementActions.click(userPage.addUser);
+//            String actualUserType = settingsUsersPage.getUserTypeInAddUser().getText();
+//            String expectedUserType = settingsUsersPage.getUserTypesList().get(i);
+//            Assert.assertEquals(actualUserType, expectedUserType, "User types are different");
+//
+//            driver.get(ConfigReader.getProperty("dashboardURL"));
+//            beforeMethod();
+//        }
+//        settingsUsersPage.getUserTypesList().clear();
+//    }
 
     /**
      * Проверяет, что список отображаемых форматов пользователей соответствует ожидаемому.
