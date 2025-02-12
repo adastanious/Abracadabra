@@ -1,5 +1,6 @@
 package talentLMS.page.userTypesPage;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  @author Aizada, Agema, Adinai, Nasyikat, Aiperi
+ *  @author Aizada
  *  */
 
 public class UserTypes extends BasePage {
@@ -48,15 +49,6 @@ public class UserTypes extends BasePage {
     @FindBy(xpath = "//input[@id='user-type-save-button']")
     public WebElement save;
 
-    @FindBy(xpath = "//i[contains(@class, 'icon-pencil')]")
-    public WebElement edit;
-
-    @FindBy(xpath = "//td[@class=' tl-align-center hidden-phone']")
-    public WebElement checkbox;
-
-    @FindBy(xpath = "//input[@id='user_type_name']")
-    public WebElement editName;
-
     @FindBy(xpath = "//i[contains(@class, 'icon-ellipsis-h tl-table-operations-icon') and contains(@class, 'tl-table')]")
     public WebElement operationIcon;
 
@@ -92,17 +84,7 @@ public class UserTypes extends BasePage {
         return Driver.getDriver().findElement(By.xpath(dynamicXpath));
     }
 
-    public String getSuccessMessage() {
-        return driver.findElement(By.id("successMessage")).getText(); // Укажи правильный локатор
-    }
-
-    /**
-     * Добавляет новый тип пользователя.
-     * @param userType Объект UserType, содержащий данные нового типа пользователя.
-     * @param userRole WebElement, представляющий роль пользователя (администратор, инструктор, ученик).
-     * @param checkbox WebElement, чекбокс, связанный с выбранной ролью.
-     * @return Объект UserTypes после выполнения операции.
-     */
+    @Step("Добавляет новый тип пользователя")
     public UserTypes addUserTypeBtn(UserTypeEntity userType, WebElement userRole, WebElement checkbox) {
         webElementActions.click(this.addUserType)
                 .sendKeys(this.name, userType.getName())
@@ -113,55 +95,24 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет пользователя с ролью Администратор.
-     * @param userType Объект UserType с данными нового администратора.
-     * @return Объект UserTypes после выполнения операции.
-     */
-
+    @Step(" Добавляет пользователя с ролью Администратор.")
     public UserTypes addUserTypeAdministrator(UserTypeEntity userType) {
         return addUserTypeBtn(userType, clickAdministrator, checkboxAdministrator);
     }
 
-    /**
-     * Добавляет пользователя с ролью Инструктор.
-     * @param userType Объект UserType с данными нового инструктора.
-     * @return Объект UserTypes после выполнения операции.
-     */
+    @Step ("Добавляет пользователя с ролью Инструктор.")
     public UserTypes addUserTypeInstructor(UserTypeEntity userType) {
         return addUserTypeBtn(userType, clickInstructor, checkboxInstructor);
     }
 
-    /**
-     * Добавляет пользователя с ролью Ученик.
-     * @param userType Объект UserType с данными нового ученика.
-     * @return Объект UserTypes после выполнения операции.
-     */
+    @Step("Добавляет пользователя с ролью Ученик")
     public UserTypes addUserTypeLearner(UserTypeEntity userType) {
         return addUserTypeBtn(userType, clickLearner, checkboxLearner);
     }
 
-    /**
-     * Редактирует существующий тип пользователя.
-     * @param userType Объект UserType с обновленными данными.
-     * @return Объект UserTypes после выполнения операции.
-     */
-    public UserTypes edit(UserTypeEntity userType) {
-        webElementActions
-                .click(checkbox)
-                .click(edit)
-                .click(editName)
-                .click(save);
-        return this;
-    }
-
-    /**
-     * Удаляет существующий тип пользователя.
-     * @param userType Объект UserType, который нужно удалить.
-     * @return Объект UserTypes после выполнения операции.
-     */
+    @Step("Удаляет существующий тип пользователя")
     public UserTypes deleteType(UserTypeEntity userType) {
-        webElementActions.click(userTypesBtn)
+        webElementActions
                 .click(operationIcon)
                 .click(arrow)
                 .click(learnerType)
@@ -169,11 +120,8 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Удаляет тип пользователя в негативном сценарии.
-     * @param userType Тип пользователя для удаления.
-     * @return Текущий объект UserTypes.
-     */
+
+    @Step("Удаляет тип пользователя в негативном сценарии")
     public UserTypes deleteNegative(UserTypeEntity userType) {
         webElementActions.click(userTypesBtn)
                 .click(operationIcon)
@@ -181,13 +129,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для пользователей.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления пользователей.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для пользователей")
     public UserTypes addAdministratorUsers(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -202,13 +144,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для курсов.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления курсов.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для курсов")
     public UserTypes addAdministratorCourses(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -223,13 +159,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для групп.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления групп.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для групп")
     public UserTypes addAdministratorCroups(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -244,13 +174,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для категорий.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления категорий.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для категорий")
     public UserTypes addAdministratorCategories(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -265,13 +189,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для филиалов (branches).
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления филиалов.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для филиалов (branches)")
     public UserTypes addAdministratorBranches(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -286,13 +204,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для уведомлений событий.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления уведомлений событий.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для уведомлений событий")
     public UserTypes addAdministratorEventsNotifications(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -308,13 +220,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для автоматизаций событий.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления автоматизаций событий.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для автоматизаций событий.")
     public UserTypes addAdministratorEventsAutomations(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -330,13 +236,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для импорта и экспорта данных.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами импорта и экспорта данных.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для импорта и экспорта данных")
     public UserTypes addAdministratorImportExport(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -349,13 +249,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для типов пользователей.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления типов пользователей.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для типов пользователей")
     public UserTypes addAdministratorUserTypes(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -370,14 +264,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для настроек аккаунта.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами доступа к просмотру и обновлению настроек аккаунта, а также правами доступа к различным функциональным областям,
-     * таким как геймификация, навыки, электронная коммерция, домен, подписка и другие.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для настроек аккаунта")
     public UserTypes addAdministratorAccountSettings(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -395,14 +282,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для отчетов.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами доступа к различным отчетам, включая пользователей, курсы, группы, филиалы,
-     * тесты, опросы, задания, ILT и кастомные отчеты.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для отчетов")
     public UserTypes addAdministratorReports(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -422,13 +302,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для файлов.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами просмотра, создания, обновления и удаления файлов.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для файлов")
     public UserTypes addAdministratorFiles(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -443,14 +317,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для навыков.
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами доступа для просмотра, создания, обновления, назначения/удаления, одобрения/отклонения
-     * запросов и удаления навыков.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для навыков")
     public UserTypes addAdministratorSkills(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -467,14 +334,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет администратора с правами доступа для искусственного интеллекта (AI).
-     * Метод выполняет последовательные действия на веб-странице для создания типа пользователя
-     * с правами доступа к функционалу искусственного интеллекта, включая создание навыков,
-     * генерацию изображений, создание вопросов для навыков, предложению курсов и ресурсов, а также доступу к пулу талантов.
-     * @param userType объект, содержащий данные о типе пользователя, который будет добавлен.
-     * @return текущий экземпляр {@link UserTypes}, позволяя использовать метод в цепочке вызовов.
-     */
+    @Step("Добавляет администратора с правами доступа для искусственного интеллекта (AI)")
     public UserTypes addAdministratorAI(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -492,11 +352,8 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Добавляет новый тип пользователя с ролью "Instructor" и назначает права на курсы и пользователей.
-     * @param userType данные пользователя ({@link UserTypeEntity})
-     * @return {@link UserTypes} для цепочечных вызовов
-     */
+
+    @Step("Добавляет новый тип пользователя с ролью Instructor и назначает права на курсы и пользователей.")
     public UserTypes addInstructorCourses(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
@@ -517,13 +374,7 @@ public class UserTypes extends BasePage {
         return this;
     }
 
-    /**
-     * Извлекает данные о типах пользователей из таблицы на веб-странице и создает список объектов {@link UserTypeEntity}.
-     * Метод находит все строки в таблице с типами пользователей и извлекает из каждой строки имя пользователя.
-     * Если в строке меньше 5 ячеек, она пропускается. Полученные данные используются для создания объектов
-     * {@link UserTypeEntity}, которые добавляются в список.
-     * @return список объектов {@link UserTypeEntity}, содержащих имена типов пользователей.
-     */
+    @Step("Извлекает данные о типах пользователей из таблицы на веб-странице и создает список объектов")
     public ArrayList<UserTypeEntity> getUserTypeFromTable() {
         List<WebElement> rows = Driver.getDriver().findElements(By.cssSelector("table#tl-list-user-types tbody tr"));
         ArrayList<UserTypeEntity> userTypeEntities = new ArrayList<>();
@@ -543,12 +394,7 @@ public class UserTypes extends BasePage {
         return userTypeEntities;
     }
 
-    /**
-     * Проверяет, что система не позволяет создать пользователя с некорректной комбинацией ролей.
-     * Назначает одновременно роли "Administrator" и "Instructor" и пытается сохранить.
-     * @param userType данные нового пользователя ({@link UserTypeEntity})
-     * @return текущий объект {@link UserTypes} для цепочечных вызовов
-     */
+    @Step("Проверяет, что система не позволяет создать пользователя с некорректной комбинацией ролей")
     public UserTypes notCorrectUserType(UserTypeEntity userType) {
         webElementActions.click(addUserType)
                 .sendKeys(name, userType.getName())
