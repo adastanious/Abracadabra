@@ -101,7 +101,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что невозможно сохранить название сайта длиннее 40 символов.
      */
-    @Test(description = "verify that it is impossible to save a site name longer than 40 characters", priority = 1)
+    @Test(groups = "Regression", description = "verify that it is impossible to save a site name longer than 40 characters", priority = 1)
     public void siteNameOverTheLimitTest() {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomIncorrectName());
 
@@ -117,7 +117,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что невозможно сохранить описание сайта длиннее 255 символов.
      */
-    @Test(description = "verify that it is impossible to save a site description longer than 255 characters", priority = 2)
+    @Test(groups = "Regression", description = "verify that it is impossible to save a site description longer than 255 characters", priority = 2)
     public void siteDescriptionOverTheLimitTest() {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), basicSettingsPage.getRandomIncorrectDescription());
 
@@ -130,7 +130,7 @@ public class BasicSettingsTest extends BaseTest {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), "");
     }
 
-    @Test(description = "verify that it is impossible to save a site description longer than 255 characters", priority = 3)
+    @Test(groups = "Regression", description = "verify that it is impossible to save a site description longer than 255 characters", priority = 3)
     public void emptySiteNameAndDescriptionTest() {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), "")
                 .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), "");
@@ -144,7 +144,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что можно сохранить название и описание сайта.
      */
-    @Test(description = "verify that it is possible to save a site name and description", priority = 4)
+    @Test(groups = "Smoke", description = "verify that it is possible to save a site name and description", priority = 4)
     public void siteNameAndDescriptionTest() {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomName())
                 .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), basicSettingsPage.getRandomDescription());
@@ -160,7 +160,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция языка доступна для выбора.
      */
-    @Test(description = "verify that every language option is clickable", priority = 5)
+    @Test(groups = "Smoke", description = "verify that every language option is clickable", priority = 5)
     public void LanguageOptionsTest() {
         basicSettingsPage.selectDropDownLanguageOption();
         List<String> expectedLanguagesList = AccountAndSettings.LANGUAGES.getList();
@@ -171,7 +171,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены языка на странице.
      */
-    @Test(description = "verify that a user can type then select the language and check its implementation", priority = 6)
+    @Test(groups = "Regression", description = "verify that a user can type then select the language and check its implementation", priority = 6)
     public void changeLanguageTest() {
         basicSettingsPage.selectLanguage("Russian");
 
@@ -189,7 +189,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены языка на Кыргызский язык на странице.
      */
-    @Test(description = "verify that unavailable language typed is not found and not selected", priority = 7)
+    @Test(groups = "Regression", description = "verify that unavailable language typed is not found and not selected", priority = 7)
     public void unavailableLanguageTest() {
         try {
             basicSettingsPage.selectLanguage("Kyrgyz");
@@ -201,7 +201,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция часового пояса доступна для выбора.
      */
-    @Test(description = "verify that every time zone option is clickable", priority = 8)
+    @Test(groups = "Smoke", description = "verify that every time zone option is clickable", priority = 8)
     public void timeZoneOptionsTest() {
         basicSettingsPage.selectDropDownTimeZoneOption();
         List<String> expectedTimeZonesList = AccountAndSettings.TIME_ZONES.getList();
@@ -212,7 +212,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены часового пояса на странице.
      */
-    @Test(description = "verify that a user can type then select the time zone and check its implementation", priority = 9)
+    @Test(groups = "E2E", description = "verify that a user can type then select the time zone and check its implementation", priority = 9)
     public void changeTimeZoneTest() {
         try {
             basicSettingsPage.selectTimeZone("Rome");
@@ -231,7 +231,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены часового пояса на Бишкек на странице.
      */
-    @Test(description = "verify that unavailable time zone typed is not found and not selected", priority = 10)
+    @Test(groups = "Regression", description = "verify that unavailable time zone typed is not found and not selected", priority = 10)
     public void unavailableTimeZoneTest() {
         try {
             basicSettingsPage.selectTimeZone("Bishkek");
@@ -253,7 +253,7 @@ public class BasicSettingsTest extends BaseTest {
      * <p>
      * Если список форматов даты пуст, тест завершится с исключением RuntimeException.
      */
-    @Test(description = "verify that a user can select every date format and check their implementation", priority = 11)
+    @Test(groups = "Regression", description = "verify that a user can select every date format and check their implementation", priority = 11)
     public void dateFormatOptionsTest() {
         basicSettingsPage.selectDropDownDateFormatOption();
 
@@ -301,7 +301,7 @@ public class BasicSettingsTest extends BaseTest {
      * - Если список форматов времени пуст, выбрасывается RuntimeException.
      * - Если элемент не найден, выводится ошибка в консоль.
      */
-    @Test(description = "verify that a user can select every time format and check their implementation", priority = 12)
+    @Test(groups = "Regression", description = "verify that a user can select every time format and check their implementation", priority = 12)
     public void timeFormatOptionsTest() {
         try {
             webElementActions.click(basicSettingsPage.getTimeFormatCell());
@@ -350,7 +350,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция валюты доступна для выбора.
      */
-    @Test(description = "verify that every currency option is clickable", priority = 13)
+    @Test(groups = "Smoke", description = "verify that every currency option is clickable", priority = 13)
     public void currencyOptionsTest() {
         basicSettingsPage.selectDropDownCurrencyOption();
 
@@ -363,7 +363,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены часового пояса на странице.
      */
-    @Test(description = "verify that a user can select currency Euro and check its implementation", priority = 14)
+    @Test(groups = "Regression", description = "verify that a user can select currency Euro and check its implementation", priority = 14)
     public void currencyTest() {
         try {
             basicSettingsPage.selectCurrency("Euro");
@@ -387,7 +387,7 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены валюты на сом на странице.
      */
-    @Test(description = "verify that unavailable currency typed is not found and not selected", priority = 15)
+    @Test(groups = "Regression", description = "verify that unavailable currency typed is not found and not selected", priority = 15)
     public void unavailableCurrencyTest() {
         try {
             basicSettingsPage.selectCurrency("Som");

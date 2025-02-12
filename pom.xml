@@ -137,6 +137,9 @@
     <profiles>
         <profile>
             <id>Smoke</id>
+            <properties>
+                <groups>Smoke</groups>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -147,6 +150,49 @@
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/suites/Smoke_suite.xml</suiteXmlFile>
                             </suiteXmlFiles>
+                            <groups>${groups}</groups>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>Regression</id>
+            <properties>
+                <groups>Regression</groups>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/suites/Regression_suite.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <groups>${groups}</groups>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>E2E</id>
+            <properties>
+                <groups>E2E</groups>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/suites/E2E_suite.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <groups>${groups}</groups>
                         </configuration>
                     </plugin>
                 </plugins>

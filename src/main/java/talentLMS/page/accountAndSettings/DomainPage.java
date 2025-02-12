@@ -1,5 +1,6 @@
 package talentLMS.page.accountAndSettings;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +29,7 @@ public class DomainPage extends BasePage {
     @FindBy (xpath = "//input[@name='submit_domain_name']")
     WebElement changeBtn;
 
+    @Step("Изменение имени домена: {name}")
     /**
      * Изменяет имя домена на указанное и применяет изменения.
      *
