@@ -90,7 +90,7 @@ public class DomainTest extends BaseTest {
      * 3. Выполняет вход в систему и переключается на старый интерфейс.
      * 4. Возвращает доменное имя обратно к текущему значению.
      */
-    @Test(groups = "E2E", description = "verify that domain name is required if a user click change domain name with blank domain name", priority = 4)
+    @Test(groups = "Smoke", description = "verify that domain name is changed", priority = 4)
     public void changeDomainNameTest() {
         domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_NEW);
 

@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import talentLMS.driver.Driver;
 import talentLMS.entity.UserEntity;
 
+import talentLMS.enums.AdminSection;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -25,12 +27,14 @@ public class UserPageTest extends BaseTest {
 
     @Test(groups = {"Smoke"}, description = "Тест проверяет добавление нового пользователя с использованием случайных данных.", priority = 1)
     public void addNewUserTest() {
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.addNewUser(randomUser);
     }
 
 
     @Test(groups = {"Smoke"}, description = "Тест проверяет возможность редактирования существующего пользователя.", priority = 3)
     public void editUserTest() {
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.editUser(randomUserGenerator.randomUser());
     }
 
