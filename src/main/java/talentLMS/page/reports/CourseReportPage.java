@@ -1,5 +1,6 @@
 package talentLMS.page.reports;
 
+import io.qameta.allure.Step;
 import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -86,6 +87,7 @@ public class CourseReportPage extends BasePage {
      *
      * @throws InterruptedException Если поток был прерван при ожидании (используется Thread.sleep).
      */
+    @Step("Метод для получения отчетных данных о курсах из таблицы на веб-странице.")
     public ArrayList<ReportCourses> getCoursesReportFormTable() {
             if (webElementActions.isElementClickable(forTableBtn)){
                 webElementActions.click(forTableBtn);

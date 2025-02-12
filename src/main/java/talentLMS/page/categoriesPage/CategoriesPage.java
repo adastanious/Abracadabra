@@ -1,5 +1,6 @@
 package talentLMS.page.categoriesPage;
 
+import io.qameta.allure.Step;
 import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -77,6 +78,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage), что позволяет использовать метод в цепочке вызовов.
      */
+    @Step("Добовление категрий с разными данными{0}, {1}")
     public CategoriesPage addCategory(String name, String price) {
         webElementActions.click(addCategory)
                 .sendKeys(categoryNameInput, name)
@@ -100,6 +102,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage), что позволяет использовать метод в цепочке вызовов.
      */
+    @Step("Добавление категорий с указанием родительского класса{0}, {1}")
     public CategoriesPage addCategoryParent(String name, String price) {
         webElementActions.click(addCategory)
                 .sendKeys(categoryNameInput, name)
@@ -125,6 +128,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Список объектов CategoryEntity, представляющих категории.
      */
+    @Step("Создание таблицы из категорий")
     public ArrayList<Category> getCategoryFormTable() {
         List<WebElement> rows = driver.findElements(By.xpath("//td[@class=' tl-align-left']"));
         ArrayList<Category> categoryEntities = new ArrayList<>();
@@ -146,6 +150,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage) для продолжения взаимодействия с интерфейсом.
      */
+    @Step("Удаление категории")
     public CategoriesPage deleteCategory() {
         webElementActions.moveToElement(moveElement)
                 .click(deleteBtn)
@@ -166,6 +171,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage) для продолжения взаимодействия с интерфейсом.
      */
+    @Step("Изменение категории на название {0}, {1}")
     public CategoriesPage changeCategory(String changeName, String changePrice) {
         webElementActions.moveToElement(moveElement)
                 .click(changeBtn)

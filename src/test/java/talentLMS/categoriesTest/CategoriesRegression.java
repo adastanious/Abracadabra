@@ -23,17 +23,15 @@ public class CategoriesRegression extends BaseTest {
     }
 
     /**
-     * Тест для проверки соответствия количества категорий в разделе "Категории" и разделе "Курсы".
+     * Тест для проверки удаления всех категорий в разделе "Категории".
      * Этот тест выполняет следующие действия:
      * 1. Переход в раздел "Категории" на странице панели управления.
-     * 2. Получение списка всех категорий в разделе "Категории".
-     * 3. Переход в раздел "Курсы" на странице панели управления.
-     * 4. Открытие окна для добавления курса и выбор категории.
-     * 5. Сравнение количества категорий в разделе "Категории" и количестве категорий, доступных для выбора в разделе "Курсы".
+     * 2. Попытка удаления всех категорий на странице, пока таблица категорий не станет пустой.
+     * 3. Проверка, что после выполнения операций удаления таблица категорий пуста.
      *
-     * @throws AssertionError Если количество категорий не совпадает, тест не пройдет.
+     * @throws Exception Если при удалении категорий произойдет ошибка, она будет поймана, но не вызовет сбой теста.
      */
-    @Test(priority = 0)
+    @Test(priority = 0, groups = "Regression", description = "Тест для проверки удаления всех категорий в разделе Категории")
     public void CategoriesTestTableZero(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         while (true) {
@@ -52,7 +50,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(categoriesTable.size(), 0, "Не прошло удаление всех категорий");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories(){
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getIncorrectPrice());
         String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.getMessage();
@@ -62,7 +60,7 @@ public class CategoriesRegression extends BaseTest {
         String actualTextPrice = categoriesPage.getIncorrectAssertPriceText().getText();
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории c не корректным прайсом.");
     }
-    @Test(priority = 2)
+    @Test(priority = 2, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories1(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getCorrectCategoryName());
         String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
@@ -70,7 +68,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из букв.");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories2(){
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getCorrectPrice());
         String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.getMessage();
@@ -78,7 +76,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной более 80 символов.");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories3(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getIncorrectPrice());
         String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
@@ -86,7 +84,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории c не корректным прайсом.");
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories4(){
         categoriesPage.addCategory(category.getIncorrectCategoryName(), category.getCorrectCategoryName());
         String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_MORE80.getMessage();
@@ -97,7 +95,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории прайсом из букв.");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories5(){
         categoriesPage.addCategory("", category.getCorrectPrice());
         String expectedText = ErrorMessage.CATEGORIES_ADD_NAME_LENGTH_LESS1.getMessage();
@@ -105,7 +103,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualText, expectedText, "Система позволяет создавать категории с названиями длинной менее 1 символа.");
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories6(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), "-500");
         String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
@@ -113,7 +111,7 @@ public class CategoriesRegression extends BaseTest {
         Assert.assertEquals(actualTextPrice, expectedTextPrice, "Система позволяет создавать категории с отрицательным прайсом.");
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, groups = "Regression", description = "Тест на создание категорий с некоректными данными")
     public void addIncorrectCategories8(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), "XII");
         String expectedTextPrice = ErrorMessage.CATEGORIES_PRICE_MESSAGE.getMessage();
@@ -134,7 +132,7 @@ public class CategoriesRegression extends BaseTest {
      * - Если операция выполняется без ошибки, то тест завершается с ошибкой с сообщением, что операция запрещена для инструктора.
      * - Если при попытке выполнить операцию возникает исключение, то тест проходит успешно, так как это ожидаемое поведение.
      */
-    @Test(priority = 9)
+    @Test(priority = 9, groups = "Regression", description = "Тесты для проверки прав доступа инструктора к функционалу управления категориями.(создание категорий)")
     public void instructorCategoriesTest(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -145,7 +143,7 @@ public class CategoriesRegression extends BaseTest {
             // Если исключение возникло, тест проходит успешно
             }
     }
-    @Test(priority = 10)
+    @Test(priority = 10, groups = "Regression", description = "Тесты для проверки прав доступа инструктора к функционалу управления категориями.(удаление категорий)")
     public void instructorCategoriesTest2(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -156,7 +154,7 @@ public class CategoriesRegression extends BaseTest {
         }
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, groups = "Regression", description = "Тесты для проверки прав доступа инструктора к функционалу управления категориями.(изменение категорий)")
     public void instructorCategoriesTest3(){
         component.selectRole(INSTRUCTOR);
         try {
@@ -183,7 +181,7 @@ public class CategoriesRegression extends BaseTest {
      * - Если операция выполняется без ошибки, то тест завершается с ошибкой с сообщением, что операция запрещена для инструктора.
      * - Если при попытке выполнить операцию возникает исключение, то тест проходит успешно, так как это ожидаемое поведение.
      */
-    @Test(priority = 12)
+    @Test(priority = 12, groups = "Regression", description = "Тесты для проверки прав доступа ученику к функционалу управления категориями.(создание категорий)")
     public void learnerCategoriesTest(){
         component.selectRole(LEARNER);
         try {
@@ -194,7 +192,7 @@ public class CategoriesRegression extends BaseTest {
         }
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, groups = "Regression", description = "Тесты для проверки прав доступа ученику к функционалу управления категориями.(удаление категорий)")
     public void learnerCategoriesTest2(){
         component.selectRole(LEARNER);
         try {
@@ -205,7 +203,7 @@ public class CategoriesRegression extends BaseTest {
         }
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14, groups = "Regression", description = "Тесты для проверки прав доступа ученику к функционалу управления категориями.(изменение категорий)")
     public void learnerCategoriesTest3(){
         component.selectRole(LEARNER);
         try {
