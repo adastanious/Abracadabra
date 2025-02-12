@@ -82,11 +82,17 @@ public class UserPage extends BasePage {
     @FindBy(xpath = "//th[@class='tl-align-center hidden-phone sorting' and contains(text(), 'Registration')]")
     public WebElement registrationSortClock;
 
-    @FindBy(xpath = "//*[@id=\"1965967776\"]")
-    public WebElement clickEditEmail;
+    @FindBy(xpath = "(//span/span[@class='help-inline'])")
+    public WebElement uniqueEmailError;
 
     @FindBy(xpath = "((//td[@class=' tl-align-center tl-table-operations-cell']/div[@class='tl-table-operations-trigger touchable'])[2])")
     public WebElement operationIcon;
+
+    @FindBy(xpath = "//span[contains(text(),'inactive')]")
+    public WebElement userIsNotActiveErrorText;
+
+    @FindBy(xpath = "//span/span[contains(@class, 'help-inline")
+    public WebElement randomUserWithoutFirstNameErrorText;
 
     /**
      * Общий метод для ввода данных пользователя.
@@ -600,5 +606,4 @@ public class UserPage extends BasePage {
 
         return new UserPage();
     }
-
 }

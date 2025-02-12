@@ -39,9 +39,7 @@ public class UserPageTest extends BaseTest {
     @Test(priority = 5)
     public void uniqueEmailTest() {
         userPage.uniqueEmail(randomUserGenerator.emailUniquenessCheck());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//span/span[@class='help-inline'])"));
-        String actualResult = isRequired.getText();
+        String actualResult = userPage.uniqueEmailError.getText();
         Assert.assertEquals(actualResult, "Someone is already using this email address");
     }
 
@@ -80,9 +78,7 @@ public class UserPageTest extends BaseTest {
     @Test(priority = 9)
     public void addUserNotActiveTest() {
         userPage.addUserNotActive(randomUserGenerator.randomUser());
-
-        WebElement isRequired = driver.findElement(By.xpath("//span[contains(text(),'inactive')]"));
-        String actualResult = isRequired.getText();
+        String actualResult = userPage.userIsNotActiveErrorText.getText();
         Assert.assertEquals(actualResult, "INACTIVE");
     }
 
