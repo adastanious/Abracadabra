@@ -3,7 +3,8 @@
 <suite name="SmokeSuit">
     <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
         <classes>
-            <class name="talentLMS.UserTypesTest"></class>
-        </classes>
-    </test>
-</suite>
+            <!--  <class name="talentLMS.UserTypesTest"></class> -->
+              <class name="talentLMS.GroupTest"></class>
+          </classes>
+      </test>
+  </suite>
