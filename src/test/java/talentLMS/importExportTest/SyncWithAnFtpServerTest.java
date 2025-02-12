@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import talentLMS.BaseTest;
 
+///  @author Agema
+
 public class SyncWithAnFtpServerTest extends BaseTest {
 
     /// Подготавливает тест, открывая страницу "Dashboard".
@@ -12,9 +14,9 @@ public class SyncWithAnFtpServerTest extends BaseTest {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
-    /// Тест для настройки и проверки синхронизации с FTP-сервером
-    @Test(priority = 1)
+    @Test(groups = "Smoke", description = "Тест для настройки и проверки синхронизации с FTP-сервером", priority = 1)
     public void testFtpSyncConfiguration() {
+
         syncWithAnFtpServerPage
                 .clickImportExport()
                 .clickSyncWithAnFTPServerTab()

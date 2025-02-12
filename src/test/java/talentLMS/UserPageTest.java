@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import talentLMS.driver.Driver;
 import talentLMS.entity.UserEntity;
+import talentLMS.enums.AdminSection;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -23,11 +25,14 @@ public class UserPageTest extends BaseTest {
 
     @Test(priority = 1)
     public void addNewUserTest() {
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.addNewUser(randomUser);
     }
 
+
     @Test (priority = 3)
     public void editUserTest() {
+        dashboardPage.selectSection(AdminSection.USERS);
         userPage.editUser(randomUserGenerator.randomUser());
     }
 

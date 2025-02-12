@@ -1,14 +1,13 @@
 package talentLMS.helper;
 
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import talentLMS.driver.Driver;
-import java.time.Duration;
 
+import java.time.Duration;
 
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
@@ -89,7 +88,6 @@ public class WebElementActions {
         }
     }
 
-
     // Проверка видимости элемента (ImportExport)
     public boolean isVisibleImport(WebElement element) {
         return element.isDisplayed();
@@ -107,5 +105,4 @@ public class WebElementActions {
         element.sendKeys(text); // Вводим текст
         return this;
     }
-
 }
