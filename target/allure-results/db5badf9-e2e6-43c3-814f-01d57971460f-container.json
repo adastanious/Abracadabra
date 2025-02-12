@@ -1,1 +1,0 @@
-{"uuid":"db5badf9-e2e6-43c3-814f-01d57971460f","name":"SmokeSuit","children":["8af6071b-4480-44cf-9d74-f277c028dad1"],"befores":[{"name":"beforeSuite","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1739355562344,"stop":1739355562348}],"afters":[],"start":1739355562329,"stop":1739355608475}
