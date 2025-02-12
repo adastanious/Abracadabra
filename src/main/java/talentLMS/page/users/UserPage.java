@@ -1,8 +1,7 @@
 package talentLMS.page.users;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.Step;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,7 +42,7 @@ public class UserPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[1]/td[4]/span")
     public WebElement learnerType;
 
-    @FindBy(xpath = "(//div/i[@class='icon-pencil icon-grid' and @alt='Edit'])[1]")
+    @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[1]/td[7]/div/div/i[3]")
     public WebElement edit;
 
     @FindBy(xpath = "//input[@name='login']")
@@ -108,12 +107,8 @@ public class UserPage extends BasePage {
                 .sendKeys(this.password, user.getPassword());
     }
 
-    /**
-     * Метод добавления нового пользователя.
-     *
-     * @param user объект класса User с данными нового пользователя.
-     * @return объект страницы пользователя (UserPage).
-     */
+
+    @Step("Метод добавления нового пользователя.")
     public UserPage addNewUser(User user) {
         webElementActions
                 .click(this.UsersDashboard)
@@ -125,12 +120,7 @@ public class UserPage extends BasePage {
     }
 
 
-    /**
-     * Метод редактирования данных существующего пользователя.
-     *
-     * @param user объект класса User с обновленными данными (например, имя).
-     * @return объект страницы пользователя (UserPage).
-     */
+    @Step("Метод редактирования данных существующего пользователя.")
     public UserPage editUser(User user) {
         webElementActions
                 .click(UsersDashboard)
@@ -142,28 +132,8 @@ public class UserPage extends BasePage {
         return new UserPage();
     }
 
-    /**
-     * Метод удаления пользователя по email.
-     *
-     * @return объект страницы пользователя (UserPage).
-     */
 
-    public UserPage deleteUsers(User user) {
-        webElementActions
-                .click(UsersDashboard)
-                .click(learnerType)
-                .click(operationIcon)
-                .click(deleteClick);
-        return this;
-    }
-
-    /**
-     * Метод добавления пользователя с уникальным email.
-     * Используется для проверки уникальности email при добавлении нового пользователя.
-     *
-     * @param user объект класса User с уникальным email.
-     * @return объект страницы пользователя (UserPage).
-     */
+    @Step("Метод добавления пользователя с уникальным email.")
     public UserPage uniqueEmail(User user) {
         webElementActions
                 .click(UsersDashboard)
@@ -174,16 +144,8 @@ public class UserPage extends BasePage {
         return new UserPage();
     }
 
-    /**
-     * Метод для получения списка пользователей с веб-страницы из таблицы.
-     * <p>
-     * Этот метод извлекает все строки таблицы пользователей и создает список объектов UserEntity,
-     * представляющих каждого пользователя. Каждый объект UserEntity содержит информацию о пользователе,
-     * такой как имя пользователя, email, тип пользователя и дата регистрации.
-     * </p>
-     *
-     * @return Список объектов UserEntity, представляющих всех пользователей на странице.
-     */
+
+    @Step("Метод для получения списка пользователей с веб-страницы из таблицы.")
     public ArrayList<UserEntity> getUserFromTable() {
         webElementActions.click(UsersDashboard);
 
@@ -217,12 +179,8 @@ public class UserPage extends BasePage {
         return userEntities;
     }
 
-    /**
-     * Метод для входа в аккаунт пользователя по имени.
-     *
-     * @param username Имя пользователя, в аккаунт которого нужно войти.
-     * @throws NoSuchElementException если пользователь с указанным именем не найден.
-     */
+
+    @Step("Метод для входа в аккаунт пользователя по имени.")
     public void logIntoAccount(String username) {
         webElementActions.click(UsersDashboard);
 
@@ -275,15 +233,10 @@ public class UserPage extends BasePage {
         }
     }
 
-    /**
-     * Метод для редактирования аккаунта пользователя по имени.
-     *
-     * @param username Имя пользователя, чей аккаунт нужно отредактировать.
-     * @param user     Объект User с новыми данными (например, новое имя).
-     * @throws NoSuchElementException если пользователь с указанным именем не найден.
-     */
+
+    @Step("Метод для редактирования аккаунта пользователя по имени.")
     public void editAccount(String username, User user) {
-        clickUsers();
+
         WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20)); // Увеличиваем время ожидания
 
         // Ожидание загрузки таблицы пользователей
@@ -332,22 +285,8 @@ public class UserPage extends BasePage {
         }
     }
 
-    /**
-     * Добавляет нового пользователя с неактивным статусом в системе.
-     *
-     * <p>Метод выполняет следующие шаги:
-     * <ol>
-     *   <li>Переходит на страницу пользователей.</li>
-     *   <li>Открывает форму добавления нового пользователя.</li>
-     *   <li>Вводит данные нового пользователя, переданные в параметре {@code user}.</li>
-     *   <li>Снимает флаг активности пользователя, делая его неактивным.</li>
-     *   <li>Подтверждает добавление нового пользователя.</li>
-     *   <li>Возвращается на страницу списка пользователей.</li>
-     * </ol>
-     *
-     * @param user объект класса {@link User}, содержащий данные для нового пользователя
-     * @return объект {@link UserPage}, представляющий текущую страницу пользователей после добавления
-     */
+
+    @Step("Добавляет нового пользователя с неактивным статусом в системе.")
     public UserPage addUserNotActive(User user) {
         clickUsers();
         webElementActions
@@ -361,37 +300,40 @@ public class UserPage extends BasePage {
     }
 
     private UserPage clickUsers() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(), 'Users')])[1]"))).click();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(35));
+
+        try {
+            // Сначала проверяем видимость элемента
+            WebElement usersLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[@id='tl-admin-users']//a[contains(normalize-space(.), 'Users')]")
+            ));
+
+            // Проверяем, что элемент действительно кликабелен
+            wait.until(ExpectedConditions.elementToBeClickable(usersLink)).click();
+
+        } catch (TimeoutException e) {
+            // Используем JavaScript клик, если стандартный клик не срабатывает
+            System.out.println("Элемент 'Users' не стал кликабельным, пробуем кликнуть через JavaScript.");
+            WebElement usersLink = Driver.getDriver().findElement(
+                    By.xpath("//div[@id='tl-admin-users']//a[contains(normalize-space(.), 'Users')]")
+            );
+            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+            js.executeScript("arguments[0].click();", usersLink);
+        }
+
         return new UserPage();
     }
 
-    /**
-     * Сортирует список пользователей по имени.
-     *
-     * <p>Метод выполняет следующие шаги:
-     * <ol>
-     *   <li>Открывает панель управления пользователями.</li>
-     *   <li>Нажимает на кнопку сортировки по имени.</li>
-     *   <li>Приостанавливает выполнение на 2 секунды для ожидания завершения сортировки.</li>
-     * </ol>
-     *
-     * <p><b>Примечание:</b> Использование метода {@code sleep} для ожидания может быть заменено
-     * на более надежные методы явных ожиданий через {@link org.openqa.selenium.support.ui.WebDriverWait}.
-     */
+
+    @Step("Сортирует список пользователей по имени.")
     public void sortUsersByName() {
         webElementActions.click(UsersDashboard);
         userSortClick.click();
         sleep(2000);
     }
 
-    /**
-     * Приостанавливает выполнение потока на указанное количество миллисекунд.
-     *
-     * @param millis время задержки в миллисекундах
-     *
-     * <p>В случае прерывания сна, поток будет повторно прерван с помощью {@code Thread.currentThread().interrupt()}.</p>
-     */
+
+    @Step("Приостанавливает выполнение потока на указанное количество миллисекунд.")
     private void sleep(int millis) {
         try {
             Thread.sleep(millis);
@@ -400,19 +342,8 @@ public class UserPage extends BasePage {
         }
     }
 
-    /**
-     * Извлекает список имен пользователей из таблицы на странице.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Находит все строки таблицы пользователей по селектору {@code table#tl-users-grid tbody tr}.</li>
-     *   <li>Преобразует каждую строку в список ячеек {@code <td>}.</li>
-     *   <li>Фильтрует строки, которые содержат как минимум две ячейки (чтобы избежать ошибок доступа к несуществующим ячейкам).</li>
-     *   <li>Извлекает текст из второй ячейки (предположительно имя пользователя), убирает лишние пробелы и добавляет в список.</li>
-     * </ol>
-     *
-     * @return список имен пользователей, отображенных в таблице
-     */
+
+    @Step("Извлекает список имен пользователей из таблицы на странице.")
     public List<String> getUserNamesFromTable() {
         return Driver.getDriver().findElements(By.cssSelector("table#tl-users-grid tbody tr"))
                 .stream()
@@ -422,14 +353,8 @@ public class UserPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Сортирует пользователей по имени и возвращает отсортированный список имен из таблицы.
-     *
-     * <p>Метод сначала вызывает {@link #sortUsersByName()}, чтобы инициировать сортировку пользователей,
-     * а затем извлекает обновленный список имен пользователей с помощью метода {@link #getUserNamesFromTable()}.</p>
-     *
-     * @return отсортированный список имен пользователей
-     */
+
+    @Step("Сортирует пользователей по имени и возвращает отсортированный список имен из таблицы.")
     public List<String> getSortedUserNamesFromTable() {
         sortUsersByName();
         return getUserNamesFromTable();
@@ -442,19 +367,8 @@ public class UserPage extends BasePage {
         sleep(2000); // Ждем 2 секунды, чтобы таблица успела отсортироваться
     }
 
-    /**
-     * Извлекает список адресов электронной почты пользователей из таблицы на странице.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Находит все строки таблицы пользователей по селектору {@code table#tl-users-grid tbody tr}.</li>
-     *   <li>Преобразует каждую строку в список ячеек {@code <td>}.</li>
-     *   <li>Фильтрует строки, которые содержат как минимум три ячейки (для доступа к колонке с email).</li>
-     *   <li>Извлекает текст из третьей ячейки (индекс 2), которая содержит адрес электронной почты, убирает лишние пробелы и добавляет в список.</li>
-     * </ol>
-     *
-     * @return список адресов электронной почты, отображенных в таблице
-     */
+
+    @Step("Извлекает список адресов электронной почты пользователей из таблицы на странице.")
     public List<String> getEmailsFromTable() {
         return Driver.getDriver().findElements(By.cssSelector("table#tl-users-grid tbody tr"))
                 .stream()
@@ -464,48 +378,23 @@ public class UserPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Сортирует пользователей по адресу электронной почты и возвращает отсортированный список email.
-     *
-     * <p>Метод сначала вызывает {@link #sortUsersByEmail()}, чтобы инициировать сортировку пользователей по email,
-     * а затем извлекает обновленный список адресов электронной почты с помощью метода {@link #getEmailsFromTable()}.</p>
-     *
-     * @return отсортированный список адресов электронной почты пользователей
-     */
+
+    @Step("Сортирует пользователей по адресу электронной почты и возвращает отсортированный список email.")
     public List<String> getSortedEmailsFromTable() {
         sortUsersByEmail();
         return getEmailsFromTable();
     }
 
-    /**
-     * Сортирует пользователей по типу (User Type) в таблице.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Открывает панель с пользователями, кликая по элементу {@code UsersDashboard}.</li>
-     *   <li>Инициирует сортировку, кликая по заголовку колонки с типами пользователей.</li>
-     *   <li>Приостанавливает выполнение на 2 секунды, чтобы дать таблице время для обновления после сортировки.</li>
-     * </ol>
-     */
+
+    @Step("Сортирует пользователей по типу (User Type) в таблице.")
     public void sortUsersByType() {
         webElementActions.click(UsersDashboard);
         userTypeSortClick.click();  // Кликаем по заголовку колонки user type
         sleep(2000);  // Ждем 2 секунды, чтобы таблица успела отсортироваться
     }
 
-    /**
-     * Извлекает список типов пользователей из таблицы на странице.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Находит все строки таблицы пользователей по селектору {@code table#tl-users-grid tbody tr}.</li>
-     *   <li>Преобразует каждую строку в список ячеек {@code <td>}.</li>
-     *   <li>Фильтрует строки, которые содержат как минимум четыре ячейки (для доступа к колонке с типом пользователя).</li>
-     *   <li>Извлекает текст из четвертой ячейки (индекс 3), которая содержит тип пользователя, убирает лишние пробелы и добавляет в список.</li>
-     * </ol>
-     *
-     * @return список типов пользователей, отображенных в таблице
-     */
+
+    @Step("Извлекает список типов пользователей из таблицы на странице.")
     public List<String> getUserTypesFromTable() {
         return Driver.getDriver().findElements(By.cssSelector("table#tl-users-grid tbody tr"))
                 .stream()
@@ -515,48 +404,23 @@ public class UserPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Сортирует пользователей по типу и возвращает отсортированный список типов пользователей.
-     *
-     * <p>Метод сначала вызывает {@link #sortUsersByType()} для сортировки таблицы по типу пользователя,
-     * а затем извлекает обновленный список типов пользователей с помощью метода {@link #getUserTypesFromTable()}.</p>
-     *
-     * @return отсортированный список типов пользователей
-     */
+
+    @Step("Сортирует пользователей по типу и возвращает отсортированный список типов пользователей.")
     public List<String> getSortedUserTypesFromTable() {
         sortUsersByType();
         return getUserTypesFromTable();
     }
 
-    /**
-     * Сортирует пользователей по дате регистрации в таблице.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Открывает панель с пользователями, кликая по элементу {@code UsersDashboard}.</li>
-     *   <li>Кликает по заголовку колонки с датой регистрации для инициирования сортировки.</li>
-     *   <li>Приостанавливает выполнение на 2 секунды, чтобы таблица успела обновиться после сортировки.</li>
-     * </ol>
-     */
+
+    @Step("Сортирует пользователей по дате регистрации в таблице.")
     public void sortUsersByRegistration() {
         webElementActions.click(UsersDashboard);
         registrationSortClock.click();  // Кликаем по заголовку колонки с датой регистрации
         sleep(2000);  // Ждем 2 секунды, чтобы таблица успела отсортироваться
     }
 
-    /**
-     * Извлекает список дат регистрации пользователей из таблицы.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Находит все строки таблицы пользователей по селектору {@code table#tl-users-grid tbody tr}.</li>
-     *   <li>Преобразует каждую строку в список ячеек {@code <td>}.</li>
-     *   <li>Фильтрует строки, которые содержат как минимум пять ячеек (для доступа к колонке с датой регистрации).</li>
-     *   <li>Извлекает текст из пятой ячейки (индекс 4), которая содержит дату регистрации, убирает лишние пробелы и добавляет в список.</li>
-     * </ol>
-     *
-     * @return список дат регистрации пользователей, отображенных в таблице
-     */
+
+    @Step("Извлекает список дат регистрации пользователей из таблицы.")
     public List<String> getRegistrationsFromTable() {
         return Driver.getDriver().findElements(By.cssSelector("table#tl-users-grid tbody tr"))
                 .stream()
@@ -566,36 +430,15 @@ public class UserPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Сортирует пользователей по дате регистрации и возвращает отсортированный список дат.
-     *
-     * <p>Метод сначала вызывает {@link #sortUsersByRegistration()} для сортировки таблицы по дате регистрации,
-     * а затем извлекает обновленный список дат с помощью метода {@link #getRegistrationsFromTable()}.</p>
-     *
-     * @return отсортированный список дат регистрации пользователей
-     */
+
+    @Step("Сортирует пользователей по дате регистрации и возвращает отсортированный список дат.")
     public List<String> getSortedRegistrationsFromTable() {
         sortUsersByRegistration();
         return getRegistrationsFromTable();
     }
 
-    /**
-     * Пытается добавить пользователя с некорректными данными.
-     *
-     * <p>Метод выполняет следующие действия:
-     * <ol>
-     *   <li>Кликает по панели управления пользователями ({@code UsersDashboard}).</li>
-     *   <li>Открывает форму добавления нового пользователя, кликая по кнопке {@code addUser}.</li>
-     *   <li>Вызывает метод {@link #enterUserData(User)}, чтобы ввести данные пользователя.</li>
-     *   <li>Пытается сохранить введенные данные, кликая по кнопке {@code addUserButton}.</li>
-     * </ol>
-     *
-     * <p><b>Примечание:</b> Этот метод предназначен для проверки обработки некорректных данных валидацией формы.
-     * Ожидается, что пользователь не будет успешно добавлен, и появятся сообщения об ошибках.</p>
-     *
-     * @param user объект класса {@link User}, содержащий данные для ввода в форму
-     * @return новый экземпляр страницы пользователя {@link UserPage} после попытки добавления
-     */
+
+    @Step("Пытается добавить пользователя с некорректными данными.")
     public UserPage addUserIncorrect(User user) {
         webElementActions
                 .click(UsersDashboard)
