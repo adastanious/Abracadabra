@@ -38,10 +38,11 @@ public class DashboardPage extends BasePage {
      */
     public DashboardPage switchToLegacyInterface () {
         try {
+            Thread.sleep(15000);
             webElementActions.moveToElement(subMenu)
                     .click(legacyMenuItem);
             return new DashboardPage();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | InterruptedException e) {
             return new DashboardPage();
         }
     }
