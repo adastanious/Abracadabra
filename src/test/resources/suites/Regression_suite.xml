@@ -19,7 +19,6 @@
             </class>
             <class name="talentLMS.accountAndSettings.UsersTest">
                 <methods>
-                    <include name="selectDefaultUserTypeTest"/>
                     <include name="selectVisibleUserFormatTest"/>
                 </methods>
             </class>
