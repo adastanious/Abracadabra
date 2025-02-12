@@ -43,7 +43,7 @@ import talentLMS.utils.randomEntityUtils.RandomUserTypeGenerator;
 import java.time.Duration;
 
 public abstract class BaseTest {
-    public WebDriver driver;
+    public WebDriver driver = Driver.getDriver();
     public WebElementActions webElementActions = new WebElementActions();
     public LoginPage loginPage = new LoginPage();
     public UserPage userPage = new UserPage();
@@ -71,24 +71,19 @@ public abstract class BaseTest {
     public RandomUserTypeGenerator randomUserTypeGenerator = new RandomUserTypeGenerator();
     public UserTypes userTypes = new UserTypes();
 
-     public Group randomGroup = new RandomGroupGenerator().randomGroup();
+    public Group randomGroup = new RandomGroupGenerator().randomGroup();
 
     @BeforeSuite
-    public void beforeSuite() {
-        driver = Driver.getDriver();
-    }
-
-    @BeforeClass
-    public void beforeClass(){
+    public void beforeSuite(){
         driver.get(ConfigReader.getProperty("dashboardURL"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
-    @AfterClass
-    public void afterClass(){
-        driver.manage().deleteAllCookies();
-        driver.close();
-    }
+//    @AfterClass
+//    public void afterClass(){
+//        driver.manage().deleteAllCookies();
+//        driver.close();
+//    }
 
 }
