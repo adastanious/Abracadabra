@@ -86,7 +86,9 @@ public enum AccountAndSettings {
     SECTION_USERS ("Users"),
     SECTION_GAMIFICATION ("Gamification"),
     SECTION_DOMAIN ("Domain"),
-    USERS_VISIBLE_USER_FORMATS (List.of("D. AIDAROV", "DAS A.", "DAS AIDAROV", "AIDAROV D.", "AIDAROV DAS", "DASAQA")),
+    USERS_VISIBLE_USER_FORMATS (List.of("F. Last name", "First name L.", "First name Last name", "Last name F.", "Last name First name", "Username")),
+
+    USERS_VISIBLE_USER_NAMES (List.of("L. ABRACADABRA", "LEADAQA A.", "LEADAQA ABRACADABRA", "ABRACADABRA L.", "ABRACADABRA LEADAQA", "ABRACADABRA")),
     DOMAIN_NAME_NEW ("komo"),
     DOMAIN_NAME_EXISTING ("amazon"),
     DOMAIN_NAME_INVALID ("digital_nomads"),
