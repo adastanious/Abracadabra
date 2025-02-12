@@ -14,7 +14,7 @@ import java.util.List;
 
 public enum AccountAndSettings {
 
-    SITE_NAME ("aidas"),
+    SITE_NAME ("abracadabra"),
     SETTINGS_ERROR_TEXT_COLOR ("#b94a48"),
     SITE_NAME_ERROR_TEXT ("'Site name' cannot exceed 40 characters"),
     SITE_DESCRIPTION_ERROR_TEXT ("'Site description' cannot exceed 255 characters"),
@@ -86,8 +86,6 @@ public enum AccountAndSettings {
     SECTION_USERS ("Users"),
     SECTION_GAMIFICATION ("Gamification"),
     SECTION_DOMAIN ("Domain"),
-
-    USERS_DEFAULT_USER_TYPE (List.of("SuperAdmin", "Admin-Type", "Trainer-Type", "Learner-Type")),
     USERS_VISIBLE_USER_FORMATS (List.of("D. AIDAROV", "DAS A.", "DAS AIDAROV", "AIDAROV D.", "AIDAROV DAS", "DASAQA")),
     DOMAIN_NAME_NEW ("komo"),
     DOMAIN_NAME_EXISTING ("amazon"),

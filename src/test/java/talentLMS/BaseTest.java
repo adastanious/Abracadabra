@@ -62,7 +62,6 @@ public abstract class BaseTest {
     public LearnerUserRole learnerUserRole = new LearnerUserRole();
     public BasicSettingsPage basicSettingsPage = new BasicSettingsPage();
     public DashboardPage dashboardPage = new DashboardPage();
-
     public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     public Groups groups  = new Groups();
     public RandomGroupGenerator randomGroupGenerator = new RandomGroupGenerator();
@@ -76,7 +75,6 @@ public abstract class BaseTest {
     public UserTypes userTypes = new UserTypes();
 
      public Group randomGroup = new RandomGroupGenerator().randomGroup();
-
 
     @BeforeSuite
     public void beforeSuite() {
