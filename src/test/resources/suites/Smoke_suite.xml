@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SmokeSuit">
-    <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
-        <classes>
-            <class name="talentLMS.UserTypesTest"></class>
-        </classes>
-    </test>
+        <test name="SmokeTests">
+            <groups>
+                <run>
+                    <include name="Smoke"/>
+                </run>
+            </groups>
+            <classes>
+                <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
+                <class name="talentLMS.accountAndSettings.UsersTest"/>
+                <class name="talentLMS.accountAndSettings.DomainTest"/>
+            </classes>
+        </test>
 </suite>

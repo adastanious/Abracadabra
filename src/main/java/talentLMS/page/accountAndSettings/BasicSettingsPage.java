@@ -1,5 +1,6 @@
 package talentLMS.page.accountAndSettings;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -148,6 +149,8 @@ public class BasicSettingsPage extends BasePage {
         webElementActions.click(settingsSectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
         return new DashboardPage();
     }
+
+    @Step("Заполнение имени сайта или описания: {text}")
     /**
      * Заполняет поле "Название или описание сайта" указанным значением.
      * Предварительно очищает поле, затем вводит переданный текст.
@@ -161,6 +164,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор языка из выпадающего списка: {language}")
     /**
      * Выбирает язык из выпадающего списка и сохраняет изменения.
      *
@@ -177,6 +181,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор всех доступных языков из выпадающего списка")
     /**
      * Открывает выпадающий список языков и добавляет все доступные языки в список languagesList.
      * Затем перебирает доступные языковые опции, кликая по каждой из них.
@@ -201,6 +206,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор всех доступных часовых поясов из выпадающего списка")
     /**
      * Открывает выпадающий список часовых поясов и добавляет все доступные часовые пояса в список timeZonesList.
      * Затем перебирает доступные часовые пояса, кликая по каждому из них.
@@ -225,6 +231,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор часового пояса: {timeZone}")
     /**
      * Выбирает часовой пояс из выпадающего списка и сохраняет изменения.
      *
@@ -237,6 +244,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор всех доступных форматов даты из выпадающего списка")
     /**
      * Открывает выпадающий список форматов даты и добавляет все доступные варианты в список dateFormatsList.
      *
@@ -255,6 +263,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор всех доступных валют из выпадающего списка")
     /**
      * Открывает выпадающий список валют и добавляет все доступные валюты в список currenciesList.
      * Затем перебирает доступные валютные опции, кликая по каждой из них.
@@ -280,6 +289,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Выбор валюты: {currency}")
     /**
      * Выбирает валюту из выпадающего списка и сохраняет изменения.
      *
@@ -293,6 +303,7 @@ public class BasicSettingsPage extends BasePage {
         return new BasicSettingsPage();
     }
 
+    @Step("Создание внутреннего объявления: {text}")
     /**
      * Создает внутреннее объявление, вводя текст в соответствующее поле
      * и нажимая кнопку "Сохранить".
