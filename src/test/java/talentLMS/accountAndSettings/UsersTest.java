@@ -60,7 +60,7 @@ public class UsersTest extends BaseTest {
      * 5. Возвращается на страницу настроек перед следующей итерацией.
      * 6. Очищает кэш списка типов пользователей.
      */
-    @Test(groups = "Regression", description = "verify that the selected default user type is specified in the Add user form", priority = 2)
+    @Test(groups = { "regression" }, description = "verify that the selected default user type is specified in the Add user form", priority = 2)
     public void selectDefaultUserTypeTest() {
         List<String> defaultUserTypes = settingsUsersPage.getDefaultUserTypes();
 
@@ -89,7 +89,7 @@ public class UsersTest extends BaseTest {
      * 2. Получает ожидаемый список форматов отображения пользователей.
      * 3. Сравнивает оба списка.
      */
-    @Test(groups = "Smoke", description = "verify that the visible user format options are correct", priority = 3)
+    @Test(groups = { "smoke" }, description = "verify that the visible user format options are correct", priority = 3)
     public void visibleUserFormatTest() {
         List<String> actualDefaultUserTypes = settingsUsersPage.getVisibleUserFormats();
         List<String> expectedDefaultUserTypes = AccountAndSettings.USERS_VISIBLE_USER_FORMATS.getList();
@@ -105,7 +105,7 @@ public class UsersTest extends BaseTest {
      * 3. Проверяет появление всплывающего сообщения об успешном сохранении.
      * 4. Сравнивает фактический отображаемый формат имени пользователя с ожидаемым.
      */
-    @Test(groups = "Smoke", description = "verify that the selected user name format is displayed", priority = 4)
+    @Test(groups = { "regression" }, description = "verify that the selected user name format is displayed", priority = 4)
     public void selectVisibleUserFormatTest() {
         List<String> visibleUserFormats = settingsUsersPage.getVisibleUserFormats();
 
@@ -114,9 +114,9 @@ public class UsersTest extends BaseTest {
 
             basicSettingsTest.assertSuccessPopUpMessage(AccountAndSettings.USERS_SETTINGS_SAVED_SUCCESSFULLY);
 
-            String actualUserType = settingsUsersPage.getActualUserFormat().getText();
-            String expectedUserType = AccountAndSettings.USERS_VISIBLE_USER_FORMATS.getList().get(i);
-            Assert.assertEquals(actualUserType, expectedUserType, "User types are different");
+            String actualVisibleUserName = settingsUsersPage.getActualUserFormat().getText();
+            String expectedVisibleUserName = AccountAndSettings.USERS_VISIBLE_USER_NAMES.getList().get(i);
+            Assert.assertEquals(actualVisibleUserName, expectedVisibleUserName, "User names are different");
         }
     }
 
@@ -128,7 +128,7 @@ public class UsersTest extends BaseTest {
      * 2. Получает текущий URL страницы после нажатия.
      * 3. Сравнивает фактический URL с ожидаемым URL Dashboard.
      */
-    @Test(groups = "Smoke", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 5)
+    @Test(groups = { "smoke" }, description = "verify that button Cancel directs a user back to the page Dashboard", priority = 5)
     public void cancelTest() {
         webElementActions.click(basicSettingsPage.getCancelBtn());
 

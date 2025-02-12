@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SmokeSuit">
+<suite name="Smoke">
     <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
             <classes>
-                <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
-                <class name="talentLMS.accountAndSettings.UsersTest"/>
-                <class name="talentLMS.accountAndSettings.DomainTest"/>
+                <class name="talentLMS.accountAndSettings.BasicSettingsTest">
+                    <methods>
+                        <include name="siteNameAndDescriptionTest"/>
+                        <include name="LanguageOptionsTest"/>
+                        <include name="timeZoneOptionsTest"/>
+                        <include name="currencyOptionsTest"/>
+                        <include name="cancelTest"/>
+                    </methods>
+                </class>
+                <class name="talentLMS.accountAndSettings.UsersTest">
+                    <methods>
+                        <include name="visibleUserFormatTest"/>
+                        <include name="cancelTest"/>
+                    </methods>
+                </class>
+                <class name="talentLMS.accountAndSettings.DomainTest">
+                <methods>
+                    <include name="changeDomainNameTest"/>
+                    <include name="cancelTest"/>
+                </methods>
+                </class>
             </classes>
         </test>
 </suite>
