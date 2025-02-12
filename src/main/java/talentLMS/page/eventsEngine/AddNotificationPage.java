@@ -1,5 +1,8 @@
 package talentLMS.page.eventsEngine;
 
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import talentLMS.entity.Notification;
@@ -56,18 +59,23 @@ public class AddNotificationPage extends BasePage {
     }
 
     public AddNotificationPage selectRecipient(Recipient recipient) throws IOException {
-        webElementActions.click(showRecipientList);
-        for (WebElement b: availableRecipientList){
-            if (b.getText().contains(recipient.getRecipient())){
-                webElementActions.click(b);
-                return this;
-            }
+        try {
+            webElementActions.click(showRecipientList);
+            for (WebElement b: availableRecipientList){
+                if (b.getText().contains(recipient.getRecipient())){
+                    webElementActions.click(b);
+                    return this;
+                }
 
-            for (WebElement c: unavilableRecipientList){
-                if (c.getText().contains(recipient.getRecipient())){
-                    throw new IOException("This recipient is unselectable");
+                for (WebElement c: unavilableRecipientList){
+                    if (c.getText().contains(recipient.getRecipient())){
+                        throw new IOException("This recipient is unselectable");
+                    }
                 }
             }
+        }
+        catch (ElementClickInterceptedException e){
+            throw new ElementNotInteractableException("Select event firstly");
         }
         return this;
     }
@@ -94,7 +102,8 @@ public class AddNotificationPage extends BasePage {
         inputName(notification.getName())
                 .selectEvent(notification.getEvent())
                 .selectRecipient(notification.getRecipient())
-                .inputMessageBox(notification.getBody());
+                .inputMessageBox(notification.getBody())
+                .setStatus(notification.isActive());
         return this;
     }
 

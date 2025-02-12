@@ -1,5 +1,7 @@
 package talentLMS;
 
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,31 +10,25 @@ import talentLMS.entity.Notification;
 import talentLMS.fileUtils.ConfigReader;
 import talentLMS.page.eventsEngine.AddNotificationPage;
 import talentLMS.page.eventsEngine.EventsEnginePage;
+import static talentLMS.page.eventsEngine.tools.RandomStringGenerator.generateRandomString;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.UUID;
+
+
+
 /**
  * @author Arsen Kaiypbekov
  */
 public class EventEngineTest extends BaseTest{
-    Notification testNotification = new Notification(generateRandomString(10), Event.ONASSIGNMENTGRADING, Recipient.ACCOUNTOWNER,"This is test notification",true);
+    final Notification testNotification = new Notification(generateRandomString(10), Event.ONASSIGNMENTGRADING, Recipient.ACCOUNTOWNER,"This is test notification",true);
     EventsEnginePage eventsEnginePage = new EventsEnginePage();
     AddNotificationPage addNotificationPage = new AddNotificationPage();
 
-    public static String generateRandomString(int length) {
-        StringBuilder sb = new StringBuilder();
-        while (sb.length() < length) {
-            sb.append(UUID.randomUUID().toString().replace("-", ""));
-        }
-        return sb.substring(0, length);
-    }
-
     @BeforeMethod
     public void setUp() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.manage().deleteAllCookies();
-        driver.get("https://abracadabra.talentlms.com/index");
-        loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password")).switchToLegacyInterface().selectSection(AdminSection.EVENTS_ENGINE);
+        driver.get(ConfigReader.getProperty("dashboardURL"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        dashboardPage.selectSection(AdminSection.EVENTS_ENGINE);
     }
     //positive cases
     @Test(priority = 1)
@@ -73,7 +69,29 @@ public class EventEngineTest extends BaseTest{
                 .submit();
         Assert.assertTrue(addNotificationPage.wrongNameDataMessage.getText().contains("'Name' cannot exceed 100 characters"));
     }
-
-
+    @Test(priority = 6)
+    public void addNotificationWithoutEvent() throws IOException {
+        Notification negativeCaseNotification = new Notification(testNotification);
+        negativeCaseNotification.setEvent(Event.SELECTEVENT);
+        Assert.assertThrows("Select event firstly", ElementNotInteractableException.class,()->eventsEnginePage.addNotification()
+                .addNewEventNotification(negativeCaseNotification)
+                .submit());
+    }
+    @Test(priority = 7)
+    public void addNotificationWithoutRecipient() throws IOException {
+        Notification negativeCaseNotification = new Notification(testNotification);
+        negativeCaseNotification.setRecipient(Recipient.SELECTRECIPIENT);
+        Assert.assertThrows("This recipient is unselectable",IOException.class,()->eventsEnginePage.addNotification()
+                .addNewEventNotification(negativeCaseNotification)
+                .submit());
+    }
+    @Test(priority = 8)
+    public void addNotificationWithWrongRecipient() throws IOException {
+        Notification negativeCaseNotification = new Notification(testNotification);
+        negativeCaseNotification.setRecipient(Recipient.BRANCHADMINS);
+        Assert.assertThrows("This recipient is unselectable",IOException.class,()->eventsEnginePage.addNotification()
+                .addNewEventNotification(negativeCaseNotification)
+                .submit());
+    }
 
 }

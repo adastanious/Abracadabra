@@ -28,6 +28,13 @@ public class Notification {
         setRecipient(recipient);
         setBody(body);
     }
+    public Notification(Notification notification){
+        setName(notification.getName());
+        setEvent(notification.getEvent());
+        setRecipient(notification.getRecipient());
+        setBody(notification.getBody());
+        setActive(notification.isActive);
+    }
     private String name;
     private Event event;
     private Recipient recipient;
