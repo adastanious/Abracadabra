@@ -10,8 +10,6 @@ import talentLMS.driver.Driver;
 import java.time.Duration;
 
 
-import static talentLMS.driver.Driver.getDriver;
-
 public class WebElementActions {
     public Actions actions = new Actions(Driver.getDriver());
     public WebElementActions waitButtonToBeClickable(WebElement element) {
@@ -71,8 +69,7 @@ public class WebElementActions {
     public WebElementActions sendKeysWithEnter(WebElement element, String text) {
         waitElementToBeDisplayed(element);
         element.clear();
-        element.sendKeys(text);
-        element.sendKeys(Keys.ENTER);
+        element.sendKeys(text,Keys.ENTER);
         return this;
     }
 
@@ -80,6 +77,7 @@ public class WebElementActions {
      * Метод проверяет, можно ли нажать на элемент.
      *
      * @param element WebElement, который нужно проверить.
+    // * @param wait    WebDriverWait для ожидания элемента.
      * @return true, если элемент кликабелен, иначе false.
      */
     public boolean isElementClickable(WebElement element) {
@@ -89,6 +87,25 @@ public class WebElementActions {
         } catch (Exception e) {
             return false; // Если элемент не кликабелен, возвращает false.
         }
+    }
+
+
+    // Проверка видимости элемента (ImportExport)
+    public boolean isVisibleImport(WebElement element) {
+        return element.isDisplayed();
+    }
+
+    // Метод для загрузки файла (ImportExport)
+    public WebElementActions importFiles(WebElement element, String path){
+        element.sendKeys(path);
+        return this;
+    }
+
+    // Метод для ввода текста в поле
+    public WebElementActions typeText(WebElement element, String text) {
+        element.clear();  // Очищаем поле перед вводом текста
+        element.sendKeys(text); // Вводим текст
+        return this;
     }
 
 }

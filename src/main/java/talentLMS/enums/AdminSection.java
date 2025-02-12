@@ -3,6 +3,10 @@ package talentLMS.enums;
 import lombok.Getter;
 @Getter
 
+/**
+ @author Dastan Aidarov
+ */
+
 public enum AdminSection {
     USERS ("Users"),
     COURSES ("Courses"),

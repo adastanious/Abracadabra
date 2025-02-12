@@ -2,7 +2,6 @@ package talentLMS.utils.randomEntityUtils;
 
 import com.github.javafaker.Faker;
 import lombok.Getter;
-import talentLMS.entity.Settings;
 
 @Getter
 
@@ -56,8 +55,5 @@ public class RandomSettingsGenerator {
         return randomText.toString().trim();
     }
 
-    public Settings randomSettings() {
-        return new Settings(randomSiteName(),randomSiteDescription());
-    }
 
 }

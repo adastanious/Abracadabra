@@ -4,9 +4,6 @@ import org.openqa.selenium.WebDriver;
 import talentLMS.fileUtils.ConfigReader;
 
 public class Driver {
-    private Driver() {
-        //Singleton pattern
-    }
 
     private static WebDriver driver;
 

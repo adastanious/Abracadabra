@@ -26,7 +26,7 @@ public class UserPageTest extends BaseTest {
         userPage.addNewUser(randomUser);
     }
 
-    @Test(priority = 3)
+    @Test (priority = 3)
     public void editUserTest() {
         userPage.editUser(randomUserGenerator.randomUser());
     }
