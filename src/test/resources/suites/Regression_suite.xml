@@ -5,7 +5,7 @@
         <classes>
             <class name="talentLMS.categoriesTest.CategoriesRegression"></class>
             <class name="talentLMS.reportsTest.ReportCoursesTest"></class>
-            <class name="talentLMS.accountAndSettings.BasicSettingsTest">
+            <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
             <class name="talentLMS.importExportTest.ExportTest">
                 <methods>
                     <include name="exportOrCancel"/>

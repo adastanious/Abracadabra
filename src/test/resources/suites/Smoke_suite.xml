@@ -27,7 +27,6 @@
                 <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
-                <class name="talentLMS.categoriesTest.CategoriesSmokeTest"></class>
                 <class name="talentLMS.accountAndSettings.BasicSettingsTest">
                     <methods>
                         <include name="siteNameAndDescriptionTest"/>
@@ -49,12 +48,6 @@
                     <include name="cancelTest"/>
                 </methods>
                 </class>
-                <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
-                <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
-                <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
-                <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
-                <class name="talentLMS.accountAndSettings.UsersTest"/>
-                <class name="talentLMS.accountAndSettings.DomainTest"/>
                 <class name="talentLMS.CoursesTest"></class>
             </classes>
         </test>
