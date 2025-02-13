@@ -34,7 +34,7 @@ public class CategoriesPage extends BasePage {
     @FindBy(xpath = "//div[@class='select2-result-label']")
     List<WebElement> parentCategory1Btn;
 
-    @FindBy(xpath = "//a[@class='tl-bold-link']")
+    @FindBy(id = "show-price")
     WebElement priceBtn;
 
     @FindBy(xpath = "//input[@name='price']")
@@ -44,7 +44,7 @@ public class CategoriesPage extends BasePage {
     WebElement assertText;
 
     @FindBy(xpath = "//td[@class=\" tl-align-center tl-table-operations-cell\"]")
-    WebElement moveElement;
+    List<WebElement> moveElement;
 
     @FindBy(xpath = "//i[@class='icon-remove icon-grid']")
     WebElement deleteBtn;
@@ -52,7 +52,7 @@ public class CategoriesPage extends BasePage {
     @FindBy(xpath = "//i[@class ='icon-pencil icon-grid']")
     WebElement changeBtn;
 
-    @FindBy(id = "tl-confirm-submit")
+    @FindBy(xpath = "//a[@id=\"tl-confirm-submit\"]")
     WebElement deleteControlBtn;
 
     @FindBy(xpath = "//input[@name = 'name']")
@@ -152,7 +152,7 @@ public class CategoriesPage extends BasePage {
      */
     @Step("Удаление категории")
     public CategoriesPage deleteCategory() {
-        webElementActions.moveToElement(moveElement)
+        webElementActions.moveToElement(moveElement.get(0))
                 .click(deleteBtn)
                 .click(deleteControlBtn);
         return this;
@@ -173,7 +173,7 @@ public class CategoriesPage extends BasePage {
      */
     @Step("Изменение категории на название {0}, {1}")
     public CategoriesPage changeCategory(String changeName, String changePrice) {
-        webElementActions.moveToElement(moveElement)
+        webElementActions.moveToElement(moveElement.get(0))
                 .click(changeBtn)
                 .clearAndSendKeys(changeNameCategoryInput, changeName)
                 .click(priceBtn)
