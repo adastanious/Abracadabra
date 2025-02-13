@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="/Users/Agema/IdeaProjects/Abracadabra">
+    <test verbose="2" preserve-order="true" name="/Users/dastanaidarov/IdeaProjects/Abracadabra">
         <classes>
+            <class name="talentLMS.categoriesTest.CategoriesRegression"></class>
+            <class name="talentLMS.reportsTest.ReportCoursesTest"></class>
+            <class name="talentLMS.accountAndSettings.BasicSettingsTest">
             <class name="talentLMS.importExportTest.ExportTest">
                 <methods>
                     <include name="exportOrCancel"/>
@@ -14,6 +17,13 @@
                     <include name="useAllReadyMadeExamplesTest"/>
                     <include name="importOrCancel"/>
                     <include name="verifyImportButtonDisabledDuringUpload"/>
+                </methods>
+            </class>
+            <class name="talentLMS.accountAndSettings.DomainTest">
+                <methods>
+                    <include name="emptyDomainNameTest"/>
+                    <include name="existingDomainNameTest"/>
+                    <include name="invalidDomainNameTest"/>
                 </methods>
             </class>
         </classes>
