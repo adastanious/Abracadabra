@@ -28,6 +28,31 @@
                 <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
+                <class name="talentLMS.categoriesTest.CategoriesSmokeTest"></class>
+                <class name="talentLMS.accountAndSettings.BasicSettingsTest">
+                    <methods>
+                        <include name="siteNameAndDescriptionTest"/>
+                        <include name="LanguageOptionsTest"/>
+                        <include name="timeZoneOptionsTest"/>
+                        <include name="currencyOptionsTest"/>
+                        <include name="cancelTest"/>
+                    </methods>
+                </class>
+                <class name="talentLMS.accountAndSettings.UsersTest">
+                    <methods>
+                        <include name="visibleUserFormatTest"/>
+                        <include name="cancelTest"/>
+                    </methods>
+                </class>
+                <class name="talentLMS.accountAndSettings.DomainTest">
+                <methods>
+                    <include name="changeDomainNameTest"/>
+                    <include name="cancelTest"/>
+                </methods>
+                </class>
+                <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
+                <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
+                <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
                 <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
                 <class name="talentLMS.accountAndSettings.UsersTest"/>
                 <class name="talentLMS.accountAndSettings.DomainTest"/>
