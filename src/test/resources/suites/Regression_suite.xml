@@ -3,6 +3,8 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="/Users/dastanaidarov/IdeaProjects/Abracadabra">
         <classes>
+            <class name="talentLMS.categoriesTest.CategoriesRegression"></class>
+            <class name="talentLMS.reportsTest.ReportCoursesTest"></class>
             <class name="talentLMS.accountAndSettings.BasicSettingsTest">
                 <methods>
                     <include name="siteNameOverTheLimitTest"/>
