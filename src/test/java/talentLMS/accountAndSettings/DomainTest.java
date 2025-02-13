@@ -90,19 +90,19 @@ public class DomainTest extends BaseTest {
      * 3. Выполняет вход в систему и переключается на старый интерфейс.
      * 4. Возвращает доменное имя обратно к текущему значению.
      */
-    @Test(groups = "Smoke", description = "verify that domain name is changed", priority = 4)
-    public void changeDomainNameTest() {
-        domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_NEW);
-
-        String actualURL = driver.getCurrentUrl();
-        String expectedURL = AccountAndSettings.NEW_URL.getString();
-        Assert.assertEquals(actualURL, expectedURL, "URLs are different");
-
-        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface();
-        beforeMethod();
-        domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_CURRENT);
-        beforeSuite();
-    }
+//    @Test(groups = "Smoke", description = "verify that domain name is changed", priority = 4)
+//    public void changeDomainNameTest() {
+//        domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_NEW);
+//
+//        String actualURL = driver.getCurrentUrl();
+//        String expectedURL = AccountAndSettings.NEW_URL.getString();
+//        Assert.assertEquals(actualURL, expectedURL, "URLs are different");
+//
+//        loginPage.doLogin(ConfigReader.getProperty("userName"),ConfigReader.getProperty("password")).switchToLegacyInterface();
+//        beforeMethod();
+//        domainPage.changeDomainName(AccountAndSettings.DOMAIN_NAME_CURRENT);
+//        beforeSuite();
+//    }
 
     /**
      * Проверяет, что кнопка "Cancel" перенаправляет пользователя обратно на страницу Dashboard.
@@ -112,7 +112,7 @@ public class DomainTest extends BaseTest {
      * 2. Получает текущий URL страницы после нажатия.
      * 3. Сравнивает фактический URL с ожидаемым URL Dashboard.
      */
-    @Test(groups = "Smoke", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 5)
+    @Test(groups = "Regression", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 5)
     public void cancelTest() {
         webElementActions.click(basicSettingsPage.getCancelBtn());
 

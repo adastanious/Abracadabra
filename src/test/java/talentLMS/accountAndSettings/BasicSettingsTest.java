@@ -437,7 +437,7 @@ public class BasicSettingsTest extends BaseTest {
      * 2. Получает текущий URL страницы после нажатия.
      * 3. Сравнивает фактический URL с ожидаемым URL Dashboard.
      */
-    @Test(groups = "Smoke", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 17)
+    @Test(groups = "Regression", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 17)
     public void cancelTest() {
         webElementActions.click(basicSettingsPage.getCancelBtn());
 
