@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/dastanaidarov/IdeaProjects/Abracadabra">
+        <classes>
+            <class name="talentLMS.accountAndSettings.BasicSettingsTest">
+                <methods>
+                    <include name="siteNameOverTheLimitTest"/>
+                    <include name="siteDescriptionOverTheLimitTest"/>
+                    <include name="emptySiteNameAndDescriptionTest"/>
+                    <include name="changeLanguageTest"/>
+                    <include name="unavailableLanguageTest"/>
+                    <include name="unavailableTimeZoneTest"/>
+                    <include name="dateFormatOptionsTest"/>
+                    <include name="timeFormatOptionsTest"/>
+                    <include name="currencyTest"/>
+                    <include name="unavailableCurrencyTest"/>
+                </methods>
+            </class>
+            <class name="talentLMS.accountAndSettings.UsersTest">
+                <methods>
+                    <include name="selectVisibleUserFormatTest"/>
+                </methods>
+            </class>
+            <class name="talentLMS.accountAndSettings.DomainTest">
+                <methods>
+                    <include name="emptyDomainNameTest"/>
+                    <include name="existingDomainNameTest"/>
+                    <include name="invalidDomainNameTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,5 +1,6 @@
 package talentLMS.page.accountAndSettings;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,6 +41,7 @@ public class UsersPage extends BasePage {
     private List<String> userTypesList = new ArrayList<>();
     private List<String> userFormatsList = new ArrayList<>();
 
+    @Step("Получение списка типов пользователей по умолчанию")
     /**
      * Получает список доступных типов пользователей по умолчанию.
      *
@@ -58,6 +60,7 @@ public class UsersPage extends BasePage {
         return userTypesList;
     }
 
+    @Step("Выбор типа пользователя по индексу {index} и сохранение изменений")
     /**
      * Выбирает заданный тип пользователя по индексу и сохраняет изменения.
      *
@@ -82,6 +85,7 @@ public class UsersPage extends BasePage {
         return new UsersPage();
     }
 
+    @Step("Получение списка доступных форматов отображения пользователей")
     /**
      * Получает список доступных форматов отображения пользователей.
      *
@@ -101,6 +105,7 @@ public class UsersPage extends BasePage {
         return userFormatsList;
     }
 
+    @Step("Выбор формата отображения пользователей по индексу {index} и сохранение изменений")
     /**
      * Выбирает заданный формат отображения пользователей по индексу и сохраняет изменения.
      *
@@ -121,7 +126,6 @@ public class UsersPage extends BasePage {
             webElementActions.click(this.userFormats.get(index))
                     .click(this.saveBtn);
         }
-
         return new UsersPage();
     }
 }

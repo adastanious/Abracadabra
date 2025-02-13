@@ -1,6 +1,7 @@
 package talentLMS.page.coursePage;
 
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -102,6 +103,7 @@ public class CoursesPage extends BasePage {
      * Заполняет все необходимые поля и нажимает кнопку "Создать курс".
      */
 
+    @Step("Добавление нового курса")
     public CoursesPage addCourses(Courses courses, String course) {
         webElementActions.click(addCourse)
                 .sendKeys(this.courseName, course)
@@ -118,6 +120,7 @@ public class CoursesPage extends BasePage {
      * Переход на страницу со списком курсов
      */
 
+    @Step("Переход на страницу со списком курсов")
     public CoursesPage goToCourse(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         webElementActions.click(clickCourse);
@@ -129,6 +132,7 @@ public class CoursesPage extends BasePage {
      * Ищет курс в таблице и кликает по нему для редактирования.
      */
 
+    @Step("Поиск курса по названию {courseName}")
     public void findCourseByName(String courseName) {
         WebElement course = driver.findElement(By.xpath("//span[@class='tl-formatted-course-name']"));
         course.click();
@@ -139,6 +143,7 @@ public class CoursesPage extends BasePage {
      * Очищает поле и вводит новое имя курса.
      */
 
+    @Step("Обновление названия курса на {name}")
     public void updateCourseName(String name) {
         WebElement editName = driver.findElement(By.xpath("//input[@name='name']"));
         editName.clear();
@@ -149,6 +154,7 @@ public class CoursesPage extends BasePage {
      *  Сохранение изменений курса
      */
 
+    @Step("Сохранение изменений курса")
     public void savesChanges() {
         webElementActions.click(submit);
     }
@@ -161,6 +167,7 @@ public class CoursesPage extends BasePage {
      * - Переключает роли для проверки удаления у инструктора и студента
      */
 
+    @Step("Удаление курса с названием {courseName}")
     public CoursesPage deleteCourse(String courseName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -188,6 +195,7 @@ public class CoursesPage extends BasePage {
      * Возвращает `true`, если курс найден, иначе `false`.
      */
 
+    @Step("Проверка наличия курса {courseName}")
     public boolean isCoursePresent(String courseName) {
         List<WebElement> courses = driver.findElements(By.xpath("//tr[td//span[contains(text(), '" + courseName + "')]]"));
         return !courses.isEmpty();
@@ -198,6 +206,7 @@ public class CoursesPage extends BasePage {
      * Собирает названия всех курсов, доступных на странице.
      */
 
+    @Step("Получение списка всех курсов")
     public List<String> getAllCourses(){
         List<WebElement> courseElements = driver.findElements(By.xpath("//tr[td//span[@class='tl-formatted-course-name']]"));
         List<String> courseName = new ArrayList<>();
@@ -212,6 +221,7 @@ public class CoursesPage extends BasePage {
      * Используется для создания длинных имен курсов.
      */
 
+    @Step("Генерация случайной строки длиной {length}")
     public String generateRandomString(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder result = new StringBuilder(length);
@@ -224,6 +234,7 @@ public class CoursesPage extends BasePage {
         return result.toString();
     }
 
+    @Step("Проверка кода курса")
     public CoursesPage checkCod(){
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         webElementActions.click(addCourse)
@@ -233,6 +244,7 @@ public class CoursesPage extends BasePage {
         return this;
     }
 
+    @Step("Валидация цены курса")
     public CoursesPage validPrice(){
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         webElementActions.click(addCourse)
@@ -242,6 +254,7 @@ public class CoursesPage extends BasePage {
         return this;
     }
 
+    @Step("Валидация видео курса")
     public CoursesPage validVideo(){
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         webElementActions.click(addCourse)
@@ -251,6 +264,7 @@ public class CoursesPage extends BasePage {
         return this;
     }
 
+    @Step("Валидация вместимости курса")
     public CoursesPage validCapacity(){
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         webElementActions.click(addCourse)

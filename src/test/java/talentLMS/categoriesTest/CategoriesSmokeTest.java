@@ -29,7 +29,7 @@ public class CategoriesSmokeTest extends BaseTest {
      *
      * @throws Exception Если при удалении категорий произойдет ошибка, она будет поймана, но не вызовет сбой теста.
      */
-    @Test(priority = 0)
+    @Test(priority = 0, groups = "Smoke", description = "Тест для проверки удаления всех категорий в разделе Категорий.")
     public void CategoriesTestTableZero(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         while (true) {
@@ -48,8 +48,7 @@ public class CategoriesSmokeTest extends BaseTest {
         Assert.assertEquals(categoriesTable.size(), 0, "Не прошло удаление всех категорий");
     }
 
-    //проверка создания категорий
-    @Test(priority = 1)
+    @Test(priority = 1, groups = "Smoke",description = "тест на создание категорий корректными названием")
     public void addCategories() {
         categoriesPage.addCategory( category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText = SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
@@ -57,15 +56,14 @@ public class CategoriesSmokeTest extends BaseTest {
         Assert.assertEquals(expectedText, actualText, "Администратор не может создать категорию с корректным названием.");
     }
 
-    // Проверка создания категорий с дублирующими названиями
-    @Test(priority = 2, dependsOnMethods = {"addCategories"})
+    @Test(priority = 2, dependsOnMethods = {"addCategories"}, groups = "Smoke", description = "Проверка системы на создание категории с дублирующимт названием")
     public void addCategoriesDoubleName(){
         categoriesPage.addCategory(category.getCorrectCategoryName(), category.getCorrectPrice());
         String expectedText =SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
         String actualText  = categoriesPage.getAssertText().getText();
         Assert.assertNotEquals(actualText, expectedText, "Система позволяет создавать категории с одинаковыми названиями.");
     }
-    @Test(priority = 3, dependsOnMethods = {"addCategories"})
+    @Test(priority = 3, dependsOnMethods = {"addCategories"}, groups = "Smoke", description = "тест на создание категорий корректными названием и с указанием родительской категории")
     public void addCategoryParentTest(){
         categoriesPage.addCategoryParent("SpaceX",category.getCorrectPrice());
         String expectedText =SuccessMessage.CATEGORIES_ADD_MESSAGE.getMessage();
@@ -73,8 +71,7 @@ public class CategoriesSmokeTest extends BaseTest {
         Assert.assertEquals(expectedText, actualText, "Администратор не может создать категорию с корректным названием.");
     }
 
-    //проверка удаления категорий[2]
-    @Test(priority = 4)
+    @Test(priority = 4, groups = "Smoke", description = "проверка удаления категорий")
     public void deleteCategory()  {
         categoriesPage.addCategory( category.getCorrectCategoryName(), category.getCorrectPrice());
         ArrayList<Category> listBeforeDelete = categoriesPage.getCategoryFormTable();
@@ -88,8 +85,7 @@ public class CategoriesSmokeTest extends BaseTest {
         Assert.assertEquals(listBeforeDelete.size(), listAfterDelete.size()+1, "Проверка удаления пользователя не прошла");
     }
 
-    //изменение категорий[2]
-    @Test(priority = 5)
+    @Test(priority = 5, groups = "Smoke", description = "тест на изменение категорий")
     public void changeCategory(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         categoriesPage.changeCategory(category.getCorrectCategoryName2(), category.getCorrectPrice2());
@@ -109,7 +105,7 @@ public class CategoriesSmokeTest extends BaseTest {
      *
      * @throws AssertionError Если количество категорий не совпадает, тест не пройдет.
      */
-    @Test(priority = 6)
+    @Test(priority = 6, groups = "Smoke", description = "Тест для проверки соответствия количества категорий в разделе Категории и разделе Курсы.")
     public void categoryCursesTest(){
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         ArrayList<Category> categoriesTable = categoriesPage.getCategoryFormTable();
