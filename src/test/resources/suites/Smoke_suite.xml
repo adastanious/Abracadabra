@@ -11,6 +11,7 @@
                 <class name="talentLMS.accountAndSettings.BasicSettingsTest"/>
                 <class name="talentLMS.accountAndSettings.UsersTest"/>
                 <class name="talentLMS.accountAndSettings.DomainTest"/>
+                <class name="talentLMS.CoursesTest"></class>
             </classes>
         </test>
 </suite>
