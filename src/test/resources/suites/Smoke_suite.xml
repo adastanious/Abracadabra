@@ -24,6 +24,7 @@
                     <include name="testFtpSyncConfiguration"/>
                 </methods>
                 </class>
+                <class name="talentLMS.usersTest.UserSmokeTest"></class>
                 <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>

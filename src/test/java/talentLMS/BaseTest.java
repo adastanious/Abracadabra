@@ -76,7 +76,7 @@ public abstract class BaseTest {
     @BeforeSuite
     public void beforeSuite(){
         driver.get(ConfigReader.getProperty("dashboardURL"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
@@ -85,5 +85,4 @@ public abstract class BaseTest {
 //        driver.manage().deleteAllCookies();
 //        driver.close();
 //    }
-
 }

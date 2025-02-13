@@ -3,7 +3,6 @@ package talentLMS.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import talentLMS.driver.Driver;
-
 import talentLMS.helper.WebElementActions;
 import talentLMS.utils.randomEntityUtils.RandomSettingsGenerator;
 

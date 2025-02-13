@@ -45,7 +45,7 @@ public class RandomUserGenerator {
     }
 
     public User emailUniquenessCheck(){
-        return new User(randomFirstName(), randomLastName(), "das.digital.nomads@gmail.com", randomUserName(), randomPassword());
+        return new User(randomFirstName(), randomLastName(), "abracadabra@mail.ru", randomUserName(), randomPassword());
     }
 
     public User randomUserWithoutFirstName(){
