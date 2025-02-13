@@ -31,7 +31,7 @@ public class CategoriesSmokeTest extends BaseTest {
      */
     @Test(priority = 0, groups = "Smoke", description = "Тест для проверки удаления всех категорий в разделе Категорий.")
     public void CategoriesTestTableZero(){
-        dashboardPage.selectSection(AdminSection.CATEGORIES);
+//        dashboardPage.selectSection(AdminSection.CATEGORIES);
         while (true) {
             ArrayList<Category> categoriesTable = categoriesPage.getCategoryFormTable();
             if (categoriesTable.isEmpty()){

@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import talentLMS.driver.Driver;
 import talentLMS.entity.User;
 import talentLMS.entity.UserEntity;
@@ -39,10 +40,10 @@ public class UserPage extends BasePage {
     @FindBy(xpath = "//input[@name='email']")
     public WebElement email;
 
-    @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[1]/td[4]/span")
+    @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[2]/td[4]/span")
     public WebElement learnerType;
 
-    @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[1]/td[7]/div/div/i[3]")
+    @FindBy(xpath = "//*[@id=\"tl-users-grid\"]/tbody/tr[2]/td[7]/div/div/i[3]")
     public WebElement edit;
 
     @FindBy(xpath = "//input[@name='login']")
@@ -90,8 +91,8 @@ public class UserPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'inactive')]")
     public WebElement userIsNotActiveErrorText;
 
-    @FindBy(xpath = "//span/span[contains(@class, 'help-inline")
-    public WebElement randomUserWithoutFirstNameErrorText;
+    @FindBy(xpath = "//span[@class='tl-box-title-options']/a[@title='Home']")
+    public WebElement Home;
 
     /**
      * Общий метод для ввода данных пользователя.
@@ -110,33 +111,59 @@ public class UserPage extends BasePage {
 
     @Step("Метод добавления нового пользователя.")
     public UserPage addNewUser(User user) {
-        webElementActions
-                .click(this.UsersDashboard)
-                .click(this.addUser);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // Ожидание перед кликом на addUser
+        wait.until(ExpectedConditions.elementToBeClickable(this.addUser));
+        webElementActions.click(this.addUser);
+
         enterUserData(user);  // Ввод данных пользователя
-        webElementActions
-                .click(this.addUserButton);
+
+        // Ожидание перед нажатием на кнопку добавления
+        wait.until(ExpectedConditions.elementToBeClickable(this.addUserButton));
+        webElementActions.click(this.addUserButton)
+                .click(users);
+
         return new UserPage();
     }
 
 
     @Step("Метод редактирования данных существующего пользователя.")
     public UserPage editUser(User user) {
-        webElementActions
-                .click(UsersDashboard)
-                .click(learnerType)
-                .click(edit)
-                .click(clickEditName)
-                .sendKeys(clickEditName, user.getFirstname())
-                .click(submit);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        // Ожидание загрузки страницы
+        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
+
+        // Ожидание и клик по learnerType
+        WebElement learnerTypeElement = wait.until(ExpectedConditions.elementToBeClickable(learnerType));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", learnerTypeElement);
+        learnerTypeElement.click();
+
+        // Ожидание и клик по кнопке редактирования
+        WebElement editElement = wait.until(ExpectedConditions.elementToBeClickable(edit));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editElement);
+        editElement.click();
+
+        // Ожидание и клик по полю имени
+        WebElement editNameField = wait.until(ExpectedConditions.elementToBeClickable(clickEditName));
+        editNameField.click();
+        editNameField.clear();
+        editNameField.sendKeys(user.getFirstname());
+
+        // Ожидание и клик по кнопке Submit
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(submit));
+        submitButton.click();
+
         return new UserPage();
     }
 
 
     @Step("Метод добавления пользователя с уникальным email.")
     public UserPage uniqueEmail(User user) {
+            webElementActions.click(UsersDashboard);
         webElementActions
-                .click(UsersDashboard)
                 .click(this.addUser);
         enterUserData(user);  // Ввод данных пользователя
         webElementActions
@@ -180,64 +207,11 @@ public class UserPage extends BasePage {
     }
 
 
-    @Step("Метод для входа в аккаунт пользователя по имени.")
-    public void logIntoAccount(String username) {
-        webElementActions.click(UsersDashboard);
-
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20)); // Увеличиваем время ожидания
-
-        // Ожидание загрузки таблицы пользователей
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("table#tl-users-grid")));
-
-        // Находим все строки таблицы с пользователями
-        List<WebElement> rows = Driver.getDriver().findElements(By.cssSelector("table#tl-users-grid tbody tr"));
-
-        boolean userFound = false; // Флаг для проверки нахождения пользователя
-
-        // Перебираем строки таблицы
-        for (WebElement row : rows) {
-            // Получаем ячейки текущей строки
-            List<WebElement> cells = row.findElements(By.cssSelector("td"));
-
-            // Получаем имя пользователя из нужной ячейки (предполагается, что это вторая колонка)
-            String foundUsername = cells.get(1).getText().trim();
-
-            // Проверяем, совпадает ли имя пользователя с переданным аргументом
-            if (foundUsername.equalsIgnoreCase(username.trim())) {
-                System.out.println("Совпадение найдено, выполняем клик по Learner-Type.");
-
-                // Находим элемент Learner-Type в текущей строке
-                WebElement learnerType = cells.get(3).findElement(By.cssSelector("td.tl-align-left span[title=\"Learner-Type\"]"));
-                wait.until(ExpectedConditions.elementToBeClickable(learnerType)).click();
-                System.out.println("Кликнули по элементу Learner-Type.");
-
-                // Находим кнопку входа в аккаунт в той же строке
-                WebElement logIntoAccountBtn = row.findElement(By.cssSelector("i.icon-signin"));
-                wait.until(ExpectedConditions.elementToBeClickable(logIntoAccountBtn)).click();
-                System.out.println("Кликнули по кнопке для входа в аккаунт.");
-
-                // Ожидание появления кнопки "Назад" и клик по ней
-                WebElement backToAdminBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//i[@class='icon-undo tl-icon16']") // Иконка кнопки "Назад"
-                ));
-                backToAdminBtn.click();
-                System.out.println("Кликнули по кнопке 'Назад'.");
-
-                userFound = true; // Устанавливаем флаг, что пользователь найден
-                break; // Прерываем цикл, так как нужный пользователь найден и обработан
-            }
-        }
-        // Если пользователь не найден, выбрасываем исключение
-        if (!userFound) {
-            throw new NoSuchElementException("Пользователь с именем " + username + " не найден.");
-        }
-    }
-
-
     @Step("Метод для редактирования аккаунта пользователя по имени.")
     public void editAccount(String username, User user) {
+        webElementActions.click(UsersDashboard);
 
-        WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20)); // Увеличиваем время ожидания
+        WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(30)); // Увеличиваем время ожидания
 
         // Ожидание загрузки таблицы пользователей
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("table#tl-users-grid")));
