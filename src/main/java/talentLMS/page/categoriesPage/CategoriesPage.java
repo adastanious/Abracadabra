@@ -78,7 +78,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage), что позволяет использовать метод в цепочке вызовов.
      */
-    @Step("Добовление категрий с разными данными{0}, {1}")
+    @Step("Добовление категрий с разными данными")
     public CategoriesPage addCategory(String name, String price) {
         webElementActions.click(addCategory)
                 .sendKeys(categoryNameInput, name)
@@ -102,7 +102,7 @@ public class CategoriesPage extends BasePage {
      *
      * @return Возвращает текущую страницу категорий (CategoriesPage), что позволяет использовать метод в цепочке вызовов.
      */
-    @Step("Добавление категорий с указанием родительского класса{0}, {1}")
+    @Step("Добавление категорий с указанием родительского класса")
     public CategoriesPage addCategoryParent(String name, String price) {
         webElementActions.click(addCategory)
                 .sendKeys(categoryNameInput, name)
