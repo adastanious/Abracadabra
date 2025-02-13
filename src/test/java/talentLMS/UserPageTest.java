@@ -59,7 +59,7 @@ public class UserPageTest extends BaseTest {
 
     @Test(groups = {"Regression"}, description = "Тест проверяет возможность входа в аккаунт пользователя и отображение кнопки возврата в админку.", priority = 7)
     public void logIntoAccountTest() {
-        String testUsername = "A. Alekseevna";
+        String testUsername = "AdiAl";
         try {
             userPage.logIntoAccount(testUsername);
             System.out.println("Тест пройден: вход выполнен для пользователя: " + testUsername);
@@ -77,7 +77,7 @@ public class UserPageTest extends BaseTest {
 
     @Test(groups = {"Regression"}, description = "Тест проверяет редактирование данных учетной записи пользователя.", priority = 8)
     public void editAccountTest() {
-        userPage.editAccount("A. Alekseevna", randomUserGenerator.randomUser());
+        userPage.editAccount("AdiAl", randomUserGenerator.randomUser());
     }
 
 

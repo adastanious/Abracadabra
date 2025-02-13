@@ -88,9 +88,9 @@ public abstract class BaseTest {
         loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
-    @AfterClass
-    public void afterClass(){
-        driver.manage().deleteAllCookies();
-        driver.close();
-    }
+//    @AfterClass
+//    public void afterClass(){
+//        driver.manage().deleteAllCookies();
+//        driver.close();
+//    }
 }
