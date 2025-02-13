@@ -11,7 +11,7 @@ import talentLMS.page.BasePage;
 
 import java.time.Duration;
 
-///   @author Agema
+/// @author Agema
 
 public class ImportPage extends BasePage {
 
@@ -56,7 +56,9 @@ public class ImportPage extends BasePage {
 
     @Step("Нажимает кнопку Import")
     public ImportPage clickImportButton() {
-        webElementActions.click(importButton);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(importButton));
+        importButton.click();
         return this;
     }
 
@@ -106,7 +108,7 @@ public class ImportPage extends BasePage {
     }
 
     @Step("Проверяет, присутствует ли сообщение об импорте в результатах")
-    public boolean isImportMessagePresent(String expectedMessage){
+    public boolean isImportMessagePresent(String expectedMessage) {
         WebElement element = driver.findElement(By.id("tl-import-results"));
         String resultText = element.getText();
         return resultText.contains(expectedMessage);
