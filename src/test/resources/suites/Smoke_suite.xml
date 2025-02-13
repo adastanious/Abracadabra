@@ -3,25 +3,23 @@
 <suite name="Smoke">
     <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
             <classes>
-                <class name="talentLMS.accountAndSettings.BasicSettingsTest">
+                <class name="talentLMS.importExportTest.ExportTest">
                     <methods>
-                        <include name="siteNameAndDescriptionTest"/>
-                        <include name="LanguageOptionsTest"/>
-                        <include name="timeZoneOptionsTest"/>
-                        <include name="currencyOptionsTest"/>
-                        <include name="cancelTest"/>
+                        <include name="exportAsCsvTest"/>
+                        <include name="exportAsExcelTest"/>
+                        <include name="exportOrCancel"/>
                     </methods>
                 </class>
-                <class name="talentLMS.accountAndSettings.UsersTest">
+                <class name="talentLMS.importExportTest.ImportTest">
                     <methods>
-                        <include name="visibleUserFormatTest"/>
-                        <include name="cancelTest"/>
+                        <include name="verifyClearFileUpload"/>
+                        <include name="verifySuccessMessageAfterImport"/>
+                        <include name="useAllReadyMadeExamplesTest"/>
                     </methods>
                 </class>
-                <class name="talentLMS.accountAndSettings.DomainTest">
+                <class name="talentLMS.importExportTest.SyncWithAnFtpServerTest">
                 <methods>
-                    <include name="changeDomainNameTest"/>
-                    <include name="cancelTest"/>
+                    <include name="testFtpSyncConfiguration"/>
                 </methods>
                 </class>
             </classes>
