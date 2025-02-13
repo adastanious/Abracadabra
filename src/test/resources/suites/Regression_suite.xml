@@ -29,6 +29,8 @@
                     <include name="invalidDomainNameTest"/>
                 </methods>
             </class>
+            <class name="talentLMS.categoriesTest.CategoriesRegression"></class>
+            <class name="talentLMS.reportsTest.ReportCoursesTest"></class>
         </classes>
     </test>
 </suite>
