@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.enums.AdminSection;
+import talentLMS.fileUtils.ConfigReader;
 import java.time.Duration;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class CoursesTest extends BaseTest {
      */
     @BeforeMethod
     public void beforeMethod() {
+        driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.COURSES);
     }
 
@@ -82,6 +84,7 @@ public class CoursesTest extends BaseTest {
 
         // Удаляем только этот курс
         coursesPage.deleteCourse(courses.getCourseName());
+        component.selectRole(ADMINISTRATOR);
 
         // Проверяем, что курс удален
         Assert.assertFalse(coursesPage.isCoursePresent(courses.getCourseName()), "Курс все еще существует!");
@@ -100,6 +103,8 @@ public class CoursesTest extends BaseTest {
         List<String> instructorCourses = coursesPage.getAllCourses();
         component.selectRole(LEARNER);
         List<String> learnerCourses = coursesPage.getAllCourses();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        component.selectRole(ADMINISTRATOR);
 
         Assert.assertTrue(adminCourses.containsAll(instructorCourses), "Инструктор видит чужие курсы!");
         Assert.assertTrue(adminCourses.containsAll(learnerCourses), "Студент видит курсы, которые ему недоступны!");
