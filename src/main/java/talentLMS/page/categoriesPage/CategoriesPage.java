@@ -52,7 +52,7 @@ public class CategoriesPage extends BasePage {
     @FindBy(xpath = "//i[@class ='icon-pencil icon-grid']")
     WebElement changeBtn;
 
-    @FindBy(xpath = "//a[@id=\"tl-confirm-submit\"]")
+    @FindBy(xpath = "//a[@id=\"tl-confirm-submit\"]//i")
     WebElement deleteControlBtn;
 
     @FindBy(xpath = "//input[@name = 'name']")
