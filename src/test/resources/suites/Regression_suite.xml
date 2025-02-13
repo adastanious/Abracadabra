@@ -29,6 +29,9 @@
                     <include name="invalidDomainNameTest"/>
                 </methods>
             </class>
+            <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
+            <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
+            <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
             <class name="talentLMS.categoriesTest.CategoriesRegression"></class>
             <class name="talentLMS.reportsTest.ReportCoursesTest"></class>
         </classes>
