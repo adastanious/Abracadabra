@@ -23,12 +23,6 @@ public class WebElementActions {
         return this;
     }
 
-    public WebElementActions waitElementToBeDisappear(WebElement element) {
-        new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(15))
-                .until(ExpectedConditions.invisibilityOf(element));
-        return this;
-    }
-
     public WebElementActions click(WebElement element) {
         waitElementToBeDisplayed(element);
         waitButtonToBeClickable(element);
