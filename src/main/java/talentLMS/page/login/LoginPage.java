@@ -13,6 +13,14 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@type ='submit']")
     WebElement submit;
 
+    //error messages
+    @FindBy(xpath = "//div/span/span[contains(text(),'Username')]|//div/div[contains(text(),'This is a required field') and @data-testid ='username-error']")
+    public WebElement emptyUsernameMessage;
+    @FindBy(xpath = "//div/span/span[contains(text(),'Password')]|//div/div[contains(text(),'This is a required field')]")
+    public WebElement emptyPasswordMessage;
+    @FindBy(xpath = "//div/div[contains(text(), 'Your username or password is incorrect')]|//p[contains(text(), 'Your username or password is incorrect')]")
+    public WebElement wrongLoginDataMessage;
+
     public DashboardPage doLogin(String username, String password){
         webElementActions.sendKeys(this.username, username)
                 .sendKeys(this.password, password)

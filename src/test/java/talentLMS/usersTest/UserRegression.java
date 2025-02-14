@@ -1,4 +1,4 @@
-package talentLMS;
+package talentLMS.usersTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,51 +8,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import talentLMS.BaseTest;
 import talentLMS.driver.Driver;
 import talentLMS.entity.UserEntity;
-import talentLMS.enums.AdminSection;
 
 import java.time.Duration;
 import java.util.List;
 
-
-public class UserPageTest extends BaseTest {
-
+public class UserRegression extends BaseTest {
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         driver.get("https://abracadabra.talentlms.com/dashboard");
     }
 
-    @Test(priority = 1)
-    public void addNewUserTest() {
-        dashboardPage.selectSection(AdminSection.USERS);
-        userPage.addNewUser(randomUser);
-    }
-
-
-    @Test (priority = 3)
-    public void editUserTest() {
-        dashboardPage.selectSection(AdminSection.USERS);
-        userPage.editUser(randomUserGenerator.randomUser());
-    }
-
-    @Test(priority = 4)
-    public void deleteUsersTest() {
-       userPage.deleteUsers(randomUserGenerator.randomUser());
-    }
-
-    @Test(priority = 5)
-    public void uniqueEmailTest() {
-        userPage.uniqueEmail(randomUserGenerator.emailUniquenessCheck());
-
-        WebElement isRequired = driver.findElement(By.xpath("(//span/span[@class='help-inline'])"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "Someone is already using this email address");
-    }
-
-    @Test(priority = 6)
+    @Test(groups = {"Regression"}, description = "Тест получает список всех пользователей и выводит его в консоль.", priority = 1)
     public void getListOfUsersTest() throws InterruptedException {
-// Вызов метода получения списка всех сотрудников и вывода на консоль
+
         List<UserEntity> userEntities = userPage.getUserFromTable();
         for (UserEntity userEntity : userEntities) {
             System.out.println(userEntity);
@@ -60,75 +31,52 @@ public class UserPageTest extends BaseTest {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 7)
-    public void logIntoAccountTest() {
-        String testUsername = "A. Alekseevna";
-        try {
-            userPage.logIntoAccount(testUsername);
-            System.out.println("Тест пройден: вход выполнен для пользователя: " + testUsername);
-
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-            WebElement backToAdminBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//i[@class='icon-undo tl-icon16']")
-            ));
-            Assert.assertTrue(backToAdminBtn.isDisplayed(), "Кнопка 'Назад' не отображается.");
-        } catch (NoSuchElementException e) {
-            Assert.fail("Тест провален: " + e.getMessage());
-        }
-    }
-
-    @Test(priority = 8)
+    @Test(groups = {"Regression"}, description = "Тест проверяет редактирование данных учетной записи пользователя.", priority = 2)
     public void editAccountTest() {
-        userPage.editAccount("A. Alekseevna",randomUserGenerator.randomUser());
+        userPage.editAccount("AdiAl", randomUserGenerator.randomUser());
     }
 
-    @Test(priority = 9)
-    public void addUserNotActiveTest() {
-        userPage.addUserNotActive(randomUserGenerator.randomUser());
-
-        WebElement isRequired = driver.findElement(By.xpath("//span[contains(text(),'inactive')]"));
-        String actualResult = isRequired.getText();
-        Assert.assertEquals(actualResult, "INACTIVE");
-    }
-
-    @Test(priority = 10)
+    @Test(groups = {"Regression"}, description = "Тест проверяет корректность сортировки пользователей по имени.", priority = 3)
     public void testUserSortingByName() {
+
         List<String> beforeSorting = userPage.getUserNamesFromTable();
         List<String> afterSorting = userPage.getSortedUserNamesFromTable();
 
         Assert.assertNotEquals(beforeSorting, afterSorting, "Порядок пользователей не изменился после сортировки!");
-        Assert.assertTrue(!beforeSorting.equals(afterSorting), "Сортировка изменила порядок пользователей.");
     }
 
-    @Test(priority = 11)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет корректность сортировки пользователей по email.", priority = 4)
     public void testSortByEmail() {
         List<String> beforeSorting = userPage.getEmailsFromTable();
         List<String> afterSorting = userPage.getSortedEmailsFromTable();
 
         Assert.assertNotEquals(beforeSorting, afterSorting, "Порядок email не изменился после сортировки!");
-        Assert.assertTrue(!beforeSorting.equals(afterSorting), "Сортировка изменила порядок email.");
     }
 
-    @Test(priority = 12)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет корректность сортировки пользователей по типу учетной записи.", priority = 5)
     public void testSortByUserType() {
         List<String> beforeSorting = userPage.getUserTypesFromTable();
         List<String> afterSorting = userPage.getSortedUserTypesFromTable();
 
         Assert.assertNotEquals(beforeSorting, afterSorting, "Порядок user type не изменился после сортировки!");
-        Assert.assertTrue(!beforeSorting.equals(afterSorting), "Сортировка изменила порядок user type.");
     }
 
-    @Test(priority = 13)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет корректность сортировки пользователей по дате регистрации.", priority = 6)
     public void testSortByRegistration() {
+
         List<String> beforeSorting = userPage.getRegistrationsFromTable();
         List<String> afterSorting = userPage.getSortedRegistrationsFromTable();
 
         Assert.assertNotEquals(beforeSorting, afterSorting, "Порядок registration не изменился после сортировки!");
-        Assert.assertTrue(!beforeSorting.equals(afterSorting), "Сортировка изменила порядок registration.");
     }
 
-    @Test(priority = 14)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при попытке добавить пользователя без имени.", priority = 7)
     public void randomUserWithoutFirstNameTest() {
+
         userPage.addUserIncorrect(randomUserGenerator.randomUserWithoutFirstName());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement isRequired = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/span[contains(@class, 'help-inline')]")));
@@ -136,8 +84,10 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'First name' is required");
     }
 
-    @Test(priority = 15)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при попытке добавить пользователя без фамилии.", priority = 8)
     public void randomUserWithoutLastNameTest() {
+
         userPage.addUserIncorrect(randomUserGenerator.randomUserWithoutLastName());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement isRequired = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/span[@class='help-inline']")));
@@ -145,8 +95,10 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Last name' is required");
     }
 
-    @Test(priority = 16)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при попытке добавить пользователя без email.", priority = 9)
     public void randomUserWithoutEmailTest() {
+
         userPage.addUserIncorrect(randomUserGenerator.randomUserWithoutEmail());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement isRequired = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/span[@class='help-inline']")));
@@ -154,8 +106,10 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Email address' is required");
     }
 
-    @Test(priority = 17)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при добавлении пользователя с некорректным паролем.", priority = 10)
     public void randomUserWithoutIncorrectPasswordTest() {
+
         userPage.addUserIncorrect(randomUserGenerator.randomUserWithIncorrectPassword());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement isRequired = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/span[@class='help-inline']")));
@@ -163,7 +117,8 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Password' is not strong enough (should have at least (1) upper case letter, at least (1) lower case letter, at least (1) number, at least (8) characters in length)");
     }
 
-    @Test(priority = 18)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет корректность цвета текста сообщения об ошибке.", priority = 11)
     public void checkErrorColorTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserWithoutFirstName());
 
@@ -173,8 +128,10 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(errorElement.getCssValue("color").trim(), "rgba(185, 74, 72, 1)", "Цвет ошибки не совпадает!");
     }
 
-    @Test(priority = 19)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при превышении длины имени более 50 символов.", priority = 12)
     public void randomUserFirstNameExceed50CharactersTest() {
+
         userPage.addUserIncorrect(randomUserGenerator.randomUserFirstNameXceed50Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement isRequired = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/span[@class='help-inline']")));
@@ -182,7 +139,8 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'First name' cannot exceed 50 characters");
     }
 
-    @Test(priority = 20)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при превышении длины фамилии более 50 символов.", priority = 13)
     public void randomUserNameExceed50CharactersTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserLastNameXceed50Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -191,7 +149,8 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Last name' cannot exceed 50 characters");
     }
 
-    @Test(priority = 21)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при превышении длины email более 150 символов.", priority = 14)
     public void randomEmailExceed150CharactersTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserEmailXceed150Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -200,7 +159,8 @@ public class UserPageTest extends BaseTest {
         Assert.assertEquals(actualResult, "'Email address' cannot exceed 150 characters");
     }
 
-    @Test(priority = 22)
+
+    @Test(groups = {"Regression"}, description = "Тест проверяет сообщение об ошибке при превышении длины пароля более 30 символов.", priority = 15)
     public void randomPasswordExceed30CharactersTest() {
         userPage.addUserIncorrect(randomUserGenerator.randomUserPasswordXceed30Characters());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
