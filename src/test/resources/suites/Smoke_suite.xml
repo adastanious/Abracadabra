@@ -3,7 +3,6 @@
 <suite name="Smoke">
     <test verbose="2" preserve-order="true" name="/IdeaProjects/Abracadabra">
             <classes>
-                <class name="talentLMS.categoriesTest.CategoriesSmokeTest"></class>
                 <class name="talentLMS.accountAndSettings.BasicSettingsTest">
                     <methods>
                         <include name="siteNameAndDescriptionTest"/>
@@ -28,6 +27,7 @@
                 <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
+                <class name="talentLMS.categoriesTest.CategoriesSmokeTest"></class>
             </classes>
         </test>
 </suite>

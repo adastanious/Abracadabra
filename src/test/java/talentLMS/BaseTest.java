@@ -73,17 +73,16 @@ public abstract class BaseTest {
 
     public Group randomGroup = new RandomGroupGenerator().randomGroup();
 
-    @BeforeSuite
+    @BeforeClass
     public void beforeSuite(){
         driver.get(ConfigReader.getProperty("dashboardURL"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage.doLogin(ConfigReader.getProperty("userName"), ConfigReader.getProperty("password"));
     }
 
-//    @AfterClass
-//    public void afterClass(){
-//        driver.manage().deleteAllCookies();
-//        driver.close();
-//    }
+    @AfterClass
+    public void afterClass(){
+        driver.manage().deleteAllCookies();
+    }
 
 }
