@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import talentLMS.BaseTest;
 import talentLMS.enums.ErrorMessage;
+import talentLMS.fileUtils.ConfigReader;
 
 import java.nio.file.Paths;
 
@@ -14,7 +15,7 @@ public class ImportTest extends BaseTest {
     ///  Подготавливает тест, открывая страницу Dashboard
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
     }
 
     @Test(groups = {"Smoke"}, description = "Проверяет успешный импорт файла и загрузку образца", priority = 1)

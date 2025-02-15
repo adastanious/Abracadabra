@@ -6,14 +6,14 @@ import org.testng.annotations.Test;
 import talentLMS.BaseTest;
 
 import talentLMS.enums.AdminSection;
-
+import talentLMS.fileUtils.ConfigReader;
 
 
 public class UserSmokeTest extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
     }
 
 

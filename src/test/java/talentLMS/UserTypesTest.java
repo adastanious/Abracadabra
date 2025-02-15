@@ -9,6 +9,8 @@ import talentLMS.driver.Driver;
 import talentLMS.entity.UserTypeEntity;
 import talentLMS.enums.AdminSection;
 import talentLMS.enums.ErrorMessage;
+import talentLMS.fileUtils.ConfigReader;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class UserTypesTest extends BaseTest{
 
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
     }
 
     @Test(priority = 1)

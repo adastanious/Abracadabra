@@ -8,6 +8,8 @@ import talentLMS.BaseTest;
 import talentLMS.entity.Category;
 import talentLMS.enums.AdminSection;
 import talentLMS.enums.SuccessMessage;
+import talentLMS.fileUtils.ConfigReader;
+
 import java.util.ArrayList;
 
 public class CategoriesSmokeTest extends BaseTest {
@@ -17,7 +19,7 @@ public class CategoriesSmokeTest extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(){
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
     }
 
     /**

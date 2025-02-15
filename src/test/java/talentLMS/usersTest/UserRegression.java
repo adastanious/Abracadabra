@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import talentLMS.BaseTest;
 import talentLMS.driver.Driver;
 import talentLMS.entity.UserEntity;
+import talentLMS.fileUtils.ConfigReader;
 
 import java.time.Duration;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class UserRegression extends BaseTest {
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
     }
 
     @Test(groups = {"Regression"}, description = "Тест получает список всех пользователей и выводит его в консоль.", priority = 1)

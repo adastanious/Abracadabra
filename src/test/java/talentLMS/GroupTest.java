@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import talentLMS.entity.Group;
 import talentLMS.enums.AdminSection;
 import talentLMS.enums.SuccessMessage;
+import talentLMS.fileUtils.ConfigReader;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class GroupTest extends BaseTest {
         String groupName = "Group" + System.currentTimeMillis();  // Уникальное имя для каждой группы
         randomGroup = new Group(groupName, "Description for " + groupName);
 
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.GROUPS);
     }
 

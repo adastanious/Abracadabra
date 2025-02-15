@@ -24,7 +24,7 @@ public class DashboardPage extends BasePage {
      */
     public DashboardPage selectSection(AdminSection section) {
 //        switchToLegacyInterface();
-        webElementActions.click(driver.findElement(By.xpath("//div[@class='tl-bold-link']/a[contains(text(),'" + section + "')]")));
+        webElementActions.click(driver.findElement(By.xpath("//div[@class='tl-bold-link']//a[contains(text(),'" + section + "')]")));
         return new DashboardPage();
     }
 
