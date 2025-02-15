@@ -21,7 +21,6 @@ public class CoursesTest extends BaseTest {
         driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.COURSES);
     }
-
     /**
      * Тест 1: Создание курса
      * Проверяем, что можно создать курс.

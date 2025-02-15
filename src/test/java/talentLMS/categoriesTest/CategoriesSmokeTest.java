@@ -112,7 +112,7 @@ public class CategoriesSmokeTest extends BaseTest {
         dashboardPage.selectSection(AdminSection.CATEGORIES);
         ArrayList<Category> categoriesTable = categoriesPage.getCategoryFormTable();
 
-        driver.get("https://abracadabra.talentlms.com/dashboard");
+        driver.get(ConfigReader.getProperty("dashboardURL"));
         dashboardPage.selectSection(AdminSection.COURSES);
         webElementActions.click(coursesPage.getAddCourse())
                 .click(coursesPage.getCategory());
