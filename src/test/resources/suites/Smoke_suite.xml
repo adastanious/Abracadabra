@@ -6,13 +6,7 @@
                 <class name="talentLMS.usersTest.UserSmokeTest"></class>
                 <class name="talentLMS.categoriesTest.CategoriesSmokeTest"></class>
                 <class name="talentLMS.CoursesTest"></class>
-                <class name="talentLMS.importExportTest.ExportTest">
-                    <methods>
-                        <include name="exportAsCsvTest"/>
-                        <include name="exportAsExcelTest"/>
-                        <include name="exportOrCancel"/>
-                    </methods>
-                </class>
+                <class name="talentLMS.importExportTest.ExportTest"></class>
                 <class name="talentLMS.importExportTest.ImportTest">
                     <methods>
                         <include name="verifyClearFileUpload"/>
@@ -20,11 +14,7 @@
                         <include name="useAllReadyMadeExamplesTest"/>
                     </methods>
                 </class>
-                <class name="talentLMS.importExportTest.SyncWithAnFtpServerTest">
-                <methods>
-                    <include name="testFtpSyncConfiguration"/>
-                </methods>
-                </class>
+                <class name="talentLMS.importExportTest.SyncWithAnFtpServerTest"></class>
                 <class name="talentLMS.userRoleTest.AdministratorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.InstructorUserRoleTest"></class>
                 <class name="talentLMS.userRoleTest.LearnerUserRoleTest"></class>
