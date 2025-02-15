@@ -28,4 +28,16 @@ public class Driver {
         }
         return driver;
     }
+
+    public static void closeDriver() {
+        try {
+            if (driver!=null){
+                driver.close();
+                driver.quit();
+                driver=null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error while closing driver");
+        }
+    }
 }
