@@ -17,9 +17,6 @@ public class DashboardPage extends BasePage {
     @FindBy(xpath = "//a[@data-testid='legacy-menu-item']//p")
     WebElement legacyMenuItem;
 
-    @FindBy(xpath = "//div[@class='tl-bold-link']")
-    WebElement sectionsList;
-
     /**
      * Метод выбирает нужный раздел администратора на панели управления.
      * @param section раздел, который необходимо выбрать
@@ -27,7 +24,7 @@ public class DashboardPage extends BasePage {
      */
     public DashboardPage selectSection(AdminSection section) {
 //        switchToLegacyInterface();
-        webElementActions.click(sectionsList.findElement(By.xpath("//a[contains(text(),'" + section + "')]")));
+        webElementActions.click(driver.findElement(By.xpath("//div[@class='tl-bold-link']/a[contains(text(),'" + section + "')]")));
         return new DashboardPage();
     }
 
