@@ -101,8 +101,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что невозможно сохранить название сайта длиннее 40 символов.
      */
-    @Test(groups = "Regression", description = "verify that it is impossible to save a site name longer than 40 characters", priority = 1)
+    @Test(groups = {"Regression", "FALL2024-01"}, description = "verify that it is impossible to save a site name longer than 40 characters", priority = 1)
     public void siteNameOverTheLimitTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomIncorrectName());
 
         assertErrorTextColor(basicSettingsPage.getSiteName(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR)
@@ -117,8 +119,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что невозможно сохранить описание сайта длиннее 255 символов.
      */
-    @Test(groups = "Regression", description = "verify that it is impossible to save a site description longer than 255 characters", priority = 2)
+    @Test(groups = {"Regression", "FALL2024-02"}, description = "verify that it is impossible to save a site description longer than 255 characters", priority = 2)
     public void siteDescriptionOverTheLimitTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), basicSettingsPage.getRandomIncorrectDescription());
 
         assertErrorTextColor(basicSettingsPage.getSiteDescription(), AccountAndSettings.SETTINGS_ERROR_TEXT_COLOR)
@@ -130,8 +134,10 @@ public class BasicSettingsTest extends BaseTest {
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), "");
     }
 
-    @Test(groups = "Regression", description = "verify that it is impossible to save a site description longer than 255 characters", priority = 3)
+    @Test(groups = {"Regression", "FALL2024-03"}, description = "verify that it is impossible to save a site description longer than 255 characters", priority = 3)
     public void emptySiteNameAndDescriptionTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), "")
                 .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), "");
 
@@ -144,8 +150,9 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что можно сохранить название и описание сайта.
      */
-    @Test(groups = "Smoke", description = "verify that it is possible to save a site name and description", priority = 4)
+    @Test(groups = {"Smoke", "FALL2024-04"}, description = "verify that it is possible to save a site name and description", priority = 4)
     public void siteNameAndDescriptionTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
         basicSettingsPage.fillSiteOrDescriptionsName(basicSettingsPage.getSiteNameCell(), basicSettingsPage.getRandomName())
                 .fillSiteOrDescriptionsName(basicSettingsPage.getSiteDescriptionCell(), basicSettingsPage.getRandomDescription());
 
@@ -160,8 +167,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция языка доступна для выбора.
      */
-    @Test(groups = "Smoke", description = "verify that every language option is clickable", priority = 5)
+    @Test(groups = {"Smoke", "FALL2024-05"}, description = "verify that every language option is clickable", priority = 5)
     public void LanguageOptionsTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.selectDropDownLanguageOption();
         List<String> expectedLanguagesList = AccountAndSettings.LANGUAGES.getList();
 
@@ -171,8 +180,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены языка на странице.
      */
-    @Test(groups = "Regression", description = "verify that a user can type then select the language and check its implementation", priority = 6)
+    @Test(groups = {"Regression", "FALL2024-06"}, description = "verify that a user can type then select the language and check its implementation", priority = 6)
     public void changeLanguageTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.selectLanguage("Russian");
 
         assertSuccessPopUpMessage(AccountAndSettings.BASIC_SETTINGS_SAVED_SUCCESSFULLY);
@@ -189,8 +200,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены языка на Кыргызский язык на странице.
      */
-    @Test(groups = "Regression", description = "verify that unavailable language typed is not found and not selected", priority = 7)
+    @Test(groups = {"Regression", "FALL2024-07"}, description = "verify that unavailable language typed is not found and not selected", priority = 7)
     public void unavailableLanguageTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             basicSettingsPage.selectLanguage("Kyrgyz");
         } catch (ElementClickInterceptedException e) {
@@ -201,8 +214,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция часового пояса доступна для выбора.
      */
-    @Test(groups = "Smoke", description = "verify that every time zone option is clickable", priority = 8)
+    @Test(groups = {"Smoke", "FALL2024-08"}, description = "verify that every time zone option is clickable", priority = 8)
     public void timeZoneOptionsTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.selectDropDownTimeZoneOption();
         List<String> expectedTimeZonesList = AccountAndSettings.TIME_ZONES.getList();
 
@@ -212,8 +227,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены часового пояса на странице.
      */
-    @Test(groups = "E2E", description = "verify that a user can type then select the time zone and check its implementation", priority = 9)
+    @Test(groups = {"E2E", "FALL2024-09"}, description = "verify that a user can type then select the time zone and check its implementation", priority = 9)
     public void changeTimeZoneTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             basicSettingsPage.selectTimeZone("Rome");
         } catch (NoSuchElementException e) {
@@ -231,8 +248,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены часового пояса на Бишкек на странице.
      */
-    @Test(groups = "Regression", description = "verify that unavailable time zone typed is not found and not selected", priority = 10)
+    @Test(groups = {"Regression", "FALL2024-10"}, description = "verify that unavailable time zone typed is not found and not selected", priority = 10)
     public void unavailableTimeZoneTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             basicSettingsPage.selectTimeZone("Bishkek");
         } catch (ElementClickInterceptedException e) {
@@ -253,8 +272,10 @@ public class BasicSettingsTest extends BaseTest {
      * <p>
      * Если список форматов даты пуст, тест завершится с исключением RuntimeException.
      */
-    @Test(groups = "Regression", description = "verify that a user can select every date format and check their implementation", priority = 11)
+    @Test(groups = {"Regression", "FALL2024-11"}, description = "verify that a user can select every date format and check their implementation", priority = 11)
     public void dateFormatOptionsTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.selectDropDownDateFormatOption();
 
         if (!basicSettingsPage.getDateFormatOptions().isEmpty()) {
@@ -301,8 +322,10 @@ public class BasicSettingsTest extends BaseTest {
      * - Если список форматов времени пуст, выбрасывается RuntimeException.
      * - Если элемент не найден, выводится ошибка в консоль.
      */
-    @Test(groups = "Regression", description = "verify that a user can select every time format and check their implementation", priority = 12)
+    @Test(groups = {"Regression", "FALL2024-12"}, description = "verify that a user can select every time format and check their implementation", priority = 12)
     public void timeFormatOptionsTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             webElementActions.click(basicSettingsPage.getTimeFormatCell());
 
@@ -350,8 +373,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет, что каждая опция валюты доступна для выбора.
      */
-    @Test(groups = "Smoke", description = "verify that every currency option is clickable", priority = 13)
+    @Test(groups = {"Smoke", "FALL2024-13"}, description = "verify that every currency option is clickable", priority = 13)
     public void currencyOptionsTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         basicSettingsPage.selectDropDownCurrencyOption();
 
         List<String> actualCurrenciesList = basicSettingsPage.getCurrenciesList();
@@ -363,8 +388,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет возможность смены часового пояса на странице.
      */
-    @Test(groups = "Regression", description = "verify that a user can select currency Euro and check its implementation", priority = 14)
+    @Test(groups = {"Regression", "FALL2024-14"}, description = "verify that a user can select currency Euro and check its implementation", priority = 14)
     public void currencyTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             basicSettingsPage.selectCurrency("Euro");
         } catch (NoSuchElementException e) {
@@ -387,8 +414,10 @@ public class BasicSettingsTest extends BaseTest {
     /**
      * Тест проверяет невозможность смены валюты на сом на странице.
      */
-    @Test(groups = "Regression", description = "verify that unavailable currency typed is not found and not selected", priority = 15)
+    @Test(groups = {"Regression", "FALL2024-15"}, description = "verify that unavailable currency typed is not found and not selected", priority = 15)
     public void unavailableCurrencyTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         try {
             basicSettingsPage.selectCurrency("Som");
         } catch (ElementClickInterceptedException e) {
@@ -409,8 +438,10 @@ public class BasicSettingsTest extends BaseTest {
      *
      * @throws InterruptedException если поток был прерван во время ожидания обновления UI
      */
-    @Test(groups = "E2E", description = "verify that an internal announcement is displayed on the dashboard when a learner or an instructor logs in", priority = 16)
+    @Test(groups = {"E2E", "FALL2024-16"}, description = "verify that an internal announcement is displayed on the dashboard when a learner or an instructor logs in", priority = 16)
     public void internalAnnouncementTest() throws InterruptedException {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         String announcementText = "Hello, world!";
         basicSettingsPage.makeAnAnnouncement(announcementText);
 
@@ -437,8 +468,10 @@ public class BasicSettingsTest extends BaseTest {
      * 2. Получает текущий URL страницы после нажатия.
      * 3. Сравнивает фактический URL с ожидаемым URL Dashboard.
      */
-    @Test(groups = "Regression", description = "verify that button Cancel directs a user back to the page Dashboard", priority = 17)
+    @Test(groups = {"Regression", "FALL2024-17"}, description = "verify that button Cancel directs a user back to the page Dashboard", priority = 17)
     public void cancelTest() {
+        dashboardPage.selectSection(AdminSection.ACCOUNT_SETTINGS);
+
         webElementActions.click(basicSettingsPage.getCancelBtn());
 
         String actualURL = driver.getCurrentUrl();
